@@ -6,4 +6,9 @@ const COLORS = {
   PRIMARY2: '#F3DAC2',
 };
 
-export { COLORS };
+const SIZES = {
+  HEADER_MIN_WIDTH: '300px',
+  HEADER_SMALL_WIDTH: '650px',
+};
+
+export { COLORS, SIZES };
