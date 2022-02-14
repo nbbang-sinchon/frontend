@@ -15,6 +15,7 @@ const reset = css`
   p,
   img,
   b,
+  a,
   i,
   ol,
   ul,
@@ -38,6 +39,7 @@ const reset = css`
     color: inherit;
     background: transparent;
     outline: none;
+    text-decoration: none;
   }
 `;
 
