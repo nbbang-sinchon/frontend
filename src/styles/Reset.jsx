@@ -27,6 +27,7 @@ const reset = css`
   footer,
   header,
   nav,
+  input,
   section,
   summary {
     margin: 0;
@@ -36,6 +37,7 @@ const reset = css`
     font-size: inherit;
     color: inherit;
     background: transparent;
+    outline: none;
   }
 `;
 
