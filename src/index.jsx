@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Main from './pages/Main';
-import Login from './pages/Login';
+import MainPage from './pages/MainPage';
+import LoginPage from './pages/LoginPage';
 import Reset from './styles/Reset';
 
 ReactDOM.render(
@@ -10,8 +10,8 @@ ReactDOM.render(
     <BrowserRouter>
       <Reset />
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<MainPage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

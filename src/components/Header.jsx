@@ -1,17 +1,21 @@
 import styled from '@emotion/styled';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { icons } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
 import Logo from './Logo';
 
-const Container = styled.div`
+const Container = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   padding: 10px;
-  border-bottom: 1px solid ${COLORS.PRIMARY};
+  border-bottom: 2px solid ${COLORS.PRIMARY};
   min-width: ${SIZES.HEADER_MIN_WIDTH};
+  position: sticky;
+  top: 0;
+  background-color: white;
 `;
 
 const HeaderColumn = styled.div`
@@ -82,7 +86,9 @@ function Header() {
       </HeaderColumn>
       <HeaderColumn>
         <icons.PartyIcon />
-        <icons.ProfileIcon />
+        <Link to="/login">
+          <icons.ProfileIcon />
+        </Link>
         <icons.NotificationIcon />
       </HeaderColumn>
     </Container>
