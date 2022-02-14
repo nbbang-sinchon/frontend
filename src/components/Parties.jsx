@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import Party from './Party';
 import partiesinfo from './partiesinfo';
-
 import styled from '@emotion/styled';
-
 
 const Container = styled.div`
 display: flex;
@@ -13,7 +11,6 @@ justify-content: center;
 align-items: flex-start;
 padding: 10px;
 `;
-
 
 function Parties() {
   const [parties] = useState(partiesinfo);

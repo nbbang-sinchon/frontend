@@ -4,7 +4,6 @@ import { COLORS } from '../styles/constants';
 import { icons } from '../assets/assets';
 import PropTypes from "prop-types";
 
-
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -56,17 +55,15 @@ border-radius: 2px;
 font-size: 10px;
 `;
 
-const Place = styled.div`
+const Info = styled.div`
   display: flex;
   flex: 1;
   color: ${COLORS.BLACKBLACK};
-
   font-size: 1px;
 `;
 
 
 function Party({title, hashtags, place}) {
-    console.log(hashtags)
     return (
       <>
       <Container>
@@ -79,11 +76,9 @@ function Party({title, hashtags, place}) {
           ))}
         </TagsContainer>
         <InnerContainer>
-        <Place><icons.LocationIcon/>{place}</Place>
-        <Place><icons.TimeIcon/>방금</Place>
+        <Info><icons.LocationIcon/>{place}&nbsp;&nbsp;<icons.TimeIcon/>&nbsp;방금</Info>
         </InnerContainer>
-        <InnerContainer>
-        </InnerContainer>
+    
       </Container>
       </>
     );
@@ -92,7 +87,7 @@ function Party({title, hashtags, place}) {
  Party.propTypes = {
     title: PropTypes.string.isRequired,
     hashtags: PropTypes.arrayOf(PropTypes.string).isRequired,
-    place: PropTypes.string.isRequired,
+    Info: PropTypes.string.isRequired,
   };
 
 export default Party;
