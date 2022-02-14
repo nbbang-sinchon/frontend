@@ -7,8 +7,9 @@ const COLORS = {
 };
 
 const SIZES = {
-  HEADER_MIN_WIDTH: '300px',
-  HEADER_SMALL_WIDTH: '650px',
+  HEADER_MIN_WIDTH: '250px',
+  HEADER_SMALL_WIDTH: '400px',
+  HEADER_MIDDLE_WIDTH: '650px',
 };
 
 export { COLORS, SIZES };

@@ -16,7 +16,7 @@ const Container = styled.div`
 const Image = styled.img`
   height: 60px;
 
-  @media only screen and (max-width: ${SIZES.HEADER_SMALL_WIDTH}) {
+  @media only screen and (max-width: ${SIZES.HEADER_MIDDLE_WIDTH}) {
     height: 40px;
   }
 `;
@@ -24,6 +24,10 @@ const Image = styled.img`
 const Title = styled.div`
   color: ${COLORS.PRIMARY};
   font-size: 36px;
+
+  @media only screen and (max-width: ${SIZES.HEADER_MIDDLE_WIDTH}) {
+    font-size: 20px;
+  }
 
   @media only screen and (max-width: ${SIZES.HEADER_SMALL_WIDTH}) {
     display: none;

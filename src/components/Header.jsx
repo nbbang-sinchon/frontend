@@ -31,7 +31,7 @@ const HeaderColumn = styled.div`
       cursor: pointer;
     }
 
-    @media only screen and (max-width: ${SIZES.HEADER_SMALL_WIDTH}) {
+    @media only screen and (max-width: ${SIZES.HEADER_MIDDLE_WIDTH}) {
       width: 24px;
       height: 24px;
     }
@@ -42,15 +42,15 @@ const SearchBar = styled.div`
   display: flex;
 
   width: 100%;
-  padding: 5px 5px 5px 20px;
+  padding: 5px 8px 5px 20px;
   box-sizing: border-box;
   border: 2px solid ${COLORS.PRIMARY};
   border-radius: 30px;
   color: ${COLORS.PRIMARY};
 
-  @media only screen and (max-width: ${SIZES.HEADER_SMALL_WIDTH}) {
+  @media only screen and (max-width: ${SIZES.HEADER_MIDDLE_WIDTH}) {
     font-size: 8px;
-    padding: 3px 3px 3px 10px;
+    padding: 3px 5px 3px 10px;
     border-radius: 25px;
 
     > svg {
