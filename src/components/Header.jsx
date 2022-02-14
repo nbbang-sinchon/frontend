@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { icons } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
 import Logo from './Logo';
@@ -85,7 +86,9 @@ function Header() {
       </HeaderColumn>
       <HeaderColumn>
         <icons.PartyIcon />
-        <icons.ProfileIcon />
+        <Link to="/login">
+          <icons.ProfileIcon />
+        </Link>
         <icons.NotificationIcon />
       </HeaderColumn>
     </Container>
