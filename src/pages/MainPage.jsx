@@ -1,12 +1,12 @@
 import React from 'react';
 import Header from '../components/Header';
 
-function Login() {
+function MainPage() {
   return (
     <div>
-      <Header></Header>
+      <Header />
     </div>
   );
 }
 
-export default Login;
+export default MainPage;
