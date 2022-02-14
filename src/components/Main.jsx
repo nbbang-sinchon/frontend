@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import { COLORS } from '../styles/constants';
+import { COLORS, SIZES } from '../styles/constants';
 
 const Container = styled.main`
   display: flex;
@@ -13,7 +13,7 @@ const Container = styled.main`
 const InnerContainer = styled.div`
   padding: 20px;
   width: 100%;
-  max-width: 800px;
+  max-width: ${SIZES.MAIN_MAX_WIDTH};
   box-sizing: border-box;
   background-color: white;
 
