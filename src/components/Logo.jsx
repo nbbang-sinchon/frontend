@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { images } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
 
@@ -36,10 +37,12 @@ const Title = styled.div`
 
 function Logo() {
   return (
-    <Container>
-      <Image src={images.logo} />
-      <Title>엔빵</Title>
-    </Container>
+    <Link to="/">
+      <Container>
+        <Image src={images.logo} />
+        <Title>엔빵</Title>
+      </Container>
+    </Link>
   );
 }
 
