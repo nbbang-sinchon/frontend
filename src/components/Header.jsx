@@ -85,8 +85,10 @@ function Header() {
         </SearchBar>
       </HeaderColumn>
       <HeaderColumn>
-        <icons.PartyIcon />
-        <Link to="/login">
+        <Link to="/my-party">
+          <icons.PartyIcon />
+        </Link>
+        <Link to="/mypage">
           <icons.ProfileIcon />
         </Link>
         <icons.NotificationIcon />
