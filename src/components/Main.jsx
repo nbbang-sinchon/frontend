@@ -1,14 +1,11 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import { COLORS, SIZES } from '../styles/constants';
-import Parties from '../components/Parties';
-
 
 const Container = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   background-color: ${COLORS.PRIMARY};
 `;
 
@@ -25,10 +22,7 @@ const InnerContainer = styled.div`
 function Main(props) {
   return (
     <Container>
-      <InnerContainer>
-        <Parties />
-        {props.children}
-      </InnerContainer>
+      <InnerContainer>{props.children}</InnerContainer>
     </Container>
   );
 }
