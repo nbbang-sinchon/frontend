@@ -81,7 +81,7 @@ const Info = styled.div`
     }
 `;
 
-function Party({ title, hashtags, place }) {
+function Party({ title, hashtags, info }) {
   return (
     <>
       <ColumnContainer>
@@ -96,7 +96,7 @@ function Party({ title, hashtags, place }) {
             <InnerContainer>
               <Info>
                 <icons.LocationIcon />
-                {place}
+                {info}
                 <icons.TimeIcon />
                 방금
               </Info>
@@ -112,7 +112,7 @@ function Party({ title, hashtags, place }) {
 Party.propTypes = {
   title: PropTypes.string.isRequired,
   hashtags: PropTypes.arrayOf(PropTypes.string).isRequired,
-  Info: PropTypes.string.isRequired,
+  info: PropTypes.string.isRequired,
 };
 
 export default Party;

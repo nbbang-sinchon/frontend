@@ -1,17 +1,14 @@
 import React from 'react';
 import Header from '../components/Header';
 import Main from '../components/Main';
-import Parties from '../components/Parties';
 
-function MainPage() {
+function PartyPage() {
   return (
     <>
       <Header />
-      <Main>
-        <Parties />
-      </Main>
+      <Main></Main>
     </>
   );
 }
 
-export default MainPage;
+export default PartyPage;
