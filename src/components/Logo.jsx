@@ -37,7 +37,7 @@ const Title = styled.div`
 
 function Logo() {
   return (
-    <Link to="/">
+    <Link to="/main">
       <Container>
         <Image src={images.logo} />
         <Title>엔빵</Title>
