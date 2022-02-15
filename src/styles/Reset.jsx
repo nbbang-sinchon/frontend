@@ -40,6 +40,7 @@ const reset = css`
     background: transparent;
     outline: none;
     text-decoration: none;
+    font-family: 'Noto Sans KR', sans-serif;
   }
 `;
 
