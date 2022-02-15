@@ -24,11 +24,11 @@ const HeaderColumn = styled.div`
   flex: 1;
   justify-content: center;
 
-  &:nth-of-type(2) {
+  &:nth-of-type(2n) {
     flex: 2;
   }
 
-  &:nth-of-type(3) svg {
+  > svg {
     margin: 0 5px;
     min-width: 24px;
 
@@ -58,7 +58,7 @@ const SearchBar = styled.div`
     padding: 3px 5px 3px 10px;
     border-radius: 25px;
 
-    svg {
+    > svg {
       width: 24px;
       height: 24px;
     }
