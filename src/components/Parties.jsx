@@ -7,9 +7,10 @@ const Container = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-
+  
   align-items: flex-start;
   padding: 10px;
+  margin; 10px;
 `;
 
 function Parties() {
