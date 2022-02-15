@@ -4,6 +4,7 @@ const COLORS = {
   DARK_GRAY: '#686868',
   BLACK: '#252525',
   PRIMARY2: '#F3DAC2',
+  WHITE: 'rgba(255, 255, 255, 1)',
 };
 
 const SIZES = {
