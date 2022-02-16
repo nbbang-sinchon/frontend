@@ -3,73 +3,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { COLORS } from '../styles/constants';
 import { icons } from '../assets/assets';
+import HashTags from './HashTags';
+import { convertDate, convertPlace } from '../utils/converter';
 
-const RowContainer = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: row;
-`;
-
-const ColumnContainer = styled.div`
+const Container = styled.div`
   display: flex;
   justify-content: center;
-  flex-flow: column wrap;
-  margin: 5px;
+  flex-direction: column;
+
+  width: 300px;
+  margin: 10px;
 `;
 
-const InnerContainer = styled.div`
-  display: flex;
-  flex: 1;
-  justify-content: center;
-`;
-
-const TagsContainer = styled.div`
+const Content = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 
-const Title = styled.div`
+const InnerContainer = styled.div`
+  position: relative;
   display: flex;
-  flex: auto;
-  padding: 15px;
-  color: ${COLORS.BLACK};
-  font-size: 25px;
-  font-weight: bolder;
-
-  background: ${COLORS.PRIMARY};
-  border-radius: 10px;
-`;
-
-const Status = styled.div`
-  display: flex;
-  flex: auto;
-  padding: 5px;
-  margin: 5px;
-  color: ${COLORS.WHITE};
-  font-size: 20px;
-  font-weight: regular;
-
-  background: ${COLORS.PRIMARY};
-  border-radius: 5px;
-`;
-
-const Tag = styled.div`
-  display: flex;
-  margin: 2px;
-  padding: 1px;
+  flex-direction: column;
   align-items: flex-start;
-  color: ${COLORS.PRIMARY};
 
-  border: 1px solid ${COLORS.PRIMARY};
-  border-radius: 2px;
-  font-size: 10px;
-`;
-
-const Info = styled.div`
-  display: flex;
-  flex: 1;
-  color: ${COLORS.BLACKBLACK};
-  font-size: 1px;
+  width: 180px;
+  overflow: hidden;
+  padding-left: 5px;
 
   > svg {
     margin: 0 5px;
@@ -81,36 +40,81 @@ const Info = styled.div`
     }
 `;
 
-function Party({ title, hashtags, info }) {
+const Title = styled.div`
+  display: flex;
+
+  padding: 15px;
+  margin-bottom: 5px;
+  color: ${COLORS.BLACK};
+  font-size: 20px;
+  font-weight: bolder;
+  background: ${COLORS.PRIMARY};
+  border-radius: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+`;
+
+const Status = styled.div`
+  display: flex;
+  align-items: center;
+
+  padding: 0 10px;
+  color: ${COLORS.WHITE};
+  font-size: 16px;
+  background: ${COLORS.PRIMARY};
+  border-radius: 10px;
+  white-space: nowrap;
+
+  svg {
+    margin-left: 5px;
+  }
+`;
+
+const Info = styled.div`
+  display: flex;
+  align-items: center;
+
+  font-size: 12px;
+
+  svg {
+    width: 12px;
+    height: 12px;
+    margin-right: 3px;
+  }
+
+  div {
+    margin-right: 8px;
+  }
+`;
+
+function Party({ title, hashtags, place, createTime }) {
   return (
-    <ColumnContainer>
+    <Container>
       <Title>{title}</Title>
-      <RowContainer>
-        <ColumnContainer>
-          <TagsContainer>
-            {hashtags.map((tag) => (
-              <Tag key={tag}>#{tag}</Tag>
-            ))}
-          </TagsContainer>
-          <InnerContainer>
-            <Info>
-              <icons.LocationIcon />
-              {info}
-              <icons.TimeIcon />
-              방금
-            </Info>
-          </InnerContainer>
-        </ColumnContainer>
-        <Status>모집중 3/4</Status>
-      </RowContainer>
-    </ColumnContainer>
+      <Content>
+        <InnerContainer>
+          <HashTags hashtags={hashtags} />
+          <Info>
+            <icons.LocationIcon />
+            <div>{convertPlace(place)}</div>
+            <icons.TimeIcon />
+            <div>{convertDate(createTime)}</div>
+          </Info>
+        </InnerContainer>
+        <Status>
+          모집중 3/4
+          <icons.HeartIcon />
+        </Status>
+      </Content>
+    </Container>
   );
 }
 
 Party.propTypes = {
   title: PropTypes.string.isRequired,
   hashtags: PropTypes.arrayOf(PropTypes.string).isRequired,
-  info: PropTypes.string.isRequired,
+  place: PropTypes.string.isRequired,
+  createTime: PropTypes.string.isRequired,
 };
 
 export default Party;
