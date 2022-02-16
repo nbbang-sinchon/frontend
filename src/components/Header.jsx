@@ -17,6 +17,7 @@ const Container = styled.header`
   top: 0;
   background-color: white;
   font-weight: 700;
+  z-index: 1;
 `;
 
 const HeaderColumn = styled.div`
