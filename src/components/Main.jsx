@@ -16,7 +16,6 @@ const InnerContainer = styled.div`
   max-width: ${SIZES.MAIN_MAX_WIDTH};
   box-sizing: border-box;
   background-color: white;
-
   height: 100vh;
 `;
 

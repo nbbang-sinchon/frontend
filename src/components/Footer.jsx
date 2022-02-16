@@ -18,12 +18,14 @@ const Container = styled.div`
 const Content = styled.div`
   display: flex;
   align-self: flex-start;
+
   h3 {
     margin-top: 0;
     margin-bottom: 12px;
     font-weight: bold;
     font-size: 5px;
   }
+
   ul {
     padding: 0;
     list-style: none;
@@ -31,11 +33,13 @@ const Content = styled.div`
     font-size: 3px;
     margin-bottom: 0;
   }
+
   ul a {
     color: inherit;
     text-decoration: none;
     opacity: 0.8;
   }
+
   ul a:hover {
     opacity: 1;
   }
