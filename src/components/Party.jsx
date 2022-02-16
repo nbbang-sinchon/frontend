@@ -53,21 +53,19 @@ const Title = styled.div`
   padding: 15px;
   margin-bottom: 5px;
   color: ${COLORS.BLACK};
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bolder;
   background: ${COLORS.PRIMARY};
   border-radius: 10px;
 `;
 
 const TitleColumn = styled.div`
-  display: flex;
-  flex-direction: column;
   align-items: center;
 
   &:nth-of-type(1) {
+    text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    margin-right: 20px;
   }
 `;
 
@@ -79,7 +77,8 @@ const Status = styled.div`
   width: 100px;
   padding: 0 10px;
   color: ${COLORS.WHITE};
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 500;
   background: ${COLORS.PRIMARY};
   border-radius: 10px;
   white-space: nowrap;
