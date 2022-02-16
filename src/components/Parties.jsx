@@ -1,29 +1,40 @@
 import React, { useState } from 'react';
-import Party from './Party';
-import partiesinfo from './partiesinfo';
 import styled from '@emotion/styled';
+import Party from './Party';
+import dummyParties from '../dummies/dummyParties';
 
 const Container = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  
-  align-items: flex-start;
+
   padding: 10px;
-  margin; 10px;
+
+  ::after {
+    content: '';
+    width: 300px;
+    margin: 10px;
+  }
 `;
 
 function Parties() {
-  const [parties] = useState(partiesinfo);
+  const [parties] = useState(dummyParties);
 
   return (
-    <div>
-      <Container>
-        {parties.map((party) => (
-          <Party key={party.id} title={party.title} hashtags={party.hashtags} place={party.place} />
-        ))}
-      </Container>
-    </div>
+    <Container>
+      {parties.map((party) => (
+        <Party
+          key={party.id}
+          title={party.title}
+          hashtags={party.hashtags}
+          place={party.place}
+          createTime={party.createTime}
+          status={party.status}
+          joinNumber={party.joinNumber}
+          goalNumber={party.goalNumber}
+        />
+      ))}
+    </Container>
   );
 }
 

@@ -20,16 +20,16 @@ const InnerContainer = styled.div`
   height: 3000px;
 `;
 
-Main.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-};
-
-function Main(props) {
+function Main({ children }) {
   return (
     <Container>
-      <InnerContainer>{props.children}</InnerContainer>
+      <InnerContainer>{children}</InnerContainer>
     </Container>
   );
 }
+
+Main.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+};
 
 export default Main;
