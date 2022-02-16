@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { COLORS } from '../styles/constants';
 
 const Container = styled.div`
@@ -8,6 +9,11 @@ const Container = styled.div`
   align-items: center;
   padding: 120px 200px 120px 200px;
   background-color: ${COLORS.BEIGE};
+
+  a {
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
 `;
 
 const WelComeText = styled.div`
@@ -29,13 +35,13 @@ const WelComeText = styled.div`
 `;
 
 const StartButton = styled.div`
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 400;
-  border: 2px solid;
+  border: 1.5px solid;
   border-radius: 5px;
   color: ${COLORS.PRIMARY};
   background-color: ${COLORS.WHITE};
-  padding: 12px 25px 12px 25px;
+  padding: 12px 30px 12px 30px;
 
   flex-grow: 0;
   flex-shrink: 0;
@@ -62,7 +68,9 @@ function Index() {
           원하는 파티를 만들거나 찾아보세요!
         </p>
       </WelComeText>
-      <StartButton>시작하기&nbsp;&#129042;</StartButton>
+      <Link to="/mypage">
+        <StartButton>시작하기&nbsp;&#129042;</StartButton>
+      </Link>
     </Container>
   );
 }
