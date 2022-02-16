@@ -7,7 +7,7 @@ const dummyParties = [
     goalNumber: 4,
     status: 'order',
     place: 'SINCHON',
-    hashtags: ['치킨', 'BHC'],
+    hashtags: ['치킨', 'BHC', '배달비', '뿌링클'],
   },
   {
     id: 1,
@@ -21,7 +21,7 @@ const dummyParties = [
   },
   {
     id: 2,
-    title: '푸라닭 콘소메이징 맛있어요',
+    title: '푸라닭 콘소메이징 맛있어요ㅛㅛㅛㅛㅛㅛ',
     createTime: '2022-02-15T15:25:17.410Z',
     joinNumber: 3,
     goalNumber: 3,
@@ -42,7 +42,7 @@ const dummyParties = [
   {
     id: 4,
     title: '떡볶이 ㄱ?',
-    createTime: '2022-02-16T05:25:17.410Z',
+    createTime: '2022-02-16T15:59:17.410Z',
     joinNumber: 1,
     goalNumber: 2,
     status: 'on',
