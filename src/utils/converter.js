@@ -36,4 +36,22 @@ const convertDate = (dateString) => {
   }
 };
 
-export { convertPlace, convertDate };
+const convertStatus = (statusString) => {
+  const upper = statusString.toUpperCase();
+
+  if (upper === 'ON') {
+    return '모집중';
+  } else if (upper === 'SOON') {
+    return '마감임박';
+  } else if (upper === 'FULL') {
+    return '모집완료';
+  } else if (upper === 'ORDER') {
+    return '주문완료';
+  } else if (upper === 'CANCEL') {
+    return '주문취소';
+  } else {
+    return 'ERROR';
+  }
+};
+
+export { convertPlace, convertDate, convertStatus };

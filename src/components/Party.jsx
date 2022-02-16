@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { COLORS } from '../styles/constants';
 import { icons } from '../assets/assets';
 import HashTags from './HashTags';
-import { convertDate, convertPlace } from '../utils/converter';
+import { convertDate, convertPlace, convertStatus } from '../utils/converter';
 
 const Container = styled.div`
   display: flex;
@@ -12,7 +12,13 @@ const Container = styled.div`
   flex-direction: column;
 
   width: 300px;
-  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: ${COLORS.PRIMARY2};
+  }
 `;
 
 const Content = styled.div`
@@ -42,6 +48,7 @@ const InnerContainer = styled.div`
 
 const Title = styled.div`
   display: flex;
+  justify-content: space-between;
 
   padding: 15px;
   margin-bottom: 5px;
@@ -50,14 +57,26 @@ const Title = styled.div`
   font-weight: bolder;
   background: ${COLORS.PRIMARY};
   border-radius: 10px;
-  overflow: hidden;
-  white-space: nowrap;
+`;
+
+const TitleColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &:nth-of-type(1) {
+    overflow: hidden;
+    white-space: nowrap;
+    margin-right: 20px;
+  }
 `;
 
 const Status = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
+  width: 100px;
   padding: 0 10px;
   color: ${COLORS.WHITE};
   font-size: 16px;
@@ -65,8 +84,14 @@ const Status = styled.div`
   border-radius: 10px;
   white-space: nowrap;
 
-  svg {
-    margin-left: 5px;
+  div {
+    text-align: center;
+  }
+  div:nth-of-type(1) {
+    flex: 1;
+  }
+  div:nth-of-type(2) {
+    flex: 2;
   }
 `;
 
@@ -87,10 +112,15 @@ const Info = styled.div`
   }
 `;
 
-function Party({ title, hashtags, place, createTime }) {
+function Party({ title, hashtags, place, createTime, joinNumber, goalNumber, status }) {
   return (
     <Container>
-      <Title>{title}</Title>
+      <Title>
+        <TitleColumn>{title}</TitleColumn>
+        <TitleColumn>
+          <icons.HeartIcon />
+        </TitleColumn>
+      </Title>
       <Content>
         <InnerContainer>
           <HashTags hashtags={hashtags} />
@@ -102,8 +132,10 @@ function Party({ title, hashtags, place, createTime }) {
           </Info>
         </InnerContainer>
         <Status>
-          모집중 3/4
-          <icons.HeartIcon />
+          <div>
+            {joinNumber} / {goalNumber}
+          </div>
+          <div>{convertStatus(status)}</div>
         </Status>
       </Content>
     </Container>
@@ -115,6 +147,9 @@ Party.propTypes = {
   hashtags: PropTypes.arrayOf(PropTypes.string).isRequired,
   place: PropTypes.string.isRequired,
   createTime: PropTypes.string.isRequired,
+  joinNumber: PropTypes.number.isRequired,
+  goalNumber: PropTypes.number.isRequired,
+  status: PropTypes.string.isRequired,
 };
 
 export default Party;

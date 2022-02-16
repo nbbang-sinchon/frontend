@@ -29,6 +29,9 @@ function Parties() {
           hashtags={party.hashtags}
           place={party.place}
           createTime={party.createTime}
+          status={party.status}
+          joinNumber={party.joinNumber}
+          goalNumber={party.goalNumber}
         />
       ))}
     </Container>
