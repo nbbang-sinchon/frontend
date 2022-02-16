@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import styled from '@emotion/styled';
 import Party from './Party';
 import partiesinfo from './partiesinfo';
-import styled from '@emotion/styled';
 
 const Container = styled.div`
   display: flex;

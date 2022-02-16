@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { COLORS } from '../styles/constants';
 import { icons } from '../assets/assets';
-import PropTypes from 'prop-types';
 
 const RowContainer = styled.div`
   display: flex;
@@ -83,29 +83,27 @@ const Info = styled.div`
 
 function Party({ title, hashtags, info }) {
   return (
-    <>
-      <ColumnContainer>
-        <Title>{title}</Title>
-        <RowContainer>
-          <ColumnContainer>
-            <TagsContainer>
-              {hashtags.map((tag) => (
-                <Tag key={tag}>#{tag}</Tag>
-              ))}
-            </TagsContainer>
-            <InnerContainer>
-              <Info>
-                <icons.LocationIcon />
-                {info}
-                <icons.TimeIcon />
-                방금
-              </Info>
-            </InnerContainer>
-          </ColumnContainer>
-          <Status>모집중 3/4</Status>
-        </RowContainer>
-      </ColumnContainer>
-    </>
+    <ColumnContainer>
+      <Title>{title}</Title>
+      <RowContainer>
+        <ColumnContainer>
+          <TagsContainer>
+            {hashtags.map((tag) => (
+              <Tag key={tag}>#{tag}</Tag>
+            ))}
+          </TagsContainer>
+          <InnerContainer>
+            <Info>
+              <icons.LocationIcon />
+              {info}
+              <icons.TimeIcon />
+              방금
+            </Info>
+          </InnerContainer>
+        </ColumnContainer>
+        <Status>모집중 3/4</Status>
+      </RowContainer>
+    </ColumnContainer>
   );
 }
 
