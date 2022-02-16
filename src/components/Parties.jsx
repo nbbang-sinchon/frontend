@@ -32,6 +32,7 @@ function Parties() {
           status={party.status}
           joinNumber={party.joinNumber}
           goalNumber={party.goalNumber}
+          id={party.id}
         />
       ))}
     </Container>

@@ -5,6 +5,7 @@ import { COLORS } from '../styles/constants';
 import { icons } from '../assets/assets';
 import HashTags from './HashTags';
 import { convertDate, convertPlace, convertStatus } from '../utils/converter';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
@@ -111,15 +112,18 @@ const Info = styled.div`
   }
 `;
 
-function Party({ title, hashtags, place, createTime, joinNumber, goalNumber, status }) {
+function Party({ title, hashtags, place, createTime, joinNumber, goalNumber, status, id }) {
   return (
     <Container>
-      <Title>
-        <TitleColumn>{title}</TitleColumn>
-        <TitleColumn>
-          <icons.HeartIcon />
-        </TitleColumn>
-      </Title>
+      <Link to={'/party/' + id}>
+        <Title>
+          <TitleColumn>{title}</TitleColumn>
+          <TitleColumn>
+            <icons.HeartIcon />
+          </TitleColumn>
+        </Title>
+      </Link>
+
       <Content>
         <InnerContainer>
           <HashTags hashtags={hashtags} />
@@ -149,6 +153,7 @@ Party.propTypes = {
   joinNumber: PropTypes.number.isRequired,
   goalNumber: PropTypes.number.isRequired,
   status: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 export default Party;
