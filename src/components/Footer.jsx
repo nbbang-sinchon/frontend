@@ -2,35 +2,39 @@ import styled from '@emotion/styled';
 import React from 'react';
 import { SIZES, COLORS } from '../styles/constants';
 
-const Container = styled.div`
+const Container = styled.footer`
   display: flex;
-  flex-direction: row;
   justify-content: center;
-  aling-items: center
-  max-width: ${SIZES.MAIN_MAX_WIDTH};
-  margin: 80px 0px 0px 0px;
-  background-color: ${COLORS.GRAYE};
+
+  padding: 40px 0;
+  background-color: ${COLORS.LIGHTGRAY};
   color: ${COLORS.DARK_GRAY};
+`;
+
+const InnerContainer = styled.div`
+  display: flex;
+
+  width: 100%;
+  max-width: ${SIZES.MAIN_MAX_WIDTH};
+  white-space: nowrap;
+  margin-left: 10%;
 `;
 
 const Content = styled.div`
   display: flex;
-  align-self: flex-start;
-  padding: 0px 50px 0px 50px;
+
+  width: 100%;
 
   h3 {
-    margin-top: 0;
     margin-bottom: 12px;
     font-weight: bold;
     font-size: 5px;
   }
 
   ul {
-    padding: 0;
     list-style: none;
     line-height: 1.6;
     font-size: 3px;
-    margin-bottom: 0;
   }
 
   ul a {
@@ -46,8 +50,8 @@ const Content = styled.div`
 
 function Footer() {
   return (
-    <footer>
-      <Container>
+    <Container>
+      <InnerContainer>
         <Content>
           <ul>
             <h3>소개</h3>
@@ -134,8 +138,8 @@ function Footer() {
             </li>
           </ul>
         </Content>
-      </Container>
-    </footer>
+      </InnerContainer>
+    </Container>
   );
 }
 export default Footer;
