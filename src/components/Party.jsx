@@ -12,8 +12,6 @@ const Container = styled.div`
   justify-content: center;
   flex-direction: column;
 
-  width: 300px;
-  padding: 10px;
   border-radius: 10px;
 
   &:hover {

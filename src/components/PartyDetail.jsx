@@ -7,7 +7,9 @@ import { COLORS, SIZES } from '../styles/constants';
 import { convertStatus, convertPlace, convertDate } from '../utils/converter';
 import HashTags from './HashTags';
 
-const Container = styled.div``;
+const Container = styled.div`
+  margin-bottom: 10px;
+`;
 
 const Status = styled.div`
   display: flex;

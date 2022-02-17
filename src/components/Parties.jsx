@@ -2,18 +2,29 @@ import styled from '@emotion/styled';
 import React, { useState } from 'react';
 import Party from './Party';
 import dummyParties from '../dummies/dummyParties';
+import { SIZES } from '../styles/constants';
 
 const Container = styled.div`
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
+  justify-content: space-evenly;
 
   padding: 10px;
 
+  > div,
+  ::after {
+    padding: 10px;
+    width: 340px;
+    box-sizing: border-box;
+
+    @media only screen and (min-width: ${SIZES.MIDDLE_WIDTH}) {
+      min-width: 250px;
+      width: 45%;
+    }
+  }
+
   ::after {
     content: '';
-    width: 300px;
-    margin: 10px;
   }
 `;
 

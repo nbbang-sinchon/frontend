@@ -13,6 +13,7 @@ const Container = styled.main`
 `;
 
 const InnerContainer = styled.div`
+  position: relative;
   padding: 20px;
   width: 100%;
   max-width: ${SIZES.MAIN_MAX_WIDTH};
