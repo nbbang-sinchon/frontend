@@ -8,8 +8,7 @@ const Container = styled.div`
   justify-content: space-evenly;
   aling-items: center
   max-width: ${SIZES.MAIN_MAX_WIDTH};
-  padding: 5px 0;
-  margin: 30px 0px 0px 0px; padding: 5px;
+  padding: 5px 0px;
   margin: 30px;
   background-color: ${COLORS.WHITE};
   color: ${COLORS.DARK_GRAY};
