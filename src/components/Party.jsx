@@ -115,7 +115,7 @@ const Info = styled.div`
 function Party({ title, hashtags, place, createTime, joinNumber, goalNumber, status, id }) {
   return (
     <Container>
-      <Link to={'/party/' + id}>
+      <Link to={'/parties/' + id}>
         <Title>
           <TitleColumn>{title}</TitleColumn>
           <TitleColumn>
@@ -123,7 +123,6 @@ function Party({ title, hashtags, place, createTime, joinNumber, goalNumber, sta
           </TitleColumn>
         </Title>
       </Link>
-
       <Content>
         <InnerContainer>
           <HashTags hashtags={hashtags} />
