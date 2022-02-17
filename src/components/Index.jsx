@@ -68,7 +68,7 @@ function Index() {
           원하는 파티를 만들거나 찾아보세요!
         </p>
       </WelComeText>
-      <Link to="/mypage">
+      <Link to="/login">
         <StartButton>시작하기&nbsp;&#129042;</StartButton>
       </Link>
     </Container>
