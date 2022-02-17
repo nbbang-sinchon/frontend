@@ -94,8 +94,8 @@ const SaveButton = styled.div`
 
   color: ${COLORS.WHITE};
   background-color: ${COLORS.PRIMARY};
-  padding: 15px 153px 15px 153px;
-  margin: 30px 0px 0px 0px;
+  padding: 15px 153px;
+  margin-top: 30px;
 
   flex-grow: 0;
   flex-shrink: 0;
@@ -116,8 +116,8 @@ const SecessionButton = styled.div`
 
   color: ${COLORS.WHITE};
   background-color: ${COLORS.DARK_GRAY};
-  padding: 15px 153px 15px 153px;
-  margin: 30px 0px 0px 0px;
+  padding: 15px 153px;
+  margin-top: 30px;
 
   flex-grow: 0;
   flex-shrink: 0;
@@ -130,7 +130,7 @@ const SecessionButton = styled.div`
 
 const Image = styled.img`
   height: 30px;
-  padding: 0px 10px 0px 0px;
+  padding-right: 10px;
   @media only screen and (max-width: ${SIZES.HEADER_MIDDLE_WIDTH}) {
     height: 40px;
   }
