@@ -9,7 +9,7 @@ const Container = styled.main`
   align-items: center;
 
   background-color: ${(props) => (props.isWhite && COLORS.WHITE) || COLORS.PRIMARY};
-  min-width: ${SIZES.SMALL_WIDTH};
+  min-width: ${SIZES.MIN_WIDTH};
 `;
 
 const InnerContainer = styled.div`

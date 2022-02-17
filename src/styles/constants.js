@@ -10,8 +10,7 @@ const COLORS = {
 };
 
 const SIZES = {
-  MIN_WIDTH: '250px',
-  SMALL_WIDTH: '400px',
+  MIN_WIDTH: '400px',
   MIDDLE_WIDTH: '650px',
   MAIN_MAX_WIDTH: '800px',
 };

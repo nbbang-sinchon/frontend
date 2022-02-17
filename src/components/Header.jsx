@@ -12,7 +12,7 @@ const Container = styled.header`
 
   padding: 10px;
   border-bottom: 2px solid ${COLORS.PRIMARY};
-  min-width: ${SIZES.SMALL_WIDTH};
+  min-width: ${SIZES.MIN_WIDTH};
   position: sticky;
   top: 0;
   background-color: white;
