@@ -10,7 +10,7 @@ function IndexPage() {
     <>
       <Header />
       <Index />
-      <Main>
+      <Main isWhite>
         <Parties />
       </Main>
       <Footer />

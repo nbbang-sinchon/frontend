@@ -7,7 +7,7 @@ const Container = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: ${COLORS.WHITE};
+  background-color: ${(props) => (props.isWhite && COLORS.WHITE) || COLORS.PRIMARY};
 `;
 
 const InnerContainer = styled.div`
@@ -19,9 +19,9 @@ const InnerContainer = styled.div`
   height: 100vh;
 `;
 
-function Main({ children }) {
+function Main({ children, isWhite }) {
   return (
-    <Container>
+    <Container isWhite={isWhite}>
       <InnerContainer>{children}</InnerContainer>
     </Container>
   );
@@ -29,6 +29,7 @@ function Main({ children }) {
 
 Main.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+  isWhite: PropTypes.bool,
 };
 
 export default Main;
