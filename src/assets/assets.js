@@ -7,8 +7,9 @@ import { ReactComponent as TimeIcon } from './icons/time.svg';
 import { ReactComponent as HeartIcon } from './icons/heart.svg';
 
 import logo from './images/logo.png';
+import bread from './images/bread.png';
 
 const icons = { NotificationIcon, PartyIcon, ProfileIcon, SearchIcon, LocationIcon, TimeIcon, HeartIcon };
-const images = { logo };
+const images = { logo, bread };
 
 export { icons, images };
