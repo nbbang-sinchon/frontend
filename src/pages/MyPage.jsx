@@ -1,12 +1,10 @@
 import React from 'react';
-import Header from '../components/Header';
-import Main from '../components/Main';
+import MyPageHeader from '../components/MyPageHeader';
 
 function MyPage() {
   return (
     <>
-      <Header />
-      <Main></Main>
+      <MyPageHeader />
     </>
   );
 }
