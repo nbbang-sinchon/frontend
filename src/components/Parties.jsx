@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import styled from '@emotion/styled';
+import React, { useState } from 'react';
 import Party from './Party';
 import dummyParties from '../dummies/dummyParties';
 

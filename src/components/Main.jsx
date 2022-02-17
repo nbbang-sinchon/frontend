@@ -7,7 +7,7 @@ const Container = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: ${COLORS.PRIMARY};
+  background-color: ${COLORS.WHITE};
 `;
 
 const InnerContainer = styled.div`
@@ -16,8 +16,7 @@ const InnerContainer = styled.div`
   max-width: ${SIZES.MAIN_MAX_WIDTH};
   box-sizing: border-box;
   background-color: white;
-
-  height: 3000px;
+  height: 100vh;
 `;
 
 function Main({ children }) {
