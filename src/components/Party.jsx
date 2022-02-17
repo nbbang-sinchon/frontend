@@ -68,6 +68,10 @@ const TitleColumn = styled.div`
     overflow: hidden;
     white-space: nowrap;
   }
+
+  svg {
+    transform: scale(1.2, 1.2);
+  }
 `;
 
 const Status = styled.div`
@@ -130,7 +134,7 @@ function Party({ title, hashtags, place, createTime, joinNumber, goalNumber, sta
         </InnerContainer>
         <Status>
           <div>
-            {joinNumber} / {goalNumber}
+            {joinNumber} / {goalNumber} 명
           </div>
           <div>{convertStatus(status)}</div>
         </Status>
