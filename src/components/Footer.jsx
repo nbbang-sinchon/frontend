@@ -6,10 +6,21 @@ const Container = styled.footer`
   display: flex;
   justify-content: center;
 
-  padding: 40px 0;
+  padding: 40px;
+  padding-bottom: 60px;
   background-color: ${COLORS.LIGHTGRAY};
   color: ${COLORS.DARK_GRAY};
   min-width: ${SIZES.MIN_WIDTH};
+
+  @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  @media only screen and (max-width: ${SIZES.SMALL_WIDTH}) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 `;
 
 const InnerContainer = styled.div`
@@ -19,6 +30,10 @@ const InnerContainer = styled.div`
   max-width: ${SIZES.MAIN_MAX_WIDTH};
   white-space: nowrap;
   margin-left: 10%;
+
+  @media only screen and (max-width: ${SIZES.SMALL_WIDTH}) {
+    margin-left: 5%;
+  }
 `;
 
 const Content = styled.div`
@@ -29,13 +44,13 @@ const Content = styled.div`
   h3 {
     margin-bottom: 12px;
     font-weight: bold;
-    font-size: 5px;
+    font-size: 10px;
   }
 
   ul {
     list-style: none;
-    line-height: 1.6;
-    font-size: 3px;
+    line-height: 2;
+    font-size: 6px;
   }
 
   ul a {
