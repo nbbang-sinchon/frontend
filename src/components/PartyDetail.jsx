@@ -1,18 +1,28 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import dummyParties from '../dummies/dummyParties';
+import dummyParty from '../dummies/dummyParty';
+import HashTags from './HashTags';
 
 const Container = styled.div``;
 
+const Status = styled.div``;
+
+const Title = styled.div``;
+
+const Content = styled.div``;
+
 function PartyDetail() {
   const { id } = useParams();
-  const party = dummyParties[id];
+  const party = dummyParty[id];
 
   return (
     <Container>
-      {party.title}, {party.hashtags}, {party.place}, {party.createTime}, {party.joinNumber}, {party.goalNumber},
-      {party.status}
+      <Status>
+        <HashTags hashtags={party.hashtags} />
+      </Status>
+      <Title>{party.title}</Title>
+      <Content>{party.content}</Content>
     </Container>
   );
 }

@@ -72,26 +72,21 @@ const TitleColumn = styled.div`
 
 const Status = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 
   width: 100px;
-  padding: 0 10px;
+  padding: 5px 10px;
   color: ${COLORS.WHITE};
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   background: ${COLORS.PRIMARY};
   border-radius: 10px;
   white-space: nowrap;
 
-  div {
-    text-align: center;
-  }
-  div:nth-of-type(1) {
-    flex: 1;
-  }
-  div:nth-of-type(2) {
-    flex: 2;
+  > div:last-of-type {
+    font-size: 16px;
   }
 `;
 
