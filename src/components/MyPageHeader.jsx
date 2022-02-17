@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { images } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
 
-const MyPageHeader = () => {
+function MyPageHeader() {
   const Logo = () => {
     const Container = styled.div`
       display: flex;
@@ -78,6 +78,6 @@ const MyPageHeader = () => {
       </Link>
     </Container>
   );
-};
+}
 
 export default MyPageHeader;
