@@ -9,6 +9,7 @@ const Container = styled.footer`
   padding: 40px 0;
   background-color: ${COLORS.LIGHTGRAY};
   color: ${COLORS.DARK_GRAY};
+  min-width: ${SIZES.SMALL_WIDTH};
 `;
 
 const InnerContainer = styled.div`

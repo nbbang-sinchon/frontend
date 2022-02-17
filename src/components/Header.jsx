@@ -12,7 +12,7 @@ const Container = styled.header`
 
   padding: 10px;
   border-bottom: 2px solid ${COLORS.PRIMARY};
-  min-width: ${SIZES.HEADER_MIN_WIDTH};
+  min-width: ${SIZES.SMALL_WIDTH};
   position: sticky;
   top: 0;
   background-color: white;
@@ -37,7 +37,7 @@ const HeaderColumn = styled.div`
       cursor: pointer;
     }
 
-    @media only screen and (max-width: ${SIZES.HEADER_MIDDLE_WIDTH}) {
+    @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
       width: 24px;
       height: 24px;
     }
@@ -54,7 +54,7 @@ const SearchBar = styled.div`
   border-radius: 30px;
   color: ${COLORS.PRIMARY};
 
-  @media only screen and (max-width: ${SIZES.HEADER_MIDDLE_WIDTH}) {
+  @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
     font-size: 8px;
     padding: 3px 5px 3px 10px;
     border-radius: 25px;

@@ -7,7 +7,9 @@ const Container = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   background-color: ${(props) => (props.isWhite && COLORS.WHITE) || COLORS.PRIMARY};
+  min-width: ${SIZES.SMALL_WIDTH};
 `;
 
 const InnerContainer = styled.div`

@@ -10,9 +10,9 @@ const COLORS = {
 };
 
 const SIZES = {
-  HEADER_MIN_WIDTH: '250px',
-  HEADER_SMALL_WIDTH: '400px',
-  HEADER_MIDDLE_WIDTH: '650px',
+  MIN_WIDTH: '250px',
+  SMALL_WIDTH: '400px',
+  MIDDLE_WIDTH: '650px',
   MAIN_MAX_WIDTH: '800px',
 };
 
