@@ -5,18 +5,18 @@ import { SIZES, COLORS } from '../styles/constants';
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   aling-items: center
   max-width: ${SIZES.MAIN_MAX_WIDTH};
-  padding: 5px 0px;
-  margin: 30px;
-  background-color: ${COLORS.WHITE};
+  margin: 80px 0px 0px 0px;
+  background-color: ${COLORS.GRAYE};
   color: ${COLORS.DARK_GRAY};
 `;
 
 const Content = styled.div`
   display: flex;
   align-self: flex-start;
+  padding: 0px 50px 0px 50px;
 
   h3 {
     margin-top: 0;
