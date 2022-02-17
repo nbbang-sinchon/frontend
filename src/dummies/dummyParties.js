@@ -1,6 +1,6 @@
 const dummyParties = [
   {
-    id: 0,
+    partyId: 0,
     title: 'BHC 뿌링클 오늘 7시',
     createTime: '2022-02-14T05:25:17.410Z',
     joinNumber: 2,
@@ -10,7 +10,7 @@ const dummyParties = [
     hashtags: ['치킨', 'BHC', '배달비', '뿌링클'],
   },
   {
-    id: 1,
+    partyId: 1,
     title: '내일 점심에 버거킹 드실분',
     createTime: '2022-02-15T14:25:17.410Z',
     joinNumber: 1,
@@ -20,7 +20,7 @@ const dummyParties = [
     hashtags: ['버거킹', '햄버거'],
   },
   {
-    id: 2,
+    partyId: 2,
     title: '푸라닭 콘소메이징 맛있어요ㅛㅛㅛㅛㅛㅛ',
     createTime: '2022-02-15T15:25:17.410Z',
     joinNumber: 3,
@@ -30,7 +30,7 @@ const dummyParties = [
     hashtags: ['치킨', '푸라닭'],
   },
   {
-    id: 3,
+    partyId: 3,
     title: '초밥 시켜먹어요',
     createTime: '2022-02-15T18:25:17.410Z',
     joinNumber: 1,
@@ -40,7 +40,7 @@ const dummyParties = [
     hashtags: ['초밥', '스시'],
   },
   {
-    id: 4,
+    partyId: 4,
     title: '떡볶이 ㄱ?',
     createTime: '2022-02-16T15:59:17.410Z',
     joinNumber: 1,
@@ -50,5 +50,11 @@ const dummyParties = [
     hashtags: ['떡볶이', '엽떡', '국대'],
   },
 ];
+
+// const dummyParty = [
+//   {
+//     ow,
+//   },
+// ];
 
 export default dummyParties;

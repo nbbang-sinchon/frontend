@@ -24,7 +24,7 @@ function Parties() {
     <Container>
       {parties.map((party) => (
         <Party
-          key={party.id}
+          key={party.partyId}
           title={party.title}
           hashtags={party.hashtags}
           place={party.place}
@@ -32,7 +32,7 @@ function Parties() {
           status={party.status}
           joinNumber={party.joinNumber}
           goalNumber={party.goalNumber}
-          id={party.id}
+          partyId={party.partyId}
         />
       ))}
     </Container>
