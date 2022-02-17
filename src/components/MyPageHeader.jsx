@@ -73,7 +73,9 @@ const MyPageHeader = () => {
     <Container>
       <WhiteSpace></WhiteSpace>
       <Logo />
-      <LogOutButton>로그아웃</LogOutButton>
+      <Link to="/">
+        <LogOutButton>로그아웃</LogOutButton>
+      </Link>
     </Container>
   );
 };
