@@ -8,7 +8,7 @@ function MainPage() {
   return (
     <>
       <Header />
-      <Main>
+      <Main isWhite>
         <Parties />
       </Main>
       <Footer />

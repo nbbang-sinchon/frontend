@@ -8,6 +8,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  white-space: nowrap;
 
   &:hover {
     cursor: pointer;
@@ -17,8 +18,12 @@ const Container = styled.div`
 const Image = styled.img`
   height: 60px;
 
-  @media only screen and (max-width: ${SIZES.HEADER_MIDDLE_WIDTH}) {
+  @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
     height: 40px;
+  }
+
+  @media only screen and (max-width: ${SIZES.SMALL_WIDTH}) {
+    height: 30px;
   }
 `;
 
@@ -26,12 +31,12 @@ const Title = styled.div`
   color: ${COLORS.PRIMARY};
   font-size: 36px;
 
-  @media only screen and (max-width: ${SIZES.HEADER_MIDDLE_WIDTH}) {
+  @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
     font-size: 20px;
   }
 
-  @media only screen and (max-width: ${SIZES.HEADER_SMALL_WIDTH}) {
-    display: none;
+  @media only screen and (max-width: ${SIZES.SMALL_WIDTH}) {
+    font-size: 16px;
   }
 `;
 

@@ -42,6 +42,11 @@ const reset = css`
     text-decoration: none;
     font-family: 'Noto Sans KR', sans-serif;
   }
+
+  body {
+    width: 100vw;
+    overflow-x: hidden;
+  }
 `;
 
 function Reset() {

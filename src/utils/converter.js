@@ -36,19 +36,17 @@ const convertDate = (dateString) => {
   }
 };
 
-const convertStatus = (statusString) => {
+const convertStatus = (statusString, joinNumber, goalNumber) => {
   const upper = statusString.toUpperCase();
 
-  if (upper === 'ON') {
-    return '모집중';
-  } else if (upper === 'SOON') {
+  if (upper === 'OPEN' && goalNumber - joinNumber === 1) {
     return '마감임박';
+  } else if (upper === 'OPEN') {
+    return '모집중';
   } else if (upper === 'FULL') {
     return '모집완료';
-  } else if (upper === 'ORDER') {
-    return '주문완료';
-  } else if (upper === 'CANCEL') {
-    return '주문취소';
+  } else if (upper === 'CLOSED') {
+    return '종료';
   } else {
     return 'ERROR';
   }
