@@ -9,6 +9,7 @@ import MyPage from './pages/MyPage';
 import PartyPage from './pages/PartyPage';
 import ChattingPage from './pages/ChattingPage';
 import MyPartyPage from './pages/MyPartyPage';
+import CreatePartyPage from './pages/CreatePartyPage';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -22,6 +23,7 @@ ReactDOM.render(
         <Route path="/parties/:id" element={<PartyPage />} />
         <Route path="/my-party" element={<MyPartyPage />} />
         <Route path="/chatting" element={<ChattingPage />} />
+        <Route path="/parties" element={<CreatePartyPage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
