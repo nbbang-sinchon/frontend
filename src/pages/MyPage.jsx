@@ -1,8 +1,6 @@
 import React from 'react';
 import Main from '../components/Main';
-
-import MyPageHeader from '../components/MyPageHeader';
-import MyPageUserInfo from '../components/MyPageUserInfo';
+import { MyPageHeader, MyPageUserInfo } from '../components/MyPage';
 
 function MyPage() {
   return (
