@@ -31,7 +31,7 @@ const InnerContainer = styled.div`
     font-size: 20px;
     font-weight: 400;
     color: ${COLORS.DARK_GRAY};
-    margin: 0px 0px 4px 0px;
+    margin-bottom: 4px;
   }
 `;
 
@@ -41,7 +41,7 @@ const Profile = styled.div`
   border-radius: 70%;
   border: 2px solid ${COLORS.GRAY};
   overflow: hidden;
-  margin: 0px 0px 20px 0px;
+  margin-bottom: 20px;
 
   img {
     width: 100%;
@@ -55,8 +55,10 @@ const UserInfo = styled.div`
     font-size: 12px;
     font-weight: 600;
     color: ${COLORS.DARK_GRAY};
-    margin: 10px 0px 4px 0px;
+    margin-top: 10px;
+    margin-botton: 4px;
   }
+
   input {
     font-size: 20px;
     font-weight: 600;
@@ -85,8 +87,6 @@ const UserInfo = styled.div`
 const SaveButton = styled.div`
   font-size: 15px;
   font-weight: 400;
-  font-align: center
-
   border: 1.5px solid;
   border-radius: 6px;
 
@@ -99,7 +99,7 @@ const SaveButton = styled.div`
   flex-shrink: 0;
 
   &:hover {
-    opacity: 0.8; 
+    opacity: 0.8;
     cursor: pointer;
   }
 `;
@@ -107,8 +107,6 @@ const SaveButton = styled.div`
 const SecessionButton = styled.div`
   font-size: 15px;
   font-weight: 400;
-  font-align: center
-
   border: 1.5px solid;
   border-radius: 6px;
 
@@ -120,9 +118,9 @@ const SecessionButton = styled.div`
 
   flex-grow: 0;
   flex-shrink: 0;
-  
+
   &:hover {
-    opacity: 0.8; 
+    opacity: 0.8;
     cursor: pointer;
   }
 `;
