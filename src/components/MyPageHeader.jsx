@@ -40,7 +40,6 @@ const Container = styled.header`
   position: sticky;
   top: 0;
   background-color: white;
-  font-weight: 700;
   z-index: 1;
 `;
 
