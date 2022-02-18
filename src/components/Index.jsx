@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { icons } from '../assets/assets';
 import { COLORS } from '../styles/constants';
 
 const Container = styled.div`
@@ -46,10 +47,19 @@ const StartButton = styled.div`
   flex-grow: 0;
   flex-shrink: 0;
 
+  svg {
+    width: 15px;
+    margin-left: 5px;
+  }
+
   &:hover {
     color: ${COLORS.WHITE};
     background-color: ${COLORS.PRIMARY};
     cursor: pointer;
+  }
+
+  &:hover svg {
+    fill: #fff;
   }
 `;
 
@@ -69,7 +79,10 @@ function Index() {
         </p>
       </WelComeText>
       <Link to="/login">
-        <StartButton>시작하기&nbsp;&#129042;</StartButton>
+        <StartButton>
+          시작하기
+          <icons.ArrowIcon />
+        </StartButton>
       </Link>
     </Container>
   );
