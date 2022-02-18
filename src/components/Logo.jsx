@@ -23,7 +23,7 @@ const Image = styled.img`
   }
 
   @media only screen and (max-width: ${SIZES.SMALL_WIDTH}) {
-    height: 25px;
+    height: 30px;
   }
 `;
 
@@ -36,7 +36,7 @@ const Title = styled.div`
   }
 
   @media only screen and (max-width: ${SIZES.SMALL_WIDTH}) {
-    font-size: 14px;
+    font-size: 16px;
   }
 `;
 

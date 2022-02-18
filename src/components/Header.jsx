@@ -26,6 +26,11 @@ const HeaderColumn = styled.div`
   flex: 1;
   justify-content: center;
 
+  a {
+    display: flex;
+    align-items: center;
+  }
+
   &:nth-of-type(2) {
     flex: 2;
   }
