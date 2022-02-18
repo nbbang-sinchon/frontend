@@ -145,9 +145,9 @@ function MyPageUserInfo() {
           <input></input>
           <h3>지역</h3>
           <select>
-            <option value="신촌동">신촌동</option>
-            <option value="연희동">연희동</option>
-            <option value="창천동">창천동</option>
+            <option value="SINCHON">신촌동</option>
+            <option value="YEONHUI">연희동</option>
+            <option value="CHANGCHEON">창천동</option>
           </select>
           <h3>받은 추천 수</h3>
           <InnerContainer>
