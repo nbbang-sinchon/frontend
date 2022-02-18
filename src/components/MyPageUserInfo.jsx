@@ -114,11 +114,12 @@ const SecessionButton = styled.div`
   color: ${COLORS.WHITE};
   background-color: ${COLORS.DARK_GRAY};
   padding: 15px 153px;
+
   margin-top: 30px;
 
   flex-grow: 0;
   flex-shrink: 0;
-
+  
   &:hover {
     opacity: 0.8; 
     cursor: pointer;
