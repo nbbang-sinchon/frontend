@@ -1,5 +1,6 @@
 const COLORS = {
   PRIMARY: '#F39945',
+  LIGHT_GRAY: '#F5F5F7',
   GRAY: 'rgba(0,0,0,0.2)',
   DARK_GRAY: '#686868',
   LIGHT_GRAY: 'rgba(196, 196, 196, 0.15)',
@@ -10,9 +11,9 @@ const COLORS = {
 };
 
 const SIZES = {
-  HEADER_MIN_WIDTH: '250px',
-  HEADER_SMALL_WIDTH: '400px',
-  HEADER_MIDDLE_WIDTH: '650px',
+  MIN_WIDTH: '320px',
+  SMALL_WIDTH: '450px',
+  MIDDLE_WIDTH: '650px',
   MAIN_MAX_WIDTH: '800px',
 };
 
