@@ -6,13 +6,24 @@ import { ReactComponent as LocationIcon } from './icons/location.svg';
 import { ReactComponent as TimeIcon } from './icons/time.svg';
 import { ReactComponent as HeartIcon } from './icons/heart.svg';
 import { ReactComponent as ArrowIcon } from './icons/arrow.svg';
+import { ReactComponent as CancelIcon } from './icons/cancel.svg';
 import logo from './images/logo.png';
 import bread from './images/bread.png';
 import kakao from './images/Kakao.png';
 import naver from './images/Naver.png';
 import google from './images/Google.png';
 
-const icons = { NotificationIcon, PartyIcon, ProfileIcon, SearchIcon, LocationIcon, TimeIcon, HeartIcon, ArrowIcon };
+const icons = {
+  NotificationIcon,
+  PartyIcon,
+  ProfileIcon,
+  SearchIcon,
+  LocationIcon,
+  TimeIcon,
+  HeartIcon,
+  ArrowIcon,
+  CancelIcon,
+};
 const images = { logo, bread, kakao, naver, google };
 
 export { icons, images };
