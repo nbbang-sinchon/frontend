@@ -5,11 +5,12 @@ import { ReactComponent as SearchIcon } from './icons/search.svg';
 import { ReactComponent as LocationIcon } from './icons/location.svg';
 import { ReactComponent as TimeIcon } from './icons/time.svg';
 import { ReactComponent as HeartIcon } from './icons/heart.svg';
+import { ReactComponent as CheckIcon } from './icons/check.svg';
 
 import logo from './images/logo.png';
 import bread from './images/bread.png';
 
-const icons = { NotificationIcon, PartyIcon, ProfileIcon, SearchIcon, LocationIcon, TimeIcon, HeartIcon };
+const icons = { NotificationIcon, PartyIcon, ProfileIcon, SearchIcon, LocationIcon, TimeIcon, HeartIcon, CheckIcon };
 const images = { logo, bread };
 
 export { icons, images };
