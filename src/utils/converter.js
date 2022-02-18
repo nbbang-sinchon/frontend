@@ -36,10 +36,12 @@ const convertDate = (dateString) => {
   }
 };
 
-const convertStatus = (statusString) => {
+const convertStatus = (statusString, joinNumber, goalNumber) => {
   const upper = statusString.toUpperCase();
 
-  if (upper === 'OPEN') {
+  if (upper === 'OPEN' && goalNumber - joinNumber === 1) {
+    return '마감임박';
+  } else if (upper === 'OPEN') {
     return '모집중';
   } else if (upper === 'FULL') {
     return '모집완료';

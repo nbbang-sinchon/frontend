@@ -153,7 +153,7 @@ function PartyDetail() {
         <StatusColumn>
           <div>{`${party.joinNumber} / ${party.goalNumber} 명`}</div>
           <Bar />
-          <div>{`${convertStatus(party.status)}`}</div>
+          <div>{convertStatus(party.status, party.joinNumber, party.goalNumber)}</div>
           <Bar />
           <div>{convertDate(party.createTime)}</div>
         </StatusColumn>

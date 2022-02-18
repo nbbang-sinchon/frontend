@@ -134,7 +134,7 @@ function Party({ title, hashtags, place, createTime, joinNumber, goalNumber, sta
           <div>
             {joinNumber} / {goalNumber} 명
           </div>
-          <div>{convertStatus(status)}</div>
+          <div>{convertStatus(status, joinNumber, goalNumber)}</div>
         </Status>
       </Content>
     </Container>
