@@ -4,9 +4,10 @@ import { images } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
 
 const Container = styled.div`
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
 
   padding: 150px;
