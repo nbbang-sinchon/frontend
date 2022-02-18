@@ -14,7 +14,7 @@ const Container = styled.div`
   min-width: ${SIZES.HEADER_MIN_WIDTH};
   position: sticky;
   top: 0;
-  background-color: white;
+  background-color: ${COLORS.WHITE};
   font-weight: 700;
 `;
 
@@ -26,7 +26,7 @@ const InnerContainer = styled.div`
 
   position: sticky;
   top: 0;
-  background-color: white;
+  background-color: ${COLORS.WHITE};
   font-weight: 700;
 
   h1 {
