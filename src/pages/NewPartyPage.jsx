@@ -1,7 +1,6 @@
 import React from 'react';
 import Main from '../components/Main';
-import NewPartyHeader from '../components/NewPartyHeader';
-import NewParty from '../components/NewParty';
+import { NewPartyHeader, NewParty } from '../components/NewParty';
 
 function NewPartyPage() {
   return (
