@@ -81,7 +81,7 @@ const SaveButton = styled.div`
   }
 `;
 
-function CreatePartyHeader() {
+function NewPartyHeader() {
   return (
     <Container>
       <Column>
@@ -101,4 +101,4 @@ function CreatePartyHeader() {
   );
 }
 
-export default CreatePartyHeader;
+export default NewPartyHeader;

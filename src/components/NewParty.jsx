@@ -87,7 +87,7 @@ const Select = styled.div`
   }
 `;
 
-function CreateParty() {
+function NewParty() {
   return (
     <>
       <Container>
@@ -109,4 +109,4 @@ function CreateParty() {
   );
 }
 
-export default CreateParty;
+export default NewParty;
