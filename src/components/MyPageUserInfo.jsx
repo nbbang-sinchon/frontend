@@ -14,8 +14,6 @@ const Container = styled.div`
   position: sticky;
   top: 0;
   background-color: white;
-  font-weight: 700;
-  z-index: 1;
 `;
 
 const InnerContainer = styled.div`
@@ -27,7 +25,6 @@ const InnerContainer = styled.div`
   top: 0;
   background-color: white;
   font-weight: 700;
-  z-index: 1;
 
   h3 {
     font-size: 20px;

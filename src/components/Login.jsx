@@ -4,6 +4,7 @@ import { images } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
 
 const Container = styled.div`
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -15,7 +16,6 @@ const Container = styled.div`
   top: 0;
   background-color: white;
   font-weight: 700;
-  z-index: 1;
 `;
 
 const InnerContainer = styled.div`
@@ -28,7 +28,6 @@ const InnerContainer = styled.div`
   top: 0;
   background-color: white;
   font-weight: 700;
-  z-index: 1;
 
   h1 {
     font-size: 20px;
