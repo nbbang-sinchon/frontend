@@ -16,14 +16,15 @@ const Status = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  box-sizing: border-box;
   padding: 0 10px 15px 10px;
   border-bottom: 1px solid ${COLORS.GRAY};
-  min-width: ${SIZES.MIN_WIDTH};
 `;
 
 const StatusColumn = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
 
   font-size: 18px;
   font-weight: 500;
@@ -33,11 +34,13 @@ const StatusColumn = styled.div`
     font-size: 14px;
   }
 
-  &: first-of-type {
-    font-size: 14px;
+  @media only screen and (max-width: ${SIZES.SMALL_WIDTH}) {
+    font-size: 12px;
 
-    @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
-      font-size: 12px;
+    &: nth-of-type(2) {
+      flex-direction: column;
+
+      font-size: 10px;
     }
   }
 
@@ -55,7 +58,19 @@ const StatusColumn = styled.div`
 
     @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
       transform: scale(1.2, 1.2) translateY(-2px);
+      margin-right: 15px;
     }
+  }
+`;
+
+const Bar = styled.div`
+  width: 1px;
+  height: 20px;
+  background-color: ${COLORS.BLACK};
+  margin: 0 10px;
+
+  @media only screen and (max-width: ${SIZES.SMALL_WIDTH}) {
+    display: none;
   }
 `;
 
@@ -109,6 +124,16 @@ const ChattingButton = styled.button`
 
 const Profile = styled.div`
   margin-left: 15px;
+  font-size: 14px;
+
+  @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
+    font-size: 12px;
+    margin-left: 10px;
+  }
+
+  @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
+    font-size: 12px;
+  }
 `;
 
 function PartyDetail() {
@@ -126,9 +151,11 @@ function PartyDetail() {
           </Profile>
         </StatusColumn>
         <StatusColumn>
-          {`${party.joinNumber} / ${party.goalNumber} 명 | ${convertStatus(party.status)} | ${convertDate(
-            party.createTime,
-          )}`}
+          <div>{`${party.joinNumber} / ${party.goalNumber} 명`}</div>
+          <Bar />
+          <div>{`${convertStatus(party.status)}`}</div>
+          <Bar />
+          <div>{convertDate(party.createTime)}</div>
         </StatusColumn>
         <StatusColumn>
           <icons.HeartIcon />

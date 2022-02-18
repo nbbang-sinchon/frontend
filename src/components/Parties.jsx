@@ -14,7 +14,8 @@ const Container = styled.div`
   > div,
   ::after {
     padding: 10px;
-    width: 340px;
+    width: 100%;
+    max-width: 340px;
     box-sizing: border-box;
 
     @media only screen and (min-width: ${SIZES.MIDDLE_WIDTH}) {
