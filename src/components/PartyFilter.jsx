@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { useState } from 'react';
 import { icons } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
 import plainButton from '../styles/plainButton';
@@ -57,11 +57,11 @@ const FilterItem = styled.div`
   align-items: center;
   padding: 3px;
 
-  color: ${COLORS.DARK_GRAY};
+  color: ${(props) => (props.items[props['data-value']] ? COLORS.PRIMARY : COLORS.DARK_GRAY)};
   margin-right: 5px;
 
   path {
-    fill: ${COLORS.DARK_GRAY};
+    fill: ${(props) => (props.items[props['data-value']] ? COLORS.PRIMARY : COLORS.DARK_GRAY)};
   }
 
   svg {
@@ -90,31 +90,45 @@ const CreatePartyBtn = styled(plainButton)`
 `;
 
 function PartyFilter() {
+  const [filterItems, setFilterItems] = useState({
+    OPEN: true,
+    WISHLIST: false,
+    SINCHON: true,
+    YEONHUI: false,
+    CHANGCHEON: false,
+  });
+
+  const clickFilterItem = ({ currentTarget }) => {
+    const value = currentTarget.dataset.value;
+
+    setFilterItems((prev) => ({ ...prev, [value]: !prev[value] }));
+  };
+
   return (
     <Container>
       <Column>
         <Title>파티목록</Title>
         <Filter>
           <FilterRow>
-            <FilterItem>
+            <FilterItem data-value="OPEN" items={filterItems} onClick={clickFilterItem}>
               <icons.CheckIcon />
-              <div> 모집중</div>
+              <div>모집중</div>
             </FilterItem>
-            <FilterItem>
+            <FilterItem data-value="WISHLIST" items={filterItems} onClick={clickFilterItem}>
               <icons.HeartIcon />
               <div>위시리스트</div>
             </FilterItem>
           </FilterRow>
           <FilterRow>
-            <FilterItem>
+            <FilterItem data-value="SINCHON" items={filterItems} onClick={clickFilterItem}>
               <icons.CheckIcon />
               <div>신촌동</div>
             </FilterItem>
-            <FilterItem>
+            <FilterItem data-value="YEONHUI" items={filterItems} onClick={clickFilterItem}>
               <icons.CheckIcon />
               <div>연희동</div>
             </FilterItem>
-            <FilterItem>
+            <FilterItem data-value="CHANGCHEON" items={filterItems} onClick={clickFilterItem}>
               <icons.CheckIcon />
               <div>창천동</div>
             </FilterItem>
