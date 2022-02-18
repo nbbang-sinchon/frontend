@@ -1,15 +1,12 @@
 import React from 'react';
-import Header from '../components/Header';
-import Main from '../components/Main';
+import LoginPageHeader from '../components/LoginPageHeader';
+import Login from '../components/Login';
 
 function LoginPage() {
   return (
     <>
-      <Header />
-      <Main>
-        <div>This is login</div>
-        <div>This is login</div>
-      </Main>
+      <LoginPageHeader />
+      <Login></Login>
     </>
   );
 }
