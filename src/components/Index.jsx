@@ -35,31 +35,31 @@ const WelComeText = styled.div`
   }
 `;
 
-const StartButton = styled.div`
+const StartBtn = styled.div`
   font-size: 13px;
   font-weight: 400;
   border: 1.5px solid;
   border-radius: 5px;
   color: ${COLORS.PRIMARY};
   background-color: ${COLORS.WHITE};
-  padding: 12px 30px 12px 30px;
+  padding: 12px 30px;
 
   flex-grow: 0;
   flex-shrink: 0;
 
   svg {
-    width: 15px;
-    margin-left: 5px;
+    width: 12px;
+    margin-left: 2 px;
   }
 
   &:hover {
     color: ${COLORS.WHITE};
     background-color: ${COLORS.PRIMARY};
     cursor: pointer;
-  }
 
-  &:hover svg {
-    fill: #fff;
+    path {
+      fill: ${COLORS.WHITE};
+    }
   }
 `;
 
@@ -79,10 +79,11 @@ function Index() {
         </p>
       </WelComeText>
       <Link to="/login">
-        <StartButton>
-          시작하기
-          <icons.ArrowIcon />
-        </StartButton>
+        <StartBtn>
+          <div>
+            시작하기 <icons.ArrowIcon />
+          </div>
+        </StartBtn>
       </Link>
     </Container>
   );
