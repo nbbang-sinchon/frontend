@@ -6,6 +6,7 @@ import dummyParty from '../dummies/dummyParty';
 import { COLORS, SIZES } from '../styles/constants';
 import { convertStatus, convertPlace, convertDate } from '../utils/converter';
 import HashTags from './HashTags';
+import plainButton from '../styles/plainButton';
 
 const Container = styled.div`
   margin-bottom: 10px;
@@ -103,22 +104,9 @@ const Content = styled.div`
   }
 `;
 
-const ChattingButton = styled.button`
-  padding: 10px;
-  text-align: center;
-  font-size: 18px;
-  font-weight: bolder;
-  background-color: ${COLORS.PRIMARY};
-  color: ${COLORS.WHITE};
-  border: none;
-  border-radius: 10px;
-
+const ChattingButton = styled(plainButton)`
   @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
     font-size: 14px;
-  }
-
-  &:hover {
-    cursor: pointer;
   }
 `;
 
