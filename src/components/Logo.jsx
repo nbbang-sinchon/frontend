@@ -32,7 +32,7 @@ const Title = styled.div`
   font-size: 36px;
 
   @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
-    font-size: 20px;
+    font-size: 26px;
   }
 
   @media only screen and (max-width: ${SIZES.SMALL_WIDTH}) {

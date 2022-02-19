@@ -9,7 +9,7 @@ function MainPage() {
     <>
       <Header />
       <Main isWhite>
-        <Parties />
+        <Parties isFiltered />
       </Main>
       <Footer />
     </>
