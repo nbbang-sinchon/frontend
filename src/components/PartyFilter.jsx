@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { icons } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
 import plainButton from '../styles/plainButton';
@@ -137,7 +138,9 @@ function PartyFilter() {
         </Filter>
       </Column>
       <Column>
-        <CreatePartyBtn> + 파티 만들기</CreatePartyBtn>
+        <Link to="/newparty">
+          <CreatePartyBtn> + 파티 만들기</CreatePartyBtn>
+        </Link>
       </Column>
     </Container>
   );
