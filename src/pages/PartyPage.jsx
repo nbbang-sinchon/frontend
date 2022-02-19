@@ -11,7 +11,7 @@ function PartyPage() {
       <Header />
       <Main>
         <PartyDetail />
-        <Parties />
+        <Parties parties={[]} />
       </Main>
       <Footer />
     </>

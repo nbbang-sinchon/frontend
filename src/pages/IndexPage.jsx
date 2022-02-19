@@ -11,7 +11,7 @@ function IndexPage() {
       <Header />
       <Index />
       <Main isWhite>
-        <Parties />
+        <Parties parties={[]} />
       </Main>
       <Footer />
     </>

@@ -1,22 +1,10 @@
 import styled from '@emotion/styled';
-import React, { useState } from 'react';
-import { bool } from 'prop-types';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Party from './Party';
-import dummyParties from '../dummies/dummyParties';
 import { SIZES } from '../styles/constants';
-import PartyFilter from './PartyFilter';
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  width: 100%;
-  padding: 10px;
-
-  @media only screen and (min-width: ${SIZES.MIDDLE_WIDTH}) {
-    align-items: center;
-  }
-`;
+const Container = styled.div``;
 
 const PartyContainer = styled.div`
   display: flex;
@@ -41,12 +29,9 @@ const PartyContainer = styled.div`
   }
 `;
 
-function Parties({ isFiltered }) {
-  const [parties] = useState(dummyParties);
-
+function Parties({ parties }) {
   return (
     <Container>
-      {isFiltered && <PartyFilter />}
       <PartyContainer>
         {parties.map((party) => (
           <Party
@@ -67,7 +52,7 @@ function Parties({ isFiltered }) {
 }
 
 Parties.propTypes = {
-  isFiltered: bool,
+  parties: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default Parties;
