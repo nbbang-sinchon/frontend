@@ -10,7 +10,7 @@ const Container = styled.div`
 
   width: 100%;
   box-sizing: border-box;
-  padding: 0 5% 10px 5%;
+  padding: 0 5% 10px 7%;
 
   div {
     align-items: center;
@@ -100,9 +100,7 @@ function PartyFilter() {
 
   const clickFilterItem = ({ currentTarget }) => {
     const value = currentTarget.dataset.value;
-    console.log(value);
     setFilterItems((prev) => ({ ...prev, [value]: !prev[value] }));
-    console.log(filterItems);
   };
 
   return (
