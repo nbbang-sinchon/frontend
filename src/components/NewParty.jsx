@@ -37,7 +37,6 @@ function NewPartyHeader() {
 
     padding: 10px;
     border-bottom: 2px solid ${COLORS.PRIMARY};
-    min-width: ${SIZES.HEADER_MIN_WIDTH};
     position: sticky;
     top: 0;
     background-color: white;
@@ -110,7 +109,6 @@ function NewParty() {
     justify-content: flex-start;
     align-items: center;
 
-    min-width: ${SIZES.HEADER_MIN_WIDTH};
     position: sticky;
     top: 0;
     background-color: ${COLORS.WHITE};
@@ -199,7 +197,7 @@ function NewParty() {
               <option value="YEONHUI">연희동</option>
               <option value="CHANGCHEON">창천동</option>
             </select>
-            <input type="number" placeholder="인원 수"></input>
+            <input type="number" min="1" placeholder="인원 수"></input>
           </Select>
           <ContentInput placeholder="내용을 입력하세요."></ContentInput>
         </InnerContainer>
