@@ -100,8 +100,9 @@ function PartyFilter() {
 
   const clickFilterItem = ({ currentTarget }) => {
     const value = currentTarget.dataset.value;
-
+    console.log(value);
     setFilterItems((prev) => ({ ...prev, [value]: !prev[value] }));
+    console.log(filterItems);
   };
 
   return (
