@@ -112,7 +112,7 @@ const SearchBarSubmit = styled.button`
   }
 `;
 
-function Header({ search }) {
+function Header({ setOption, search }) {
   const navigate = useNavigate();
   const inputRef = useRef();
 
@@ -120,8 +120,11 @@ function Header({ search }) {
     event.preventDefault();
 
     const form = new FormData(event.target);
-    const search = form.get('keyword');
+    const search = form.get('keyword').trim();
 
+    if (setOption) {
+      setOption((prev) => ({ ...prev, search }));
+    }
     navigate('/main/' + search);
   };
 
@@ -131,7 +134,7 @@ function Header({ search }) {
     }
 
     inputRef.current.value = search || '';
-  }, [search]);
+  }, []);
 
   return (
     <Container>
@@ -160,6 +163,7 @@ function Header({ search }) {
 }
 
 Header.propTypes = {
+  setOption: PropTypes.func,
   search: PropTypes.string,
 };
 

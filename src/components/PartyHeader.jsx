@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { icons } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
@@ -45,7 +45,7 @@ const Title = styled.div`
   }
 `;
 
-const Filter = styled.div`
+const Filter = styled.ul`
   white-space: nowrap;
 `;
 
@@ -54,21 +54,29 @@ const FilterRow = styled.div`
 
   font-size: 12px;
 
+  .isActive {
+    color: ${COLORS.PRIMARY};
+
+    path {
+      fill: ${COLORS.PRIMARY};
+    }
+  }
+
   @media only screen and (max-width: ${SIZES.SMALL_WIDTH}) {
     font-size: 10px;
   }
 `;
 
-const FilterItem = styled.div`
+const FilterItem = styled.li`
   display: flex;
   align-items: center;
   padding: 3px;
 
-  color: ${(props) => (props.items[props['data-value']] ? COLORS.PRIMARY : COLORS.DARK_GRAY)};
+  color: ${COLORS.DARK_GRAY};
   margin-right: 5px;
 
   path {
-    fill: ${(props) => (props.items[props['data-value']] ? COLORS.PRIMARY : COLORS.DARK_GRAY)};
+    fill: ${COLORS.DARK_GRAY};
   }
 
   svg {
@@ -96,18 +104,19 @@ const CreatePartyBtn = styled(plainButton)`
   }
 `;
 
-function PartyHeader({ header, isFiltered }) {
-  const [filterItems, setFilterItems] = useState({
-    OPEN: true,
-    WISHLIST: false,
-    SINCHON: true,
-    YEONHUI: false,
-    CHANGCHEON: false,
-  });
+function PartyHeader({ header, isFiltered, setOption }) {
+  const clickFilterItem = ({ target }) => {
+    const item = target.closest('li');
+    const place = item.dataset.place;
+    const option = item.dataset.option;
 
-  const clickFilterItem = ({ currentTarget }) => {
-    const value = currentTarget.dataset.value;
-    setFilterItems((prev) => ({ ...prev, [value]: !prev[value] }));
+    item.classList.toggle('isActive');
+
+    if (place) {
+      setOption((prev) => ({ ...prev, place: { ...prev.place, [place]: !prev.place[place] } }));
+    } else {
+      setOption((prev) => ({ ...prev, [option]: !prev[option] }));
+    }
   };
 
   return (
@@ -115,27 +124,27 @@ function PartyHeader({ header, isFiltered }) {
       <Column>
         <Title isFiltered={isFiltered}>{header}</Title>
         {isFiltered && (
-          <Filter>
+          <Filter onClick={clickFilterItem}>
             <FilterRow>
-              <FilterItem data-value="OPEN" items={filterItems} onClick={clickFilterItem}>
+              <FilterItem data-option="OPEN" className="isActive">
                 <icons.CheckIcon />
                 <div>모집중</div>
               </FilterItem>
-              <FilterItem data-value="WISHLIST" items={filterItems} onClick={clickFilterItem}>
+              <FilterItem data-option="WISHLIST">
                 <icons.HeartIcon />
                 <div>위시리스트</div>
               </FilterItem>
             </FilterRow>
             <FilterRow>
-              <FilterItem data-value="SINCHON" items={filterItems} onClick={clickFilterItem}>
+              <FilterItem data-place="SINCHON" className="isActive">
                 <icons.CheckIcon />
                 <div>신촌동</div>
               </FilterItem>
-              <FilterItem data-value="YEONHUI" items={filterItems} onClick={clickFilterItem}>
+              <FilterItem data-place="YEONHUI" className="isActive">
                 <icons.CheckIcon />
                 <div>연희동</div>
               </FilterItem>
-              <FilterItem data-value="CHANGCHEON" items={filterItems} onClick={clickFilterItem}>
+              <FilterItem data-place="CHANGCHEON" className="isActive">
                 <icons.CheckIcon />
                 <div>창천동</div>
               </FilterItem>
@@ -155,6 +164,7 @@ function PartyHeader({ header, isFiltered }) {
 PartyHeader.propTypes = {
   header: PropTypes.string,
   isFiltered: PropTypes.bool,
+  setOption: PropTypes.func,
 };
 
 export default PartyHeader;
