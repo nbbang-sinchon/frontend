@@ -12,6 +12,7 @@ function PartyPage() {
       <Main>
         <PartyDetail />
         <Parties parties={[]} />
+        <PartyHeader header={'다른 파티목록'} isFiltered={false} />
       </Main>
       <Footer />
     </>

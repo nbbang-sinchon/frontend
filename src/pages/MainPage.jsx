@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Main from '../components/Main';
 import Parties from '../components/Parties';
-import PartyFilter from '../components/PartyFilter';
+import PartyHeader from '../components/PartyHeader';
 import { SWAGGER_URL } from '../config';
 
 function MainPage() {
@@ -26,7 +26,7 @@ function MainPage() {
     <>
       <Header search={search} />
       <Main isWhite>
-        <PartyFilter />
+        <PartyHeader header={'파티목록'} isFiltered />
         <Parties parties={parties} />
       </Main>
       <Footer />

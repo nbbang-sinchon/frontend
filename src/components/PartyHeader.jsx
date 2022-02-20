@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { icons } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
 import plainButton from '../styles/plainButton';
@@ -33,8 +34,13 @@ const Title = styled.div`
   }
 
   @media only screen and (max-width: ${SIZES.SMALL_WIDTH}) {
+    ${(props) =>
+      (props.isFiltered &&
+        `
     font-size: 0;
     padding-right: 0;
+    `) ||
+      ''}
   }
 `;
 
@@ -89,7 +95,7 @@ const CreatePartyBtn = styled(plainButton)`
   }
 `;
 
-function PartyFilter() {
+function PartyHeader({ header, isFiltered }) {
   const [filterItems, setFilterItems] = useState({
     OPEN: true,
     WISHLIST: false,
@@ -106,33 +112,35 @@ function PartyFilter() {
   return (
     <Container>
       <Column>
-        <Title>파티목록</Title>
-        <Filter>
-          <FilterRow>
-            <FilterItem data-value="OPEN" items={filterItems} onClick={clickFilterItem}>
-              <icons.CheckIcon />
-              <div>모집중</div>
-            </FilterItem>
-            <FilterItem data-value="WISHLIST" items={filterItems} onClick={clickFilterItem}>
-              <icons.HeartIcon />
-              <div>위시리스트</div>
-            </FilterItem>
-          </FilterRow>
-          <FilterRow>
-            <FilterItem data-value="SINCHON" items={filterItems} onClick={clickFilterItem}>
-              <icons.CheckIcon />
-              <div>신촌동</div>
-            </FilterItem>
-            <FilterItem data-value="YEONHUI" items={filterItems} onClick={clickFilterItem}>
-              <icons.CheckIcon />
-              <div>연희동</div>
-            </FilterItem>
-            <FilterItem data-value="CHANGCHEON" items={filterItems} onClick={clickFilterItem}>
-              <icons.CheckIcon />
-              <div>창천동</div>
-            </FilterItem>
-          </FilterRow>
-        </Filter>
+        <Title isFiltered={isFiltered}>{header}</Title>
+        {isFiltered && (
+          <Filter>
+            <FilterRow>
+              <FilterItem data-value="OPEN" items={filterItems} onClick={clickFilterItem}>
+                <icons.CheckIcon />
+                <div>모집중</div>
+              </FilterItem>
+              <FilterItem data-value="WISHLIST" items={filterItems} onClick={clickFilterItem}>
+                <icons.HeartIcon />
+                <div>위시리스트</div>
+              </FilterItem>
+            </FilterRow>
+            <FilterRow>
+              <FilterItem data-value="SINCHON" items={filterItems} onClick={clickFilterItem}>
+                <icons.CheckIcon />
+                <div>신촌동</div>
+              </FilterItem>
+              <FilterItem data-value="YEONHUI" items={filterItems} onClick={clickFilterItem}>
+                <icons.CheckIcon />
+                <div>연희동</div>
+              </FilterItem>
+              <FilterItem data-value="CHANGCHEON" items={filterItems} onClick={clickFilterItem}>
+                <icons.CheckIcon />
+                <div>창천동</div>
+              </FilterItem>
+            </FilterRow>
+          </Filter>
+        )}
       </Column>
       <Column>
         <CreatePartyBtn> + 파티 만들기</CreatePartyBtn>
@@ -141,4 +149,9 @@ function PartyFilter() {
   );
 }
 
-export default PartyFilter;
+PartyHeader.propTypes = {
+  header: PropTypes.string,
+  isFiltered: PropTypes.bool,
+};
+
+export default PartyHeader;
