@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { icons } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
 import plainButton from '../styles/plainButton';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
@@ -143,7 +144,9 @@ function PartyHeader({ header, isFiltered }) {
         )}
       </Column>
       <Column>
-        <CreatePartyBtn> + 파티 만들기</CreatePartyBtn>
+        <Link to="/newparty">
+          <CreatePartyBtn> + 파티 만들기</CreatePartyBtn>
+        </Link>
       </Column>
     </Container>
   );
