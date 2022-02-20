@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { icons } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
 import Logo from './Logo';
@@ -111,8 +112,9 @@ const SearchBarSubmit = styled.button`
   }
 `;
 
-function Header() {
+function Header({ search }) {
   const navigate = useNavigate();
+  const inputRef = useRef();
 
   const searchKeyword = (event) => {
     event.preventDefault();
@@ -123,6 +125,14 @@ function Header() {
     navigate('/main/' + search);
   };
 
+  useEffect(() => {
+    if (!inputRef.current) {
+      return;
+    }
+
+    inputRef.current.value = search || '';
+  }, [search]);
+
   return (
     <Container>
       <HeaderColumn>
@@ -130,7 +140,7 @@ function Header() {
       </HeaderColumn>
       <HeaderColumn>
         <SearchBar onSubmit={searchKeyword}>
-          <SearchBarInput name="keyword" placeholder="음식명 등을 검색하여 원하는 파티을 찾아 보세요!" />
+          <SearchBarInput name="keyword" placeholder="음식명 등을 검색하여 원하는 파티을 찾아 보세요!" ref={inputRef} />
           <SearchBarSubmit type="submit">
             <icons.SearchIcon />
           </SearchBarSubmit>
@@ -148,5 +158,9 @@ function Header() {
     </Container>
   );
 }
+
+Header.propTypes = {
+  search: PropTypes.string,
+};
 
 export default Header;

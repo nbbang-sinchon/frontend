@@ -24,7 +24,7 @@ function MainPage() {
 
   return (
     <>
-      <Header />
+      <Header search={search} />
       <Main isWhite>
         <PartyFilter />
         <Parties parties={parties} />
