@@ -13,6 +13,9 @@ const Container = styled.main`
 `;
 
 const InnerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
   position: relative;
   padding: 20px;
   width: 100%;

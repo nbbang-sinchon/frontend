@@ -59,7 +59,6 @@ function IndexPage() {
       <Header />
       <Index />
       <Main isWhite>
-        <Parties parties={[]} />
         <PartyHeader header={'파티 목록'} />
         <Parties parties={parties} />
       </Main>
