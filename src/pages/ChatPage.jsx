@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../components/Header';
 import Main from '../components/Main';
 
-function ChattingPage() {
+function ChatPage() {
   return (
     <>
       <Header />
@@ -11,4 +11,4 @@ function ChattingPage() {
   );
 }
 
-export default ChattingPage;
+export default ChatPage;
