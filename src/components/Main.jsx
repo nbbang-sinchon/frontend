@@ -8,7 +8,7 @@ const Container = styled.main`
   flex-direction: column;
   align-items: center;
 
-  background-color: ${(props) => (props.isWhite && COLORS.WHITE) || COLORS.PRIMARY};
+  background-color: ${(props) => COLORS[props.background] || COLORS.PRIMARY};
   min-width: ${SIZES.MIN_WIDTH};
 `;
 
@@ -24,9 +24,9 @@ const InnerContainer = styled.div`
   background-color: white;
 `;
 
-function Main({ children, isWhite }) {
+function Main({ children, background }) {
   return (
-    <Container isWhite={isWhite}>
+    <Container background={background?.toUpperCase()}>
       <InnerContainer>{children}</InnerContainer>
     </Container>
   );
@@ -34,7 +34,7 @@ function Main({ children, isWhite }) {
 
 Main.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-  isWhite: PropTypes.bool,
+  background: PropTypes.string,
 };
 
 export default Main;
