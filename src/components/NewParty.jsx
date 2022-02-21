@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { icons, images } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
 
-function NewPartyHeader() {
+function NewPartyHeader({ onClick }) {
   const Logo = () => {
     const Container = styled.div`
       display: flex;
@@ -63,7 +64,7 @@ function NewPartyHeader() {
     }
   `;
 
-  const SaveButton = styled.div`
+  const SaveButton = styled.button`
     font-size: 20px;
     font-weight: 400;
     border: 1.5px solid;
@@ -92,114 +93,126 @@ function NewPartyHeader() {
         <Logo />
       </Column>
       <Column>
-        <Link to="/main">
-          <SaveButton>완료</SaveButton>
-        </Link>
+        <SaveButton onClick={onClick}>완료</SaveButton>
       </Column>
     </Container>
   );
 }
 
-function NewParty() {
-  const Container = styled.div`
-    height: 100vh;
-    display: flex;
-    padding-top: 100px;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+const Container = styled.div`
+  height: 100vh;
+  display: flex;
+  padding-top: 100px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 
-    position: sticky;
-    top: 0;
-    background-color: ${COLORS.WHITE};
-  `;
+  position: sticky;
+  top: 0;
+  background-color: ${COLORS.WHITE};
+`;
 
-  const InnerContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 350px;
-  `;
+const InnerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 350px;
+`;
 
-  const TitleInput = styled.input`
-    font-size: 20px;
-    font-weight: 500;
-    width: 100%;
+const TitleInput = styled.input`
+  font-size: 20px;
+  font-weight: 500;
+  width: 100%;
 
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 
-    border-bottom: 1px solid ${COLORS.DARK_GRAY};
+  border-bottom: 1px solid ${COLORS.DARK_GRAY};
 
-    background-color: ${COLORS.LIGHT_GRAY};
-    color: ${COLORS.DARK_GRAY};
-  `;
+  background-color: ${COLORS.LIGHT_GRAY};
+  color: ${COLORS.DARK_GRAY};
+`;
 
-  const HashTagInput = styled.input`
+const HashTagInput = styled.input`
+  font-size: 10px;
+  font-weight: 400;
+  width: 100%;
+
+  margin-bottom: 20px;
+  border-bottom: 1px solid ${COLORS.DARK_GRAY};
+
+  background-color: ${COLORS.LIGHT_GRAY};
+  color: ${COLORS.DARK_GRAY};
+`;
+
+const Select = styled.div`
+  width: 100%;
+  display: flex;
+  items-align: center;
+  margin-bottom: 40px;
+
+  select {
     font-size: 10px;
-    font-weight: 400;
-    width: 100%;
-
-    margin-bottom: 20px;
-    border-bottom: 1px solid ${COLORS.DARK_GRAY};
-
+    padding: 2px 5px;
     background-color: ${COLORS.LIGHT_GRAY};
     color: ${COLORS.DARK_GRAY};
-  `;
+  }
 
-  const ContentInput = styled.textarea`
-    font-size: 12px;
-    font-weight: 400;
-    width: 100%;
-    word-wrap: break-word;
-    border: none;
-    padding-bottom: 400px;
+  select option {
+    background-color: ${COLORS.WHITE};
+    padding: 3px 0;
+  }
+
+  input {
+    margin-left: 10px;
+    font-size: 10px;
+    width: 18%;
+    border: 1px solid ${COLORS.BLACK};
     background-color: ${COLORS.LIGHT_GRAY};
     color: ${COLORS.DARK_GRAY};
-  `;
+  }
+`;
 
-  const Select = styled.div`
-    width: 100%;
-    display: flex;
-    items-align: center;
-    margin-bottom: 40px;
+const ContentInput = styled.textarea`
+  font-size: 12px;
+  font-weight: 400;
+  width: 100%;
+  word-wrap: break-word;
+  border: none;
+  padding-bottom: 400px;
+  background-color: ${COLORS.LIGHT_GRAY};
+  color: ${COLORS.DARK_GRAY};
+`;
 
-    select {
-      font-size: 10px;
-      padding: 2px 5px;
-      background-color: ${COLORS.LIGHT_GRAY};
-      color: ${COLORS.DARK_GRAY};
-    }
-
-    select option {
-      background-color: ${COLORS.WHITE};
-      padding: 3px 0;
-    }
-
-    input {
-      margin-left: 10px;
-      font-size: 10px;
-      width: 18%;
-      border: 1px solid ${COLORS.BLACK};
-      background-color: ${COLORS.LIGHT_GRAY};
-      color: ${COLORS.DARK_GRAY};
-    }
-  `;
-
+function NewParty({ newparty, onChange }) {
   return (
     <>
       <Container>
         <InnerContainer>
-          <TitleInput placeholder="파티 제목을 입력하세요."></TitleInput>
-          <HashTagInput placeholder="#해시태그로 파티 정보를 알려주세요."></HashTagInput>
+          <TitleInput name="title" placeholder="파티 제목을 입력하세요." onChange={onChange} value={newparty.title} />
+          <HashTagInput
+            name="hashtags"
+            placeholder="#해시태그로 파티 정보를 알려주세요."
+            onChange={onChange}
+            value={newparty.hashtags}></HashTagInput>
           <Select>
-            <select>
+            <select name="place" onChange={onChange} value={newparty.place}>
               <option value="SINCHON">신촌동</option>
               <option value="YEONHUI">연희동</option>
               <option value="CHANGCHEON">창천동</option>
             </select>
-            <input type="number" min="1" placeholder="인원 수"></input>
+            <input
+              name="goalNumber"
+              type="number"
+              min="1"
+              placeholder="인원 수"
+              onChange={onChange}
+              value={newparty.goalNumber}></input>
           </Select>
-          <ContentInput placeholder="내용을 입력하세요."></ContentInput>
+          <ContentInput
+            name="content"
+            placeholder="내용을 입력하세요."
+            onChange={onChange}
+            value={newparty.content}></ContentInput>
         </InnerContainer>
       </Container>
     </>
@@ -207,3 +220,12 @@ function NewParty() {
 }
 
 export { NewPartyHeader, NewParty };
+
+NewParty.propTypes = {
+  newparty: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
+
+NewPartyHeader.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};

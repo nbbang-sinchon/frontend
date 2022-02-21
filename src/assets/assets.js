@@ -24,7 +24,6 @@ const icons = {
   TimeIcon,
   HeartIcon,
   ArrowIcon,
-
   CheckIcon,
   CancelIcon,
 };
