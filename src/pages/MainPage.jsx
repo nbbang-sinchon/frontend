@@ -60,7 +60,7 @@ function MainPage() {
     <>
       <Header setOption={setOption} search={search} />
       <Main isWhite>
-        <PartyHeader header={'파티목록'} isFiltered setOption={setOption} />
+        <PartyHeader header={'파티 목록'} isFiltered setOption={setOption} />
         <Parties parties={parties} />
       </Main>
       <Footer />
