@@ -1,15 +1,14 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { icons, images } from '../assets/assets';
-import dummyParty from '../dummies/dummyParty';
 import { COLORS, SIZES } from '../styles/constants';
 import { convertStatus, convertPlace, convertDate } from '../utils/converter';
 import HashTags from './HashTags';
 import plainButton from '../styles/plainButton';
 
 const Container = styled.div`
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `;
 
 const Status = styled.div`
@@ -124,10 +123,10 @@ const Profile = styled.div`
   }
 `;
 
-function PartyDetail() {
-  const { id } = useParams();
-  const party = dummyParty[id];
-
+function PartyDetail({ party }) {
+  if (!party) {
+    return <Container />;
+  }
   return (
     <Container>
       <Status>
@@ -158,5 +157,9 @@ function PartyDetail() {
     </Container>
   );
 }
+
+PartyDetail.propTypes = {
+  party: PropTypes.object,
+};
 
 export default PartyDetail;
