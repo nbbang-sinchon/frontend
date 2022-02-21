@@ -109,10 +109,10 @@ const Info = styled.div`
   }
 `;
 
-function Party({ title, hashtags, place, createTime, joinNumber, goalNumber, status, partyId }) {
+function Party({ title, hashtags, place, createTime, joinNumber, goalNumber, status, id }) {
   return (
     <Container>
-      <Link to={'/parties/' + partyId}>
+      <Link to={'/parties/' + id}>
         <Title>
           <TitleColumn>{title}</TitleColumn>
           <TitleColumn>
@@ -149,7 +149,7 @@ Party.propTypes = {
   joinNumber: PropTypes.number.isRequired,
   goalNumber: PropTypes.number.isRequired,
   status: PropTypes.string.isRequired,
-  partyId: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 export default Party;

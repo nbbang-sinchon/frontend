@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { icons } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
 import Logo from './Logo';
@@ -57,7 +58,7 @@ const HeaderColumn = styled.div`
   }
 `;
 
-const SearchBar = styled.div`
+const SearchBar = styled.form`
   display: flex;
 
   width: 100%;
@@ -98,16 +99,54 @@ const SearchBarInput = styled.input`
   }
 `;
 
-function Header() {
+const SearchBarSubmit = styled.button`
+  display: flex;
+  align-items: center;
+
+  border: none;
+  background: none;
+  padding: 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+function Header({ setOption, search }) {
+  const navigate = useNavigate();
+  const inputRef = useRef();
+
+  const searchKeyword = (event) => {
+    event.preventDefault();
+
+    const form = new FormData(event.target);
+    const search = form.get('keyword').trim();
+
+    if (setOption) {
+      setOption((prev) => ({ ...prev, search }));
+    }
+    navigate('/main/' + search);
+  };
+
+  useEffect(() => {
+    if (!inputRef.current) {
+      return;
+    }
+
+    inputRef.current.value = search || '';
+  }, []);
+
   return (
     <Container>
       <HeaderColumn>
         <Logo />
       </HeaderColumn>
       <HeaderColumn>
-        <SearchBar>
-          <SearchBarInput placeholder="음식명 등을 검색하여 원하는 파티을 찾아 보세요!" />
-          <icons.SearchIcon />
+        <SearchBar onSubmit={searchKeyword}>
+          <SearchBarInput name="keyword" placeholder="음식명 등을 검색하여 원하는 파티을 찾아 보세요!" ref={inputRef} />
+          <SearchBarSubmit type="submit">
+            <icons.SearchIcon />
+          </SearchBarSubmit>
         </SearchBar>
       </HeaderColumn>
       <HeaderColumn>
@@ -122,5 +161,10 @@ function Header() {
     </Container>
   );
 }
+
+Header.propTypes = {
+  setOption: PropTypes.func,
+  search: PropTypes.string,
+};
 
 export default Header;

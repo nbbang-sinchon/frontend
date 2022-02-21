@@ -19,6 +19,7 @@ ReactDOM.render(
         <Route path="/" element={<IndexPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/main" element={<MainPage />} />
+        <Route path="/main/:search" element={<MainPage />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/parties/:id" element={<PartyPage />} />
         <Route path="/my-party" element={<MyPartyPage />} />
