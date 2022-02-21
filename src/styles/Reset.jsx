@@ -15,6 +15,7 @@ const reset = css`
   p,
   img,
   b,
+  a,
   i,
   ol,
   ul,
@@ -27,6 +28,7 @@ const reset = css`
   footer,
   header,
   nav,
+  input,
   section,
   summary {
     margin: 0;
@@ -36,6 +38,14 @@ const reset = css`
     font-size: inherit;
     color: inherit;
     background: transparent;
+    outline: none;
+    text-decoration: none;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+  body {
+    width: 100vw;
+    overflow-x: hidden;
   }
 `;
 
