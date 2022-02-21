@@ -9,10 +9,12 @@ import { Link } from 'react-router-dom';
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
+  align-self: center;
 
-  width: 100%;
-  box-sizing: border-box;
-  padding: 0 5% 10px 7%;
+  width: 90%;
+  min-width: calc(${SIZES.MIN_WIDTH} - 60px);
+
+  padding: 10px;
 
   div {
     align-items: center;
