@@ -9,11 +9,12 @@ const Container = styled.div``;
 const PartyContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-evenly;
+  justify-content: center;
 
   > div,
   ::after {
     padding: 10px;
+    margin: 0 10px;
     width: 100%;
     max-width: 340px;
     box-sizing: border-box;
