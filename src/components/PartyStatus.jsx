@@ -103,6 +103,9 @@ const Profile = styled.div`
 `;
 
 function PartyStatus({ party }) {
+  if (!party) {
+    return <Container />;
+  }
   return (
     <Container>
       <StatusColumn>
