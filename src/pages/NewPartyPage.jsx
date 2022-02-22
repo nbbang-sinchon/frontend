@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import Main from '../components/Main';
 import { SWAGGER_URL } from '../config';
 import { NewPartyHeader, NewParty } from '../components/NewParty';
-import hashtagstringtolist from '../utils/hashtagstringtolist';
+// import hashtagstringtolist from '../utils/hashtagstringtolist';
 
 function NewPartyPage() {
-  const [newPartyID, SetNewPartyID] = useState({ paryId: null });
+  // const [newPartyID, SetNewPartyID] = useState({ paryId: null });
   const [newParty, SetNewParty] = useState({
     title: '',
     content: '',
@@ -23,26 +23,23 @@ function NewPartyPage() {
   };
 
   const onClick = () => {
-    let message = confirm('파티를 생성하겠습니까?');
+    SetNewParty({
+      ...newParty,
+      ['hashtags']: ['#야식', '#먹자'],
+    });
 
-    if (message) {
-      SetNewParty({
-        ...newParty,
-        ['hashtags']: hashtagstringtolist(newParty['hashtags']),
-      });
-
-      const requestOptions = {
+    if (window.confirm('파티를 생성하시겠습니까?')) {
+      fetch(`${SWAGGER_URL}/parties`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(newParty),
-      };
-
-      fetch(`${SWAGGER_URL}/parties`, requestOptions)
+      })
         .then((response) => response.json())
-        .then((data) => SetNewPartyID({ paryId: data.id }));
+        .then((response) => console.log(response));
     } else {
-      console.log(newPartyID);
-      return;
+      console.log('Error: ');
     }
   };
 
