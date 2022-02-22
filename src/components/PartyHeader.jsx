@@ -11,10 +11,10 @@ const Container = styled.div`
   justify-content: space-between;
   align-self: center;
 
-  width: 90%;
+  width: 100%;
   min-width: calc(${SIZES.MIN_WIDTH} - 60px);
-
   padding: 10px;
+  box-sizing: border-box;
 
   div {
     align-items: center;

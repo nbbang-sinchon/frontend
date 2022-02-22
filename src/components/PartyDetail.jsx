@@ -28,13 +28,13 @@ const Content = styled.div`
   }
 `;
 
-function PartyDetail({ party }) {
+function PartyDetail({ party, isPartyPage }) {
   if (!party) {
     return <Container />;
   }
   return (
     <Container>
-      <PartyStatus party={party} />
+      <PartyStatus party={party} isPartyPage={isPartyPage} />
       <Title>{party.title}</Title>
       <Content>
         <div>{party.content}</div>
@@ -46,6 +46,7 @@ function PartyDetail({ party }) {
 
 PartyDetail.propTypes = {
   party: PropTypes.object,
+  isPartyPage: PropTypes.bool,
 };
 
 export default PartyDetail;

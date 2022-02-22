@@ -103,7 +103,7 @@ const Profile = styled.div`
   }
 `;
 
-function PartyStatus({ party }) {
+function PartyStatus({ party, isPartyPage }) {
   if (!party) {
     return <Container />;
   }
@@ -125,9 +125,11 @@ function PartyStatus({ party }) {
       </StatusColumn>
       <StatusColumn>
         <icons.HeartIcon />
-        <Link to={'/chats/' + party.id}>
-          <ChattingButton>채팅 입장</ChattingButton>
-        </Link>
+        {isPartyPage && (
+          <Link to={'/chats/' + party.id}>
+            <ChattingButton>채팅 입장</ChattingButton>
+          </Link>
+        )}
       </StatusColumn>
     </Container>
   );
@@ -135,6 +137,7 @@ function PartyStatus({ party }) {
 
 PartyStatus.propTypes = {
   party: PropTypes.object,
+  isPartyPage: PropTypes.bool,
 };
 
 export default PartyStatus;
