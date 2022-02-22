@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Main from '../components/Main';
 import { SWAGGER_URL } from '../config';
 import { NewPartyHeader, NewParty } from '../components/NewParty';
-// import hashtagstringtolist from '../utils/hashtagstringtolist';
+// import hashTagStringToList from '../utils/hashtagstringtolist';
 
 function NewPartyPage() {
   // const [newPartyID, SetNewPartyID] = useState({ paryId: null });
@@ -37,7 +37,9 @@ function NewPartyPage() {
         body: JSON.stringify(newParty),
       })
         .then((response) => response.json())
-        .then((response) => console.log(response));
+        .then((response) => {
+          console.log(response);
+        });
     } else {
       console.log('Error: ');
     }
