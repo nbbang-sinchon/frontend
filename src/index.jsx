@@ -23,7 +23,7 @@ ReactDOM.render(
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/parties/:id" element={<PartyPage />} />
         <Route path="/my-party" element={<MyPartyPage />} />
-        <Route path="/chat" element={<ChatPage />} />
+        <Route path="/chats/:id" element={<ChatPage />} />
         <Route path="/newparty" element={<NewPartyPage />} />
       </Routes>
     </BrowserRouter>
