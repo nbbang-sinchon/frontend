@@ -25,13 +25,16 @@ const StatusColumn = styled.div`
   font-size: 18px;
   font-weight: 500;
   white-space: nowrap;
+  padding-left: ${(props) => props.isChatPage && '60px'};
 
   @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
     font-size: 14px;
+    padding-left: ${(props) => props.isChatPage && '40px'};
   }
 
   @media only screen and (max-width: ${SIZES.SMALL_WIDTH}) {
     font-size: 12px;
+    padding-left: ${(props) => props.isChatPage && '30px'};
 
     &: nth-of-type(2) {
       flex-direction: column;
@@ -123,7 +126,7 @@ function PartyStatus({ party, isPartyPage }) {
         <Bar />
         <div>{convertDate(party.createTime)}</div>
       </StatusColumn>
-      <StatusColumn>
+      <StatusColumn isChatPage={!isPartyPage}>
         <icons.HeartIcon />
         {isPartyPage && (
           <Link to={'/chats/' + party.id}>
