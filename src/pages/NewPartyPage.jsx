@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Main from '../components/Main';
 import { SWAGGER_URL } from '../config';
-import { NewPartyHeader, NewParty } from '../components/NewParty';
-// import hashTagStringToList from '../utils/hashtagstringtolist';
+import NewPartyHeader from '../components/NeaPartyHeader';
+import NewParty from '../components/NewParty';
+import hashTagStringToList from '../utils/hashtagstringtolist';
 
 function NewPartyPage() {
   // const [newPartyID, SetNewPartyID] = useState({ paryId: null });
@@ -23,9 +24,11 @@ function NewPartyPage() {
   };
 
   const onClick = () => {
+    console.log(hashTagStringToList(newParty['hashtags']));
+
     SetNewParty({
       ...newParty,
-      ['hashtags']: ['#야식', '#먹자'],
+      ['hashtags']: hashTagStringToList(newParty['hashtags']),
     });
 
     if (window.confirm('파티를 생성하시겠습니까?')) {
@@ -41,7 +44,7 @@ function NewPartyPage() {
           console.log(response);
         });
     } else {
-      console.log('Error: ');
+      console.log('파티 만들기 취소');
     }
   };
 
