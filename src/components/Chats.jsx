@@ -11,13 +11,14 @@ const Container = styled.div`
 `;
 
 function Chats({ chats }) {
-  return (
-    <Container>
-      {chats.map((chat) => (
-        <Chat key={chat.id} chat={chat} isSender={chat.sender.id === 1} />
-      ))}
-    </Container>
-  );
+  const makeChats = (chats) =>
+    chats.map((chat, i, arr) => {
+      const isSender = chat.sender.id === 1;
+      const isContinuous = i > 0 && arr[i - 1].sender.id === chat.sender.id;
+      return <Chat key={chat.id} chat={chat} isSender={isSender} isContinuous={isContinuous} />;
+    });
+
+  return <Container>{makeChats(chats)}</Container>;
 }
 
 Chats.propTypes = {
