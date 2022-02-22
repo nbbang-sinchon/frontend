@@ -5,6 +5,7 @@ import { COLORS, SIZES } from '../styles/constants';
 import { convertStatus, convertPlace, convertDate } from '../utils/converter';
 import { icons, images } from '../assets/assets';
 import plainButton from '../styles/plainButton';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
@@ -124,7 +125,9 @@ function PartyStatus({ party }) {
       </StatusColumn>
       <StatusColumn>
         <icons.HeartIcon />
-        <ChattingButton>채팅 입장</ChattingButton>
+        <Link to={'/chats/' + party.id}>
+          <ChattingButton>채팅 입장</ChattingButton>
+        </Link>
       </StatusColumn>
     </Container>
   );
