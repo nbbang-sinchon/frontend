@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { COLORS } from '../styles/constants';
+import { COLORS, HOVER_CURSOR_PONTER } from '../styles/constants';
 import { icons } from '../assets/assets';
 import HashTags from './HashTags';
 import { convertDate, convertPlace, convertStatus } from '../utils/converter';
@@ -40,9 +40,7 @@ const InnerContainer = styled.div`
     width: 10px;
     height: 13px;
 
-    &:hover {
-      cursor: pointer;
-    }
+    ${HOVER_CURSOR_PONTER};
 `;
 
 const Title = styled.div`

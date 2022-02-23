@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { icons } from '../assets/assets';
-import { COLORS, SIZES } from '../styles/constants';
+import { COLORS, HOVER_CURSOR_PONTER, SIZES } from '../styles/constants';
 import Logo from './Logo';
 
 const Container = styled.header`
@@ -40,9 +40,7 @@ const HeaderColumn = styled.div`
     min-width: 24px;
     margin-left: 8px;
 
-    &:hover {
-      cursor: pointer;
-    }
+    ${HOVER_CURSOR_PONTER};
 
     @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
       margin-left: 5px;
@@ -107,9 +105,7 @@ const SearchBarSubmit = styled.button`
   background: none;
   padding: 0;
 
-  &:hover {
-    cursor: pointer;
-  }
+  ${HOVER_CURSOR_PONTER};
 `;
 
 function Header({ setOption, search }) {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { COLORS } from '../styles/constants';
+import { COLORS, HOVER_CURSOR_PONTER } from '../styles/constants';
 import { icons } from '../assets/assets';
 
 const Container = styled.div`
@@ -43,9 +43,7 @@ const FormColumn = styled.div`
     height: 24px;
     padding: 0 5px;
 
-    &:hover {
-      cursor: pointer;
-    }
+    ${HOVER_CURSOR_PONTER};
   }
 
   path {
@@ -64,9 +62,7 @@ const Button = styled.input`
   background-color: ${COLORS.PRIMARY};
   color: ${COLORS.WHITE};
 
-  &:hover {
-    cursor: pointer;
-  }
+  ${HOVER_CURSOR_PONTER};
 `;
 
 function ChatForm() {

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { COLORS, SIZES } from '../styles/constants';
+import { COLORS, HOVER_CURSOR_PONTER, SIZES } from '../styles/constants';
 import { convertStatus, convertPlace, convertDate } from '../utils/converter';
 import { icons, images } from '../assets/assets';
 import plainButton from '../styles/plainButton';
@@ -51,9 +51,7 @@ const StatusColumn = styled.div`
       fill: ${COLORS.PRIMARY};
     }
 
-    &:hover {
-      cursor: pointer;
-    }
+    ${HOVER_CURSOR_PONTER};
 
     @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
       transform: scale(1.2, 1.2) translateY(-2px);

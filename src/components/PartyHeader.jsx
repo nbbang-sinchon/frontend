@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { icons } from '../assets/assets';
-import { COLORS, SIZES } from '../styles/constants';
+import { COLORS, HOVER_CURSOR_PONTER, SIZES } from '../styles/constants';
 import plainButton from '../styles/plainButton';
 import { Link } from 'react-router-dom';
 
@@ -92,9 +92,7 @@ const FilterItem = styled.li`
     }
   }
 
-  &:hover {
-    cursor: pointer;
-  }
+  ${HOVER_CURSOR_PONTER};
 `;
 
 const CreatePartyBtn = styled(plainButton)`

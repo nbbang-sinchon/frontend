@@ -20,4 +20,6 @@ const SIZES = {
   HEADER_HEIGHT_SMALL: '52px',
 };
 
-export { COLORS, SIZES };
+const HOVER_CURSOR_PONTER = '&:hover{cursor: pointer}';
+
+export { COLORS, SIZES, HOVER_CURSOR_PONTER };
