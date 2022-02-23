@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 import { COLORS, HOVER_CURSOR_PONTER } from '../styles/constants';
 import { icons } from '../assets/assets';
+import { SWAGGER_URL } from '../config';
 
 const Container = styled.div`
   display: flex;
@@ -65,17 +67,53 @@ const Button = styled.input`
   ${HOVER_CURSOR_PONTER};
 `;
 
-function ChatForm() {
+function ChatForm({ partyId }) {
   const [chatLength, setChatLength] = useState(0);
+  const chatRef = useRef();
+  const submitRef = useRef();
 
   const onChatChange = ({ target }) => {
     setChatLength(target.value.length);
   };
 
+  const submitChat = (event) => {
+    event.preventDefault();
+
+    const form = new FormData(event.target);
+    const chat = form.get('chat');
+
+    fetch(`${SWAGGER_URL}/chats/${partyId}`, {
+      method: 'POST',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(chat),
+    });
+
+    if (chatRef.current) {
+      chatRef.current.value = '';
+    }
+  };
+
+  const onKeyDown = (event) => {
+    if (event.keyCode === 13 && !event.shiftKey) {
+      event.preventDefault();
+
+      if (submitRef.current) {
+        submitRef.current.click();
+      }
+    }
+  };
+
   return (
     <Container>
-      <Form>
-        <Content placeholder="메세지를 입력해주세요" onChange={onChatChange} />
+      <Form onSubmit={submitChat}>
+        <Content
+          placeholder="메세지를 입력해주세요"
+          onChange={onChatChange}
+          name="chat"
+          ref={chatRef}
+          onKeyUp={onKeyDown}
+        />
         <FormMenu>
           <FormColumn>
             <icons.LocationIcon />
@@ -83,12 +121,16 @@ function ChatForm() {
           </FormColumn>
           <FormColumn>
             <ChatCounter>{chatLength + '자'}</ChatCounter>
-            <Button type="submit" value="전송" />
+            <Button type="submit" value="전송" ref={submitRef} />
           </FormColumn>
         </FormMenu>
       </Form>
     </Container>
   );
 }
+
+ChatForm.propTypes = {
+  partyId: PropTypes.string,
+};
 
 export default ChatForm;

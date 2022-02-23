@@ -51,6 +51,7 @@ const InnerContent = styled.div`
   padding: 7px 15px;
   color: ${(props) => props.isSender && COLORS.WHITE};
   border-radius: 20px;
+  white-space: pre;
 `;
 
 const Time = styled.div`

@@ -17,7 +17,7 @@ function ChatPage() {
       <Main background="LIGHT_GRAY" fitHeight>
         <PartyStatus party={party} />
         <Chats chats={chats} />
-        <ChatForm />
+        <ChatForm partyId={id} />
       </Main>
     </>
   );

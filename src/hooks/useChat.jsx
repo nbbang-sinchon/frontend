@@ -7,7 +7,7 @@ function useChat(id) {
 
   useEffect(() => {
     const fetchParty = async () => {
-      const res = await fetch(`${SWAGGER_URL}/chats/${id}`);
+      const res = await fetch(`${SWAGGER_URL}/chats/${id}?pageSize=50`);
       const json = await res.json();
 
       setParty({
