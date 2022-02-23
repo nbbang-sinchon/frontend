@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Chat from './Chat';
@@ -19,6 +19,8 @@ const Container = styled.div`
 `;
 
 function Chats({ chats }) {
+  const chatsRef = useRef();
+
   const makeChats = (chats) =>
     chats.map((chat, i, arr) => {
       const isSender = chat.sender.id === 1;
@@ -26,7 +28,15 @@ function Chats({ chats }) {
       return <Chat key={chat.id} chat={chat} isSender={isSender} isContinuous={isContinuous} />;
     });
 
-  return <Container>{makeChats(chats)}</Container>;
+  useEffect(() => {
+    if (!chatsRef.current) {
+      return;
+    }
+
+    chatsRef.current.scrollTop = window.innerHeight;
+  }, [chats]);
+
+  return <Container ref={chatsRef}>{makeChats(chats)}</Container>;
 }
 
 Chats.propTypes = {
