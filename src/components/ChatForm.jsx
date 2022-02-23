@@ -8,7 +8,6 @@ import { SWAGGER_URL } from '../config';
 const Container = styled.div`
   display: flex;
 
-  margin-top: 10px;
   padding: 10px;
   border: 1px solid ${COLORS.GRAY};
   box-sizing: border-box;

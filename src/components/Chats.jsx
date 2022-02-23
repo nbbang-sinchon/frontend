@@ -11,6 +11,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   padding: 20px 10px;
+  margin: 10px 0;
   box-sizing: border-box;
   overflow-x: hidden;
   overflow-y: auto;
