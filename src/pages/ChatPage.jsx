@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import ChatForm from '../components/ChatForm';
 import Chats from '../components/Chats';
 import Header from '../components/Header';
 import Main from '../components/Main';
@@ -13,9 +14,10 @@ function ChatPage() {
   return (
     <>
       <Header />
-      <Main background="LIGHT_GRAY">
+      <Main background="LIGHT_GRAY" fitHeight>
         <PartyStatus party={party} />
         <Chats chats={chats} />
+        <ChatForm />
       </Main>
     </>
   );

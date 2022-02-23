@@ -22,12 +22,20 @@ const InnerContainer = styled.div`
   max-width: ${SIZES.MAIN_MAX_WIDTH};
   box-sizing: border-box;
   background-color: white;
+
+  height: ${(props) => props.fitHeight && `calc(100vh - ${SIZES.HEADER_HEIGHT_LARGE})`};
+  @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
+    height: ${(props) => props.fitHeight && `calc(100vh - ${SIZES.HEADER_HEIGHT_MIDDLE})`};
+  }
+  @media only screen and (max-width: ${SIZES.SMALL_WIDTH}) {
+    height: ${(props) => props.fitHeight && `calc(100vh - ${SIZES.HEADER_HEIGHT_SMALL})`};
+  }
 `;
 
-function Main({ children, background }) {
+function Main({ children, background, fitHeight }) {
   return (
     <Container background={background?.toUpperCase()}>
-      <InnerContainer>{children}</InnerContainer>
+      <InnerContainer fitHeight={fitHeight}>{children}</InnerContainer>
     </Container>
   );
 }
@@ -35,6 +43,7 @@ function Main({ children, background }) {
 Main.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
   background: PropTypes.string,
+  fitHeight: PropTypes.bool,
 };
 
 export default Main;
