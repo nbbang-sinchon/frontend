@@ -14,6 +14,10 @@ const SIZES = {
   SMALL_WIDTH: '450px',
   MIDDLE_WIDTH: '650px',
   MAIN_MAX_WIDTH: '800px',
+
+  HEADER_HEIGHT_LARGE: '82px',
+  HEADER_HEIGHT_MIDDLE: '62px',
+  HEADER_HEIGHT_SMALL: '52px',
 };
 
 export { COLORS, SIZES };
