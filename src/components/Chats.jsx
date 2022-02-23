@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Chat from './Chat';
+import { SCROLL_PRIMARY } from '../styles/constants';
 
 const Container = styled.div`
   display: flex;
@@ -13,6 +14,8 @@ const Container = styled.div`
   box-sizing: border-box;
   overflow-x: hidden;
   overflow-y: auto;
+
+  ${SCROLL_PRIMARY};
 `;
 
 function Chats({ chats }) {

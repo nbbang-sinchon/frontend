@@ -22,4 +22,15 @@ const SIZES = {
 
 const HOVER_CURSOR_PONTER = '&:hover{cursor: pointer}';
 
-export { COLORS, SIZES, HOVER_CURSOR_PONTER };
+const SCROLL_PRIMARY = `  
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: ${COLORS.PRIMARY};
+  }
+  &::-webkit-scrollbar-track {
+    background-color: ${COLORS.GRAY};
+`;
+
+export { COLORS, SIZES, HOVER_CURSOR_PONTER, SCROLL_PRIMARY };

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import { COLORS, HOVER_CURSOR_PONTER } from '../styles/constants';
+import { COLORS, HOVER_CURSOR_PONTER, SCROLL_PRIMARY } from '../styles/constants';
 import { icons } from '../assets/assets';
 import { SWAGGER_URL } from '../config';
 
@@ -26,8 +26,11 @@ const Content = styled.textarea`
   width: 100%;
   height: 100px;
   box-sizing: border-box;
+  color: ${COLORS.BLACK};
 
   resize: none;
+
+  ${SCROLL_PRIMARY};
 `;
 
 const FormMenu = styled.div`
