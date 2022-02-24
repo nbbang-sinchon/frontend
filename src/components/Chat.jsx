@@ -41,7 +41,7 @@ const Content = styled.div`
   flex-direction: column;
   justify-content: center;
 
-  max-width: 50%;
+  max-width: 60%;
   font-size: 14px;
 `;
 
@@ -51,7 +51,7 @@ const InnerContent = styled.div`
   padding: 7px 15px;
   color: ${(props) => props.isSender && COLORS.WHITE};
   border-radius: 20px;
-  white-space: pre;
+  white-space: pre-wrap;
 `;
 
 const Time = styled.div`
