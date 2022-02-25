@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { icons, images } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
@@ -181,7 +180,10 @@ function NewParty() {
       })
         .then((response) => response.json())
         .then((response) => {
-          console.log(response);
+          if (response.statusCode === 400) alert(response.errors[0].errorMessage);
+          else if (response.statusCode === 200) {
+            alert('파티 생성 성공');
+          }
         });
     } else {
       console.log('파티 만들기 취소');
@@ -237,9 +239,3 @@ function NewParty() {
 }
 
 export default NewParty;
-
-NewParty.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
-};
