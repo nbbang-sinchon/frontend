@@ -27,11 +27,7 @@ function Chats({ chats, fetchChatRef }) {
     chats.map((chat, i, arr) => {
       const isContinuous = i > 0 && arr[i - 1].sender.id === chat.sender.id;
 
-      if (i === 0) {
-        return <Chat key={chat.id} chat={chat} isContinuous={isContinuous} isFirst />;
-      } else {
-        return <Chat key={chat.id} chat={chat} isContinuous={isContinuous} />;
-      }
+      return <Chat key={chat.id} chat={chat} isContinuous={isContinuous} />;
     });
 
   useEffect(() => {

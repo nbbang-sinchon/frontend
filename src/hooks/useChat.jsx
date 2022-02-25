@@ -4,13 +4,13 @@ import { CHAT_PAGE_SIZE, SERVER_URL } from '../config';
 function useChat(id) {
   const [party, setParty] = useState();
   const [chats, setChats] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isReady, setIsReady] = useState(true);
   const fetchChatRef = useRef();
 
   useEffect(() => {
     fetchChatRef.current = async () => {
-      if (isLoading) {
-        return;
+      if (!isReady) {
+        return 0;
       }
 
       const isInitial = chats.length === 0;
@@ -18,12 +18,10 @@ function useChat(id) {
         isInitial ? '' : `&cursorId=${chats[0].id}`
       }`;
 
-      setIsLoading(true);
+      setIsReady(false);
 
       const res = await fetch(URL);
       const json = await res.json();
-
-      setIsLoading(false);
 
       if (isInitial) {
         setParty({
@@ -37,11 +35,14 @@ function useChat(id) {
         });
       }
 
-      setChats((prev) => [...json.data.messages, ...prev]);
+      if (json.data.messages.length > 0) {
+        setIsReady(true);
+        setChats((prev) => [...json.data.messages, ...prev]);
+      }
 
       return json.data.messages.length;
     };
-  }, [chats]);
+  }, [chats, isReady]);
 
   return { party, chats, fetchChatRef };
 }
