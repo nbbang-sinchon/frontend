@@ -9,14 +9,14 @@ import useChat from '../hooks/useChat';
 
 function ChatPage() {
   const { id } = useParams();
-  const { party, chats } = useChat(id);
+  const { party, chats, fetchChatRef } = useChat(id);
 
   return (
     <>
       <Header />
       <Main background="LIGHT_GRAY" fitHeight>
         <PartyStatus party={party} />
-        <Chats chats={chats} />
+        <Chats chats={chats} fetchChatRef={fetchChatRef} />
         <ChatForm partyId={id} />
       </Main>
     </>

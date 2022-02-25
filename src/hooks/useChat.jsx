@@ -1,31 +1,49 @@
-import { useEffect, useState } from 'react';
-import { SWAGGER_URL } from '../config';
+import { useEffect, useRef, useState } from 'react';
+import { CHAT_PAGE_SIZE, SERVER_URL } from '../config';
 
 function useChat(id) {
   const [party, setParty] = useState();
   const [chats, setChats] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const fetchChatRef = useRef();
 
   useEffect(() => {
-    const fetchParty = async () => {
-      const res = await fetch(`${SWAGGER_URL}/chats/${id}?pageSize=50`);
+    fetchChatRef.current = async () => {
+      if (isLoading) {
+        return;
+      }
+
+      const isInitial = chats.length === 0;
+      const URL = `${SERVER_URL}/chats/${id}${isInitial ? '' : `/messages`}?pageSize=${CHAT_PAGE_SIZE}${
+        isInitial ? '' : `&cursorId=${chats[0].id}`
+      }`;
+
+      setIsLoading(true);
+
+      const res = await fetch(URL);
       const json = await res.json();
 
-      setParty({
-        ownerNickname: json.data.owner.nickname,
-        place: json.data.owner.place,
-        createTime: json.data.createTime,
-        joinNumber: json.data.joinNumber,
-        goalNumber: json.data.goalNumber,
-        status: json.data.status,
-      });
+      setIsLoading(false);
 
-      setChats(json.data.messages);
+      if (isInitial) {
+        setParty({
+          ownerNickname: json.data.owner.nickname,
+          place: json.data.owner.place,
+          createTime: json.data.createTime,
+          joinNumber: json.data.joinNumber,
+          goalNumber: json.data.goalNumber,
+          status: json.data.status,
+          isSender: json.data.isSender,
+        });
+      }
+
+      setChats((prev) => [...json.data.messages, ...prev]);
+
+      return json.data.messages.length;
     };
+  }, [chats]);
 
-    fetchParty();
-  }, [id]);
-
-  return { party, chats };
+  return { party, chats, fetchChatRef };
 }
 
 export default useChat;

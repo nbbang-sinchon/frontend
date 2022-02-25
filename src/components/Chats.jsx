@@ -19,29 +19,46 @@ const Container = styled.div`
   ${SCROLL_PRIMARY};
 `;
 
-function Chats({ chats }) {
+function Chats({ chats, fetchChatRef }) {
   const chatsRef = useRef();
+  const topRef = useRef();
 
   const makeChats = (chats) =>
     chats.map((chat, i, arr) => {
-      const isSender = chat.sender.id === 1;
       const isContinuous = i > 0 && arr[i - 1].sender.id === chat.sender.id;
-      return <Chat key={chat.id} chat={chat} isSender={isSender} isContinuous={isContinuous} />;
+
+      if (i === 0) {
+        return <Chat key={chat.id} chat={chat} isContinuous={isContinuous} isFirst />;
+      } else {
+        return <Chat key={chat.id} chat={chat} isContinuous={isContinuous} />;
+      }
     });
 
   useEffect(() => {
-    if (!chatsRef.current) {
-      return;
-    }
+    const observerCallback = async ([entries]) => {
+      if (entries.isIntersecting) {
+        const newLength = await fetchChatRef.current();
+        const first = chatsRef.current.querySelectorAll(':scope > div');
+        first[newLength].scrollIntoView();
+      }
+    };
 
-    chatsRef.current.scrollTop = window.innerHeight;
-  }, [chats]);
+    const observer = new IntersectionObserver(observerCallback);
+    observer.observe(topRef.current);
+  }, []);
 
-  return <Container ref={chatsRef}>{makeChats(chats)}</Container>;
+  return (
+    <Container ref={chatsRef}>
+      <div ref={topRef} />
+      {makeChats(chats)}
+    </Container>
+  );
 }
 
 Chats.propTypes = {
   chats: PropTypes.arrayOf(PropTypes.object),
+  fetchChatRef: PropTypes.object,
+  isLoading: PropTypes.bool,
 };
 
 export default Chats;

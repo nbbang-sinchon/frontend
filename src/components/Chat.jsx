@@ -64,24 +64,24 @@ const Time = styled.div`
   margin: 0 5px;
 `;
 
-function Chat({ chat, isSender, isContinuous }) {
+function Chat({ chat, isContinuous }) {
   if (isContinuous) {
     return (
-      <Container isSender={isSender} isContinuous={isContinuous}>
-        {!isSender && <Blank />}
+      <Container isSender={chat.isSender} isContinuous={isContinuous}>
+        {!chat.isSender && <Blank />}
         <Content>
-          <InnerContent isSender={isSender}>{chat.content}</InnerContent>
+          <InnerContent isSender={chat.isSender}>{chat.content}</InnerContent>
         </Content>
         <Time>{convertDateToTime(chat.createTime)}</Time>
       </Container>
     );
   }
   return (
-    <Container isSender={isSender}>
-      {!isSender && <Image src={images.logo} />}
+    <Container isSender={chat.isSender}>
+      {!chat.isSender && <Image src={images.logo} />}
       <Content>
-        {!isSender && <Nickname>{chat.sender.nickname}</Nickname>}
-        <InnerContent isSender={isSender}>{chat.content}</InnerContent>
+        {!chat.isSender && <Nickname>{chat.sender.nickname}</Nickname>}
+        <InnerContent isSender={chat.isSender}>{chat.content}</InnerContent>
       </Content>
       <Time>{convertDateToTime(chat.createTime)}</Time>
     </Container>
@@ -90,7 +90,6 @@ function Chat({ chat, isSender, isContinuous }) {
 
 Chat.propTypes = {
   chat: PropTypes.object,
-  isSender: PropTypes.bool,
   isContinuous: PropTypes.bool,
 };
 
