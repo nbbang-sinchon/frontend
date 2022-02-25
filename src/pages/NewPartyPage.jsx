@@ -1,13 +1,12 @@
 import React from 'react';
 import Main from '../components/Main';
-import { NewPartyHeader, NewParty } from '../components/NewParty';
+import NewParty from '../components/NewParty';
 
 function NewPartyPage() {
   return (
     <>
-      <NewPartyHeader />
       <Main>
-        <NewParty></NewParty>
+        <NewParty />
       </Main>
     </>
   );
