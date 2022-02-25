@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { COLORS, HOVER_CURSOR_PONTER, SCROLL_PRIMARY } from '../styles/constants';
 import { icons } from '../assets/assets';
-import { SWAGGER_URL } from '../config';
+import { SERVER_URL } from '../config';
 
 const Container = styled.div`
   display: flex;
@@ -84,7 +84,7 @@ function ChatForm({ partyId }) {
     const form = new FormData(event.target);
     const chat = form.get('chat');
 
-    fetch(`${SWAGGER_URL}/chats/${partyId}`, {
+    fetch(`${SERVER_URL}/chats/${partyId}`, {
       method: 'POST',
       mode: 'cors',
       headers: { 'Content-Type': 'application/json' },
