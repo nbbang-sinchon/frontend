@@ -114,7 +114,7 @@ function ChatForm({ partyId }) {
           onChange={onChatChange}
           name="chat"
           ref={chatRef}
-          onKeyUp={onKeyDown}
+          onKeyDown={onKeyDown}
         />
         <FormMenu>
           <FormColumn>
