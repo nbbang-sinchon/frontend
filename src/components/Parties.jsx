@@ -9,19 +9,22 @@ const Container = styled.div``;
 const PartyContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
+  justify-content: space-between;
+
+  @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
+    justify-content: center;
+  }
 
   > div,
   ::after {
     padding: 10px;
-    margin: 0 10px;
     width: 100%;
-    max-width: 340px;
+    max-width: 360px;
     box-sizing: border-box;
 
     @media only screen and (min-width: ${SIZES.MIDDLE_WIDTH}) {
       min-width: 250px;
-      width: 45%;
+      width: 50%;
     }
   }
 

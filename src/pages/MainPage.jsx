@@ -14,7 +14,7 @@ function MainPage() {
   return (
     <>
       <Header setOption={setOption} search={search} />
-      <Main isWhite>
+      <Main background="WHITE">
         <PartyHeader header={'파티 목록'} isFiltered setOption={setOption} />
         <Parties parties={parties} />
       </Main>
