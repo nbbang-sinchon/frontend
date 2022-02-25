@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { icons, images } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
-import { SWAGGER_URL } from '../config';
+import { SERVER_URL } from '../config';
 import hashTagStringToList from '../utils/hashtagstringtolist';
 
 const Logo = () => {
@@ -171,7 +171,7 @@ function NewParty() {
 
   const createPartyObj = (newparty) => {
     if (window.confirm('파티를 생성하시겠습니까?')) {
-      fetch(`${SWAGGER_URL}/parties`, {
+      fetch(`${SERVER_URL}/parties`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
