@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import React, { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { icons, images } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
 import { SWAGGER_URL } from '../config';
@@ -169,6 +169,8 @@ const ContentInput = styled.textarea`
 function NewParty() {
   const formRef = useRef();
 
+  const navigate = useNavigate();
+
   const createPartyObj = (newparty) => {
     if (window.confirm('파티를 생성하시겠습니까?')) {
       fetch(`${SWAGGER_URL}/parties`, {
@@ -183,6 +185,7 @@ function NewParty() {
           if (response.statusCode === 400) alert(response.errors[0].errorMessage);
           else if (response.statusCode === 200) {
             alert('파티 생성 성공');
+            navigate('/');
           }
         });
     } else {
