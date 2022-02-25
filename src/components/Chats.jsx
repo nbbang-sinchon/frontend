@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Chat from './Chat';
@@ -19,29 +19,13 @@ const Container = styled.div`
   ${SCROLL_PRIMARY};
 `;
 
-function Chats({ chats, fetchChatRef }) {
-  const chatsRef = useRef();
-  const topRef = useRef();
-
+function Chats({ chats, chatsRef, topRef }) {
   const makeChats = (chats) =>
     chats.map((chat, i, arr) => {
       const isContinuous = i > 0 && arr[i - 1].sender.id === chat.sender.id;
 
       return <Chat key={chat.id} chat={chat} isContinuous={isContinuous} />;
     });
-
-  useEffect(() => {
-    const observerCallback = async ([entries]) => {
-      if (entries.isIntersecting) {
-        const newLength = await fetchChatRef.current();
-        const first = chatsRef.current.querySelectorAll(':scope > div');
-        first[newLength].scrollIntoView();
-      }
-    };
-
-    const observer = new IntersectionObserver(observerCallback);
-    observer.observe(topRef.current);
-  }, []);
 
   return (
     <Container ref={chatsRef}>
@@ -53,8 +37,8 @@ function Chats({ chats, fetchChatRef }) {
 
 Chats.propTypes = {
   chats: PropTypes.arrayOf(PropTypes.object),
-  fetchChatRef: PropTypes.object,
-  isLoading: PropTypes.bool,
+  topRef: PropTypes.object,
+  chatsRef: PropTypes.object,
 };
 
 export default Chats;
