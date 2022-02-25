@@ -1,3 +1,4 @@
-const SWAGGER_URL = 'http://15.165.132.250:8094';
+const SERVER_URL = 'http://15.165.132.250:8094';
+const CHAT_PAGE_SIZE = '20';
 
-export { SWAGGER_URL };
+export { SERVER_URL, CHAT_PAGE_SIZE };

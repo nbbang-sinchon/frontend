@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { SWAGGER_URL } from '../config';
+import { SERVER_URL } from '../config';
 
 function useParty(id) {
   const [party, setParty] = useState();
@@ -7,7 +7,7 @@ function useParty(id) {
 
   useEffect(() => {
     const fetchParty = async () => {
-      const res = await fetch(`${SWAGGER_URL}/parties/${id}`);
+      const res = await fetch(`${SERVER_URL}/parties/${id}`);
       const json = await res.json();
 
       setParties(json.data.parties);

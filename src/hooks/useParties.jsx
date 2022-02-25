@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { SWAGGER_URL } from '../config';
+import { SERVER_URL } from '../config';
 
 function useParties(search) {
   const [parties, setParties] = useState([]);
@@ -44,7 +44,7 @@ function useParties(search) {
   useEffect(() => {
     const fetchParties = async () => {
       const params = makeParams(option);
-      const res = await fetch(`${SWAGGER_URL}/parties?${params.join('&')}`);
+      const res = await fetch(`${SERVER_URL}/parties?${params.join('&')}`);
       const json = await res.json();
 
       setParties(json.data.parties);
