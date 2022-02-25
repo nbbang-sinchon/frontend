@@ -7,7 +7,7 @@ import Reset from './styles/Reset';
 import IndexPage from './pages/IndexPage';
 import MyPage from './pages/MyPage';
 import PartyPage from './pages/PartyPage';
-import ChattingPage from './pages/ChattingPage';
+import ChatPage from './pages/ChatPage';
 import MyPartyPage from './pages/MyPartyPage';
 import NewPartyPage from './pages/NewPartyPage';
 
@@ -23,7 +23,7 @@ ReactDOM.render(
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/parties/:id" element={<PartyPage />} />
         <Route path="/my-party" element={<MyPartyPage />} />
-        <Route path="/chatting" element={<ChattingPage />} />
+        <Route path="/chats/:id" element={<ChatPage />} />
         <Route path="/newparty" element={<NewPartyPage />} />
       </Routes>
     </BrowserRouter>

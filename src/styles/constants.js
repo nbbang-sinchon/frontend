@@ -14,6 +14,23 @@ const SIZES = {
   SMALL_WIDTH: '450px',
   MIDDLE_WIDTH: '650px',
   MAIN_MAX_WIDTH: '800px',
+
+  HEADER_HEIGHT_LARGE: '82px',
+  HEADER_HEIGHT_MIDDLE: '62px',
+  HEADER_HEIGHT_SMALL: '52px',
 };
 
-export { COLORS, SIZES };
+const HOVER_CURSOR_PONTER = '&:hover{cursor: pointer}';
+
+const SCROLL_PRIMARY = `  
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: ${COLORS.PRIMARY};
+  }
+  &::-webkit-scrollbar-track {
+    background-color: ${COLORS.GRAY};
+`;
+
+export { COLORS, SIZES, HOVER_CURSOR_PONTER, SCROLL_PRIMARY };

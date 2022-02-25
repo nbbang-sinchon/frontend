@@ -2,15 +2,14 @@ import styled from '@emotion/styled';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { images } from '../assets/assets';
-import { COLORS, SIZES } from '../styles/constants';
+import { COLORS, HOVER_CURSOR_PONTER, SIZES } from '../styles/constants';
 
 function LoginPageHeader() {
   const Logo = () => {
     const Container = styled.div`
       display: flex;
-      &:hover {
-        cursor: pointer;
-      }
+
+      ${HOVER_CURSOR_PONTER};
     `;
 
     const Image = styled.img`

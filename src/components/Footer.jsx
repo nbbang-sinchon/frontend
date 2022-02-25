@@ -8,7 +8,7 @@ const Container = styled.footer`
 
   padding: 40px;
   padding-bottom: 60px;
-  background-color: ${COLORS.LIGHTGRAY};
+  background-color: ${COLORS.LIGHT_GRAY};
   color: ${COLORS.DARK_GRAY};
   min-width: ${SIZES.MIN_WIDTH};
 

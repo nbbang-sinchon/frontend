@@ -11,7 +11,7 @@ function useParty(id) {
       const json = await res.json();
 
       setParties(json.data.parties);
-      setParty(json.data);
+      setParty({ ...json.data, id });
     };
 
     fetchParty();

@@ -52,4 +52,8 @@ const convertStatus = (statusString, joinNumber, goalNumber) => {
   }
 };
 
-export { convertPlace, convertDate, convertStatus };
+const convertDateToTime = (dateString) => {
+  return new Date(dateString).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
+};
+
+export { convertPlace, convertDate, convertStatus, convertDateToTime };

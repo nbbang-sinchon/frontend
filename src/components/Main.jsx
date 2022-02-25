@@ -8,7 +8,7 @@ const Container = styled.main`
   flex-direction: column;
   align-items: center;
 
-  background-color: ${(props) => (props.isWhite && COLORS.WHITE) || COLORS.PRIMARY};
+  background-color: ${(props) => COLORS[props.background] || COLORS.PRIMARY};
   min-width: ${SIZES.MIN_WIDTH};
 `;
 
@@ -22,19 +22,28 @@ const InnerContainer = styled.div`
   max-width: ${SIZES.MAIN_MAX_WIDTH};
   box-sizing: border-box;
   background-color: white;
+
+  height: ${(props) => props.fitHeight && `calc(100vh - ${SIZES.HEADER_HEIGHT_LARGE})`};
+  @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
+    height: ${(props) => props.fitHeight && `calc(100vh - ${SIZES.HEADER_HEIGHT_MIDDLE})`};
+  }
+  @media only screen and (max-width: ${SIZES.SMALL_WIDTH}) {
+    height: ${(props) => props.fitHeight && `calc(100vh - ${SIZES.HEADER_HEIGHT_SMALL})`};
+  }
 `;
 
-function Main({ children, isWhite }) {
+function Main({ children, background, fitHeight }) {
   return (
-    <Container isWhite={isWhite}>
-      <InnerContainer>{children}</InnerContainer>
+    <Container background={background?.toUpperCase()}>
+      <InnerContainer fitHeight={fitHeight}>{children}</InnerContainer>
     </Container>
   );
 }
 
 Main.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-  isWhite: PropTypes.bool,
+  background: PropTypes.string,
+  fitHeight: PropTypes.bool,
 };
 
 export default Main;

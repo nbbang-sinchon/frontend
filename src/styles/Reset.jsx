@@ -30,6 +30,7 @@ const reset = css`
   nav,
   input,
   section,
+  textarea,
   summary {
     margin: 0;
     padding: 0;
