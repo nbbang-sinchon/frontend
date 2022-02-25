@@ -7,7 +7,9 @@ function useChatUpdate(socket, pushOldChatRef, pushNewChat) {
   useEffect(async () => {
     const onNewChat = ({ body }) => {
       pushNewChat(JSON.parse(body));
-      chatsRef.current.scroll({ top: chatsRef.current.scrollHeight, behavior: 'smooth' });
+      if (chatsRef.current) {
+        chatsRef.current.scroll({ top: chatsRef.current.scrollHeight, behavior: 'smooth' });
+      }
     };
 
     await new Promise((resolve) => socket.connect({}, resolve));
