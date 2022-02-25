@@ -4,7 +4,7 @@ function useChatUpdate(id, socket, pushOldChatRef, pushNewChat) {
   const chatsRef = useRef();
   const topRef = useRef();
 
-  useEffect(async () => {
+  useEffect(() => {
     const onNewChat = ({ body }) => {
       pushNewChat(JSON.parse(body));
       if (chatsRef.current) {
@@ -12,15 +12,13 @@ function useChatUpdate(id, socket, pushOldChatRef, pushNewChat) {
       }
     };
 
-    await new Promise((resolve) => socket.connect({}, resolve));
-    socket.subscribe('/topic/' + id, onNewChat);
-
-    return () => {
-      socket.unsubscribe('/topic/' + id, onNewChat);
+    const connectSocket = async () => {
+      if (!socket.connected) {
+        await new Promise((resolve) => socket.connect({}, () => resolve()));
+      }
+      socket.subscribe('/topic/' + id, onNewChat);
     };
-  }, []);
 
-  useEffect(() => {
     const observerCallback = async ([entries]) => {
       if (entries.isIntersecting) {
         const newLength = await pushOldChatRef.current();
@@ -29,8 +27,15 @@ function useChatUpdate(id, socket, pushOldChatRef, pushNewChat) {
       }
     };
 
+    connectSocket();
+
     const observer = new IntersectionObserver(observerCallback);
     observer.observe(topRef.current);
+
+    return () => {
+      socket.unsubscribe('/topic/' + id, onNewChat);
+      observer.disconnect();
+    };
   }, []);
 
   return { topRef, chatsRef };
