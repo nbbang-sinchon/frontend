@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-function useChatUpdate(socket, pushOldChatRef, pushNewChat) {
+function useChatUpdate(id, socket, pushOldChatRef, pushNewChat) {
   const chatsRef = useRef();
   const topRef = useRef();
 
@@ -13,10 +13,10 @@ function useChatUpdate(socket, pushOldChatRef, pushNewChat) {
     };
 
     await new Promise((resolve) => socket.connect({}, resolve));
-    socket.subscribe('/topic/1', onNewChat);
+    socket.subscribe('/topic/' + id, onNewChat);
 
     return () => {
-      socket.unsubscribe('/topic/1', onNewChat);
+      socket.unsubscribe('/topic/' + id, onNewChat);
     };
   }, []);
 

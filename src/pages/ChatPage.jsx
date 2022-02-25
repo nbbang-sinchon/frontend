@@ -13,7 +13,7 @@ function ChatPage() {
   const { id } = useParams();
   const { socket } = useContext(SocketStoreContext);
   const { party, chats, pushOldChatRef, pushNewChat } = useChat(id);
-  const { topRef, chatsRef } = useChatUpdate(socket, pushOldChatRef, pushNewChat);
+  const { topRef, chatsRef } = useChatUpdate(id, socket, pushOldChatRef, pushNewChat);
 
   return (
     <>
