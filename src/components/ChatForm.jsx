@@ -84,6 +84,10 @@ function ChatForm({ partyId }) {
     const form = new FormData(event.target);
     const chat = form.get('chat');
 
+    if (!chat) {
+      return;
+    }
+
     fetch(`${SERVER_URL}/chats/${partyId}`, {
       method: 'POST',
       mode: 'cors',
