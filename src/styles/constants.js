@@ -9,6 +9,11 @@ const COLORS = {
   BEIGE: '#FBF7F2;',
 };
 
+const MODALS = {
+  CONFIRM: 'CONFIRM',
+  ALERT: 'ALERT',
+};
+
 const SIZES = {
   MIN_WIDTH: '320px',
   SMALL_WIDTH: '450px',
@@ -33,4 +38,4 @@ const SCROLL_PRIMARY = `
     background-color: ${COLORS.GRAY};
 `;
 
-export { COLORS, SIZES, HOVER_CURSOR_PONTER, SCROLL_PRIMARY };
+export { COLORS, SIZES, HOVER_CURSOR_PONTER, SCROLL_PRIMARY, MODALS };
