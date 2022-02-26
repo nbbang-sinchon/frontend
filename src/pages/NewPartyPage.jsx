@@ -5,7 +5,7 @@ import NewParty from '../components/NewParty';
 function NewPartyPage() {
   return (
     <>
-      <Main>
+      <Main background="WHITE">
         <NewParty />
       </Main>
     </>
