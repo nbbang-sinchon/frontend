@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { icons } from '../assets/assets';
 import { COLORS } from '../styles/constants';
 
 const ModalWrapper = styled.div`
@@ -25,7 +26,7 @@ const ModalOverlay = styled.div`
   bottom: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.6);
-  z-index: 999;
+  z-index: 998;
 `;
 
 const ModalInner = styled.div`
@@ -64,9 +65,20 @@ const ModalInner = styled.div`
   button:hover {
     opacity: 1;
   }
+
+  svg {
+    position: relative;
+    bottom: 30px;
+    left: 160px;
+    cursor: pointer;
+
+    path {
+      color: black;
+    }
+  }
 `;
 
-function ConfirmModal({ onConfirm, onDeny, visible, children }) {
+function ConfirmModal({ visible, children, onConfirm, onDisconfirm }) {
   return (
     <>
       <ModalOverlay visible={visible} />
@@ -74,19 +86,34 @@ function ConfirmModal({ onConfirm, onDeny, visible, children }) {
         <ModalInner tabIndex="0">
           {children}
           <button onClick={onConfirm}>확인</button>
-          <button onClick={onDeny}>취소</button>
+          <button onClick={onDisconfirm}>취소</button>
         </ModalInner>
       </ModalWrapper>
     </>
   );
 }
 
-function AlertModal({ visible, children }) {
+function AlertModal({ visible, children, closable, maskClosable, onClose }) {
+  const onMaskClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose(e);
+    }
+  };
+
+  const close = (e) => {
+    if (onClose) {
+      onClose(e);
+    }
+  };
+
   return (
     <>
       <ModalOverlay visible={visible} />
-      <ModalWrapper tabIndex="-1" visible={visible}>
-        <ModalInner tabIndex="0">{children}</ModalInner>
+      <ModalWrapper onClick={maskClosable ? onMaskClick : null} tabIndex="-1" visible={visible}>
+        <ModalInner tabIndex="0">
+          {closable && <icons.CancelIcon onClick={close} />}
+          {children}
+        </ModalInner>
       </ModalWrapper>
     </>
   );
@@ -94,9 +121,9 @@ function AlertModal({ visible, children }) {
 
 ConfirmModal.propTypes = {
   visible: PropTypes.bool,
-  children: PropTypes.object,
-  onConfirm: PropTypes.func,
-  onDeny: PropTypes.func,
+  children: PropTypes.object.isRequired,
+  onConfirm: PropTypes.func.isRequired,
+  onDisconfirm: PropTypes.func.isRequired,
 };
 
 ConfirmModal.defaultProps = {
@@ -105,7 +132,16 @@ ConfirmModal.defaultProps = {
 
 AlertModal.propTypes = {
   visible: PropTypes.bool,
-  children: PropTypes.object,
+  children: PropTypes.object.isRequired,
+  closable: PropTypes.bool,
+  maskClosable: PropTypes.bool,
+  onClose: PropTypes.func,
+};
+
+AlertModal.defaultProps = {
+  visible: false,
+  closable: true,
+  maskClosable: true,
 };
 
 export { ConfirmModal, AlertModal };
