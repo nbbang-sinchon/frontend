@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { icons, images } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
 import { SERVER_URL } from '../config';
 import hashTagStringToList from '../utils/hashtagstringtolist';
+import Modal from './Modal';
 
 const Logo = () => {
   const Container = styled.div`
@@ -167,12 +168,30 @@ const ContentInput = styled.textarea`
 `;
 
 function NewParty() {
-  const formRef = useRef();
-
+  const [modalVisible, setModalVisible] = useState(false);
+  const [isConfirm, setIsConfirm] = useState(false);
   const navigate = useNavigate();
 
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const onConfirm = () => {
+    setModalVisible(false);
+    setIsConfirm(true);
+    navigate('/');
+  };
+  const onDeny = () => {
+    setModalVisible(false);
+    setIsConfirm(false);
+  };
+
+  const formRef = useRef();
+
   const createPartyObj = (newparty) => {
-    if (window.confirm('파티를 생성하시겠습니까?')) {
+    openModal();
+
+    if (isConfirm) {
       fetch(`${SERVER_URL}/parties`, {
         method: 'POST',
         headers: {
@@ -184,8 +203,7 @@ function NewParty() {
         .then((response) => {
           if (response.statusCode === 400) alert(response.errors[0].errorMessage);
           else if (response.statusCode === 200) {
-            alert('파티 생성 성공');
-            navigate('/');
+            console.log('파티 만들기 성공');
           }
         });
     } else {
@@ -237,6 +255,11 @@ function NewParty() {
           </form>
         </InnerContainer>
       </Container>
+      {modalVisible && !isConfirm && (
+        <Modal visible={modalVisible} onConfirm={onConfirm} onDeny={onDeny}>
+          <h1>파티를 만드시겠습니까?</h1>
+        </Modal>
+      )}
     </>
   );
 }
