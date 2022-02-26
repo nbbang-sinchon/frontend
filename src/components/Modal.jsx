@@ -78,22 +78,7 @@ const ModalInner = styled.div`
   }
 `;
 
-function ConfirmModal({ visible, children, onConfirm, onDisconfirm }) {
-  return (
-    <>
-      <ModalOverlay visible={visible} />
-      <ModalWrapper tabIndex="-1" visible={visible}>
-        <ModalInner tabIndex="0">
-          {children}
-          <button onClick={onConfirm}>확인</button>
-          <button onClick={onDisconfirm}>취소</button>
-        </ModalInner>
-      </ModalWrapper>
-    </>
-  );
-}
-
-function AlertModal({ visible, children, closable, maskClosable, onClose }) {
+function Modal({ type, visible, children, onClose, onConfirm, onDisconfirm }) {
   const onMaskClick = (e) => {
     if (e.target === e.currentTarget) {
       onClose(e);
@@ -106,42 +91,41 @@ function AlertModal({ visible, children, closable, maskClosable, onClose }) {
     }
   };
 
-  return (
-    <>
-      <ModalOverlay visible={visible} />
-      <ModalWrapper onClick={maskClosable ? onMaskClick : null} tabIndex="-1" visible={visible}>
-        <ModalInner tabIndex="0">
-          {closable && <icons.CancelIcon onClick={close} />}
-          {children}
-        </ModalInner>
-      </ModalWrapper>
-    </>
-  );
+  if (type == 'CONFIRM') {
+    return (
+      <>
+        <ModalOverlay visible={visible} />
+        <ModalWrapper tabIndex="-1" visible={visible}>
+          <ModalInner tabIndex="0">
+            {children}
+            <button onClick={onConfirm}>확인</button>
+            <button onClick={onDisconfirm}>취소</button>
+          </ModalInner>
+        </ModalWrapper>
+      </>
+    );
+  } else if (type == 'ALERT') {
+    return (
+      <>
+        <ModalOverlay visible={visible} />
+        <ModalWrapper onClick={onMaskClick} tabIndex="-1" visible={visible}>
+          <ModalInner tabIndex="0">
+            <icons.CancelIcon onClick={close} />
+            {children}
+          </ModalInner>
+        </ModalWrapper>
+      </>
+    );
+  }
 }
 
-ConfirmModal.propTypes = {
-  visible: PropTypes.bool,
+Modal.propTypes = {
+  type: PropTypes.string.isRequired,
+  visible: PropTypes.bool.isRequired,
   children: PropTypes.object.isRequired,
-  onConfirm: PropTypes.func.isRequired,
-  onDisconfirm: PropTypes.func.isRequired,
+  onConfirm: PropTypes.func,
+  onDisconfirm: PropTypes.func,
+  onClose: PropTypes.bool,
 };
 
-ConfirmModal.defaultProps = {
-  visible: false,
-};
-
-AlertModal.propTypes = {
-  visible: PropTypes.bool,
-  children: PropTypes.object.isRequired,
-  closable: PropTypes.bool,
-  maskClosable: PropTypes.bool,
-  onClose: PropTypes.func,
-};
-
-AlertModal.defaultProps = {
-  visible: false,
-  closable: true,
-  maskClosable: true,
-};
-
-export { ConfirmModal, AlertModal };
+export default Modal;

@@ -2,9 +2,9 @@ import styled from '@emotion/styled';
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { icons, images } from '../assets/assets';
-import { COLORS, SIZES } from '../styles/constants';
+import { COLORS, SIZES, MODALS } from '../styles/constants';
 import { SERVER_URL } from '../config';
-import { AlertModal, ConfirmModal } from './Modal';
+import Modal from './Modal';
 import hashTagStringToList from '../utils/hashtagstringtolist';
 
 const Logo = () => {
@@ -227,7 +227,6 @@ function NewParty() {
 
   const onClick = () => {
     const form = new FormData(formRef.current);
-    console.log(form);
     const newParty = {
       title: form.get('title'),
       content: form.get('content'),
@@ -274,14 +273,19 @@ function NewParty() {
         </InnerContainer>
       </Container>
       {confirmModalVisible && !isConfirm && (
-        <ConfirmModal visible={confirmModalVisible} onConfirm={onConfirm} onDisconfirm={onDisconfirm}>
+        <Modal type={MODALS.CONFIRM} visible={confirmModalVisible} onConfirm={onConfirm} onDisconfirm={onDisconfirm}>
           <h1>파티를 만드시겠습니까?</h1>
-        </ConfirmModal>
+        </Modal>
       )}
       {alertModalVisible && alertMessage && (
-        <AlertModal visible={alertModalVisible} closable={true} maskClosable={true} onClose={closeAlertModal}>
+        <Modal type={MODALS.ALERT} visible={alertModalVisible} onClose={closeAlertModal}>
           <p>{alertMessage}</p>
-        </AlertModal>
+        </Modal>
+      )}
+      {alertModalVisible && alertMessage && (
+        <Modal type={MODALS.ALERT} visible={alertModalVisible} onClose={closeAlertModal}>
+          <p>{alertMessage}</p>
+        </Modal>
       )}
     </>
   );
