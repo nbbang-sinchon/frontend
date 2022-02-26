@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { icons, images } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
 import { SERVER_URL } from '../config';
+import { AlertModal, ConfirmModal } from './Modal';
 import hashTagStringToList from '../utils/hashtagstringtolist';
-import Modal from './Modal';
 
 const Logo = () => {
   const Container = styled.div`
@@ -168,42 +168,54 @@ const ContentInput = styled.textarea`
 `;
 
 function NewParty() {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [confirmModalVisible, setConfirmModalVisible] = useState(false);
   const [isConfirm, setIsConfirm] = useState(false);
+
+  const [alertModalVisible, setAlertModalVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+
+  const [newParty, setNewParty] = useState();
   const navigate = useNavigate();
 
-  const openModal = () => {
-    setModalVisible(true);
+  const openConfirmModal = () => {
+    setConfirmModalVisible(true);
   };
 
   const onConfirm = () => {
-    setModalVisible(false);
+    setConfirmModalVisible(false);
     setIsConfirm(true);
-    navigate('/');
-  };
-  const onDeny = () => {
-    setModalVisible(false);
-    setIsConfirm(false);
   };
 
-  const formRef = useRef();
+  const onDisconfirm = () => {
+    setConfirmModalVisible(false);
+  };
 
-  const createPartyObj = (newparty) => {
-    openModal();
+  const openAlertModal = () => {
+    setAlertModalVisible(true);
+  };
 
+  const closeAlertModal = () => {
+    setAlertModalVisible(false);
+  };
+
+  const createPartyObj = () => {
     if (isConfirm) {
       fetch(`${SERVER_URL}/parties`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(newparty),
+        body: JSON.stringify(newParty),
       })
         .then((response) => response.json())
         .then((response) => {
-          if (response.statusCode === 400) alert(response.errors[0].errorMessage);
-          else if (response.statusCode === 200) {
+          if (response.statusCode === 400) {
+            setAlertMessage(response.errors[0].errorMessage);
+            openAlertModal();
+            setIsConfirm(false);
+          } else if (response.statusCode === 200) {
             console.log('파티 만들기 성공');
+            navigate('/');
           }
         });
     } else {
@@ -211,8 +223,11 @@ function NewParty() {
     }
   };
 
+  const formRef = useRef();
+
   const onClick = () => {
     const form = new FormData(formRef.current);
+    console.log(form);
     const newParty = {
       title: form.get('title'),
       content: form.get('content'),
@@ -220,8 +235,11 @@ function NewParty() {
       place: form.get('place'),
       goalNumber: form.get('goalNumber'),
     };
-    createPartyObj(newParty);
+    setNewParty(newParty);
+    openConfirmModal();
   };
+
+  useEffect(createPartyObj, [isConfirm, newParty]);
 
   return (
     <>
@@ -255,10 +273,15 @@ function NewParty() {
           </form>
         </InnerContainer>
       </Container>
-      {modalVisible && !isConfirm && (
-        <Modal visible={modalVisible} onConfirm={onConfirm} onDeny={onDeny}>
+      {confirmModalVisible && !isConfirm && (
+        <ConfirmModal visible={confirmModalVisible} onConfirm={onConfirm} onDisconfirm={onDisconfirm}>
           <h1>파티를 만드시겠습니까?</h1>
-        </Modal>
+        </ConfirmModal>
+      )}
+      {alertModalVisible && alertMessage && (
+        <AlertModal visible={alertModalVisible} closable={true} maskClosable={true} onClose={closeAlertModal}>
+          <p>{alertMessage}</p>
+        </AlertModal>
       )}
     </>
   );
