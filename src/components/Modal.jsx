@@ -66,7 +66,7 @@ const ModalInner = styled.div`
   }
 `;
 
-function Modal({ onConfirm, onDeny, visible, children }) {
+function ConfirmModal({ onConfirm, onDeny, visible, children }) {
   return (
     <>
       <ModalOverlay visible={visible} />
@@ -81,15 +81,31 @@ function Modal({ onConfirm, onDeny, visible, children }) {
   );
 }
 
-Modal.propTypes = {
+function AlertModal({ visible, children }) {
+  return (
+    <>
+      <ModalOverlay visible={visible} />
+      <ModalWrapper tabIndex="-1" visible={visible}>
+        <ModalInner tabIndex="0">{children}</ModalInner>
+      </ModalWrapper>
+    </>
+  );
+}
+
+ConfirmModal.propTypes = {
   visible: PropTypes.bool,
   children: PropTypes.object,
   onConfirm: PropTypes.func,
   onDeny: PropTypes.func,
 };
 
-Modal.defaultProps = {
+ConfirmModal.defaultProps = {
   visible: false,
 };
 
-export default Modal;
+AlertModal.propTypes = {
+  visible: PropTypes.bool,
+  children: PropTypes.object,
+};
+
+export { ConfirmModal, AlertModal };
