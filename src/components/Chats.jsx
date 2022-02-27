@@ -19,7 +19,7 @@ const Container = styled.div`
   ${SCROLL_PRIMARY};
 `;
 
-function Chats({ chats, chatsRef, topRef }) {
+function Chats({ chats, chatsRef, detectorRef }) {
   const makeChats = (chats) =>
     chats.map((chat, i, arr) => {
       const isContinuous = i > 0 && arr[i - 1].sender.id === chat.sender.id;
@@ -29,7 +29,7 @@ function Chats({ chats, chatsRef, topRef }) {
 
   return (
     <Container ref={chatsRef}>
-      <div ref={topRef} />
+      <div ref={detectorRef} />
       {makeChats(chats)}
     </Container>
   );
@@ -37,7 +37,7 @@ function Chats({ chats, chatsRef, topRef }) {
 
 Chats.propTypes = {
   chats: PropTypes.arrayOf(PropTypes.object),
-  topRef: PropTypes.object,
+  detectorRef: PropTypes.object,
   chatsRef: PropTypes.object,
 };
 

@@ -13,14 +13,14 @@ function ChatPage() {
   const { id } = useParams();
   const { socket } = useContext(SocketStoreContext);
   const { party, chats, pushOldChatRef, pushNewChat } = useChat(id);
-  const { topRef, chatsRef } = useChatUpdate(id, socket, pushOldChatRef, pushNewChat);
+  const { detectorRef, chatsRef } = useChatUpdate(id, socket, pushOldChatRef, pushNewChat);
 
   return (
     <>
       <Header />
       <Main background="LIGHT_GRAY" fitHeight>
         <PartyStatus party={party} />
-        <Chats chats={chats} topRef={topRef} chatsRef={chatsRef} />
+        <Chats chats={chats} detectorRef={detectorRef} chatsRef={chatsRef} />
         <ChatForm partyId={id} />
       </Main>
     </>
