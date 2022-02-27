@@ -7,7 +7,7 @@ import { convertDateToTime } from '../utils/converter';
 
 const Container = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: ${(props) => (props.isNotice && 'center') || 'flex-start'};
   flex-direction: ${(props) => (props.isSender && 'row-reverse') || 'row'};
 
   margin-top: ${(props) => (props.isContinuous && '5px') || '15px'};
@@ -47,11 +47,13 @@ const Content = styled.div`
 
 const InnerContent = styled.div`
   height: fit-content;
-  background: ${(props) => (props.isSender && COLORS.PRIMARY) || COLORS.GRAY};
-  padding: 7px 15px;
-  color: ${(props) => props.isSender && COLORS.WHITE};
+  background: ${(props) => (props.isNotice ? COLORS.DARK_GRAY : props.isSender ? COLORS.PRIMARY : COLORS.GRAY)};
+  padding: ${(props) => (props.isNotice ? '7px 30px' : '7px 15px')};
+  color: ${(props) => (props.isNotice || props.isSender) && COLORS.WHITE};
   border-radius: 20px;
   white-space: pre-wrap;
+  margin: ${(props) => props.isNotice && '15px 0'};
+  opacity: ${(props) => props.isNotice && '0.8'};
 `;
 
 const Time = styled.div`
@@ -65,9 +67,18 @@ const Time = styled.div`
 `;
 
 function Chat({ chat, isContinuous }) {
+  if (chat.type === 'EXIT' || chat.type === 'ENTER') {
+    return (
+      <Container isNotice>
+        <Content>
+          <InnerContent isNotice>{chat.content}</InnerContent>
+        </Content>
+      </Container>
+    );
+  }
   if (isContinuous) {
     return (
-      <Container isSender={chat.isSender} isContinuous={isContinuous}>
+      <Container isSender={chat.isSender} isContinuous>
         {!chat.isSender && <Blank />}
         <Content>
           <InnerContent isSender={chat.isSender}>{chat.content}</InnerContent>
