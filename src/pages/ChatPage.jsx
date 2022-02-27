@@ -12,8 +12,8 @@ import useChatUpdate from '../hooks/useChatUpdate';
 function ChatPage() {
   const { id } = useParams();
   const { socket } = useContext(SocketStoreContext);
-  const { party, chats, pushOldChatRef, pushNewChat } = useChat(id);
-  const { detectorRef, chatsRef } = useChatUpdate(id, socket, pushOldChatRef, pushNewChat);
+  const { party, chats, fetchOldChatRef, pushNewChat } = useChat(id);
+  const { detectorRef, chatsRef } = useChatUpdate(id, socket, fetchOldChatRef, pushNewChat);
 
   return (
     <>

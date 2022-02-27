@@ -1,12 +1,12 @@
 import { useEffect, useRef } from 'react';
 import useInfiniteScroll from './useInfiniteScroll';
 
-function useChatUpdate(id, socket, pushOldChatRef, pushNewChat) {
+function useChatUpdate(id, socket, fetchOldChatRef, pushNewChat) {
   const chatsRef = useRef();
 
   const observerCallback = async ([entries]) => {
     if (entries.isIntersecting) {
-      const newLength = await pushOldChatRef.current();
+      const newLength = await fetchOldChatRef.current();
       const first = chatsRef.current.querySelectorAll(':scope > div');
       first[newLength].scrollIntoView();
     }

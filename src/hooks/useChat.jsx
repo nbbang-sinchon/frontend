@@ -6,11 +6,11 @@ function useChat(id) {
   const [chats, setChats] = useState([]);
   const [isReady, setIsReady] = useState(true);
 
-  const pushOldChatRef = useRef();
+  const fetchOldChatRef = useRef();
   const pushNewChat = (chat) => setChats((prev) => [...prev, chat]);
 
   useEffect(() => {
-    pushOldChatRef.current = async () => {
+    fetchOldChatRef.current = async () => {
       if (!isReady) {
         return 0;
       }
@@ -46,7 +46,7 @@ function useChat(id) {
     };
   }, [chats, isReady]);
 
-  return { party, chats, pushOldChatRef, pushNewChat };
+  return { party, chats, fetchOldChatRef, pushNewChat };
 }
 
 export default useChat;
