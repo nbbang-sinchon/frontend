@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { images } from '../assets/assets';
@@ -66,10 +66,10 @@ const Time = styled.div`
   margin: 0 5px;
 `;
 
-function Chat({ chat, isContinuous }) {
+const Chat = forwardRef(({ chat, isContinuous }, ref) => {
   if (chat.type === 'EXIT' || chat.type === 'ENTER') {
     return (
-      <Container isNotice>
+      <Container isNotice ref={ref}>
         <Content>
           <InnerContent isNotice>{chat.content}</InnerContent>
         </Content>
@@ -78,7 +78,7 @@ function Chat({ chat, isContinuous }) {
   }
   if (isContinuous) {
     return (
-      <Container isSender={chat.isSender} isContinuous>
+      <Container isSender={chat.isSender} isContinuous ref={ref}>
         {!chat.isSender && <Blank />}
         <Content>
           <InnerContent isSender={chat.isSender}>{chat.content}</InnerContent>
@@ -88,7 +88,7 @@ function Chat({ chat, isContinuous }) {
     );
   }
   return (
-    <Container isSender={chat.isSender}>
+    <Container isSender={chat.isSender} ref={ref}>
       {!chat.isSender && <Image src={images.logo} />}
       <Content>
         {!chat.isSender && <Nickname>{chat.sender.nickname}</Nickname>}
@@ -97,8 +97,9 @@ function Chat({ chat, isContinuous }) {
       <Time>{convertDateToTime(chat.createTime)}</Time>
     </Container>
   );
-}
+});
 
+Chat.displayName = 'Chat';
 Chat.propTypes = {
   chat: PropTypes.object,
   isContinuous: PropTypes.bool,
