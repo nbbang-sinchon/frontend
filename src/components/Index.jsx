@@ -109,7 +109,7 @@ function Index() {
             원하는 파티를 만들거나 찾아보세요!
           </p>
         </WelComeText>
-        <Link to="/main">
+        <Link to="/login">
           <StartBtn>
             <span>시작하기</span>
             <icons.ArrowIcon />
