@@ -4,7 +4,7 @@ import { convertOptionToParam } from '../utils/converter';
 import makeObserverCallback from '../utils/observer';
 import useInfiniteScroll from './useInfiniteScroll';
 
-function usePartiesUpdate(parties, setParties, option) {
+function usePartyUpdate(parties, setParties, option) {
   const fetchOldPartyRef = useRef();
   const [isReady, setIsReady] = useState(true);
 
@@ -43,4 +43,4 @@ function usePartiesUpdate(parties, setParties, option) {
   return detectorRef;
 }
 
-export default usePartiesUpdate;
+export default usePartyUpdate;

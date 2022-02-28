@@ -5,13 +5,13 @@ import Header from '../components/Header';
 import Main from '../components/Main';
 import Parties from '../components/Parties';
 import PartyHeader from '../components/PartyHeader';
-import useParties from '../hooks/useParties';
-import usePartiesUpdate from '../hooks/usePartiesUpdate';
+import useParty from '../hooks/useParty';
+import usePartyUpdate from '../hooks/usePartyUpdate';
 
 function MainPage() {
   const { search } = useParams();
-  const { parties, setParties, option, setOption } = useParties(search);
-  const detectorRef = usePartiesUpdate(parties, setParties, option);
+  const { parties, setParties, option, setOption } = useParty(search);
+  const detectorRef = usePartyUpdate(parties, setParties, option);
 
   return (
     <>
