@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-function useInfiniteScroll(observerCallback) {
+function useInfiniteScroll(observerCallback, depArray = []) {
   const detectorRef = useRef();
 
   useEffect(() => {
@@ -10,7 +10,7 @@ function useInfiniteScroll(observerCallback) {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, depArray);
 
   return detectorRef;
 }
