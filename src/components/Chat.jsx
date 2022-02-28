@@ -41,7 +41,7 @@ const Content = styled.div`
   flex-direction: column;
   justify-content: center;
 
-  max-width: 60%;
+  max-width: ${(props) => (props.isNotice && '90%') || '60%'};
   font-size: 14px;
 `;
 
@@ -54,6 +54,7 @@ const InnerContent = styled.div`
   white-space: pre-wrap;
   margin: ${(props) => props.isNotice && '15px 0'};
   opacity: ${(props) => props.isNotice && '0.8'};
+  white-space: ${(props) => props.isNotice && 'nowrap'};
 `;
 
 const Time = styled.div`
@@ -70,7 +71,7 @@ const Chat = forwardRef(({ chat, isContinuous }, ref) => {
   if (chat.type === 'EXIT' || chat.type === 'ENTER') {
     return (
       <Container isNotice ref={ref}>
-        <Content>
+        <Content isNotice>
           <InnerContent isNotice>{chat.content}</InnerContent>
         </Content>
       </Container>
