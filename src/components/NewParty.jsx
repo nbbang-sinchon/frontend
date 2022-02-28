@@ -1,10 +1,12 @@
 import styled from '@emotion/styled';
-import React, { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { Link, useNavigate } from 'react-router-dom';
 import { icons, images } from '../assets/assets';
-import { COLORS, SIZES } from '../styles/constants';
+import { COLORS, SIZES, MODALS } from '../styles/constants';
 import { SERVER_URL } from '../config';
-import hashTagStringToList from '../utils/hashtagstringtolist';
+import Modal from './Modal';
+import { hashTagStringToList, hashTagListToString } from '../utils/hashtags';
 
 const Logo = () => {
   const Container = styled.div`
@@ -166,29 +168,118 @@ const ContentInput = styled.textarea`
   color: ${COLORS.DARK_GRAY};
 `;
 
-function NewParty() {
-  const formRef = useRef();
+function NewParty({ id, party }) {
+  const [confirmModalVisible, setConfirmModalVisible] = useState(false);
+  const [isConfirm, setIsConfirm] = useState(false);
 
-  const createPartyObj = (newparty) => {
-    if (window.confirm('파티를 생성하시겠습니까?')) {
-      fetch(`${SERVER_URL}/parties`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newparty),
-      })
-        .then((response) => response.json())
-        .then((response) => {
-          if (response.statusCode === 400) alert(response.errors[0].errorMessage);
-          else if (response.statusCode === 200) {
-            alert('파티 생성 성공');
-          }
-        });
-    } else {
-      console.log('파티 만들기 취소');
+  const [alertModalVisible, setAlertModalVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+
+  const [inputs, setInputs] = useState({
+    title: '',
+    content: '',
+    hashtags: [],
+    place: 'SINCHON',
+    goalNumber: 0,
+  });
+  const [newParty, setNewParty] = useState({
+    title: '',
+    content: '',
+    hashtags: [],
+    place: 'SINCHON',
+    goalNumber: 0,
+  });
+
+  useEffect(() => {
+    if (party) {
+      setInputs({
+        title: party.title,
+        content: party.content,
+        hashtags: hashTagListToString(party.hashtags),
+        place: party.place,
+        goalNumber: party.goalNumber,
+      });
+    }
+  }, [party]);
+
+  const onChange = (event) => {
+    const { value, name } = event.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+  };
+
+  const navigate = useNavigate();
+
+  const openConfirmModal = () => {
+    setConfirmModalVisible(true);
+  };
+
+  const onConfirm = () => {
+    setConfirmModalVisible(false);
+    setIsConfirm(true);
+  };
+
+  const onDisconfirm = () => {
+    setConfirmModalVisible(false);
+  };
+
+  const openAlertModal = () => {
+    setAlertModalVisible(true);
+  };
+
+  const closeAlertModal = () => {
+    setAlertModalVisible(false);
+  };
+
+  const createParty = () => {
+    if (party) {
+      //파티수정인 경우
+      if (isConfirm) {
+        fetch(`${SERVER_URL}/parties/${id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newParty),
+        })
+          .then((response) => response.json())
+          .then((response) => {
+            if (response.statusCode === 400) {
+              setAlertMessage(response.errors[0].errorMessage);
+              openAlertModal();
+              setIsConfirm(false);
+            } else if (response.statusCode === 200) {
+              navigate('/');
+            }
+          });
+      }
+    } else if (!party) {
+      //파티 생성인 경우
+      if (isConfirm) {
+        fetch(`${SERVER_URL}/parties/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newParty),
+        })
+          .then((response) => response.json())
+          .then((response) => {
+            if (response.statusCode === 400) {
+              setAlertMessage(response.errors[0].errorMessage);
+              openAlertModal();
+              setIsConfirm(false);
+            } else if (response.statusCode === 200) {
+              navigate('/');
+            }
+          });
+      }
     }
   };
+
+  const formRef = useRef();
 
   const onClick = () => {
     const form = new FormData(formRef.current);
@@ -199,8 +290,11 @@ function NewParty() {
       place: form.get('place'),
       goalNumber: form.get('goalNumber'),
     };
-    createPartyObj(newParty);
+    setNewParty(newParty);
+    openConfirmModal();
   };
+
+  useEffect(createParty, [isConfirm, newParty]);
 
   return (
     <>
@@ -220,22 +314,56 @@ function NewParty() {
       <Container>
         <InnerContainer>
           <form ref={formRef}>
-            <TitleInput name="title" placeholder="파티 제목을 입력하세요." />
-            <HashTagInput name="hashtags" placeholder="#해시태그로 파티 정보를 알려주세요."></HashTagInput>
+            <TitleInput name="title" placeholder="파티 제목을 입력하세요." onChange={onChange} value={inputs.title} />
+            <HashTagInput
+              name="hashtags"
+              placeholder="#해시태그로 파티 정보를 알려주세요."
+              onChange={onChange}
+              value={inputs.hashtags}></HashTagInput>
             <Select>
-              <select name="place">
+              <select name="place" onChange={onChange} value={inputs.place}>
                 <option value="SINCHON">신촌동</option>
                 <option value="YEONHUI">연희동</option>
                 <option value="CHANGCHEON">창천동</option>
               </select>
-              <input name="goalNumber" type="number" min="1" placeholder="인원 수"></input>
+              <input
+                name="goalNumber"
+                type="number"
+                min="1"
+                placeholder="인원 수"
+                onChange={onChange}
+                value={inputs.goalNumber}></input>
             </Select>
-            <ContentInput name="content" placeholder="내용을 입력하세요."></ContentInput>
+            <ContentInput
+              name="content"
+              placeholder="내용을 입력하세요."
+              onChange={onChange}
+              value={inputs.content}></ContentInput>
           </form>
         </InnerContainer>
       </Container>
+      {confirmModalVisible && !isConfirm && (
+        <Modal type={MODALS.CONFIRM} visible={confirmModalVisible} onConfirm={onConfirm} onDisconfirm={onDisconfirm}>
+          {party ? <h1>파티를 수정하시겠습니까?</h1> : <h1>파티를 만드시겠습니까?</h1>}
+        </Modal>
+      )}
+      {alertModalVisible && alertMessage && (
+        <Modal
+          type={MODALS.ALERT}
+          visible={alertModalVisible}
+          closable={true}
+          maskClosable={true}
+          onClose={closeAlertModal}>
+          <p>{alertMessage}</p>
+        </Modal>
+      )}
     </>
   );
 }
+
+NewParty.propTypes = {
+  party: PropTypes.object,
+  id: PropTypes.string,
+};
 
 export default NewParty;
