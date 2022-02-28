@@ -166,6 +166,7 @@ const ContentInput = styled.textarea`
   padding-bottom: 400px;
   background-color: ${COLORS.LIGHT_GRAY};
   color: ${COLORS.DARK_GRAY};
+  resize: none;
 `;
 
 function NewParty({ id, party }) {
