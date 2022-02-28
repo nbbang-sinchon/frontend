@@ -21,9 +21,7 @@ function useChat(id) {
         isSender: json.data.isSender,
       });
 
-      if (json.data.messages.length > 0) {
-        setChats(json.data.messages);
-      }
+      setChats(json.data.messages);
     };
 
     fetchChat();
