@@ -10,7 +10,7 @@ function SocketStore({ children }) {
   const option = { protocols: webstomp.VERSIONS.supportedProtocols(), debug: false };
   const socket = webstomp.over(new SockJS(`${SERVER_URL}/chat`), option);
 
-  return <SocketStoreContext.Provider value={{ socket }}>{children}</SocketStoreContext.Provider>;
+  return <SocketStoreContext.Provider value={socket}>{children}</SocketStoreContext.Provider>;
 }
 
 SocketStore.propTypes = {

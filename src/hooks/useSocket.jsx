@@ -4,7 +4,7 @@ import { SocketStoreContext } from '../components/SocketStore';
 function useSocket() {
   const socket = useContext(SocketStoreContext);
 
-  return { socket };
+  return socket;
 }
 
 export default useSocket;
