@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { images } from '../assets/assets';
 import { COLORS, HOVER_CURSOR_PONTER, SIZES } from '../styles/constants';
+import { GOOGLE_LOGIN_URL } from '../config';
 
 function LoginPageHeader() {
   const Logo = () => {
@@ -97,6 +98,7 @@ function Login() {
       height: 40px;
     }
   `;
+
   return (
     <>
       <Container>
@@ -104,7 +106,9 @@ function Login() {
           <h1>어서 파티를 만들러 가고싶어요!</h1>
           <Image src={images.kakao} />
           <Image src={images.naver} />
-          <Image src={images.google} />
+          <a href={GOOGLE_LOGIN_URL}>
+            <Image src={images.google}></Image>
+          </a>
         </InnerContainer>
       </Container>
     </>
