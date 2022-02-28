@@ -1,4 +1,5 @@
 const SERVER_URL = 'http://15.165.132.250:8094';
 const CHAT_PAGE_SIZE = '20';
+const PARTY_PAGE_SIZE = '10';
 
-export { SERVER_URL, CHAT_PAGE_SIZE };
+export { SERVER_URL, CHAT_PAGE_SIZE, PARTY_PAGE_SIZE };

@@ -10,7 +10,7 @@ import usePartiesUpdate from '../hooks/usePartiesUpdate';
 
 function MainPage() {
   const { search } = useParams();
-  const { parties, setParties, option, setOption } = useParties(search, true);
+  const { parties, setParties, option, setOption } = useParties(search);
   const detectorRef = usePartiesUpdate(parties, setParties, option);
 
   return (
