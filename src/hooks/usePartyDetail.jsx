@@ -6,6 +6,10 @@ function usePartyDetail(id) {
   const [parties, setParties] = useState([]);
 
   useEffect(() => {
+    if (!id) {
+      return;
+    }
+
     const fetchParty = async () => {
       const res = await fetch(`${SERVER_URL}/parties/${id}`);
       const json = await res.json();

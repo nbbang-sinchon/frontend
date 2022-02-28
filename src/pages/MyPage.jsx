@@ -1,13 +1,14 @@
 import React from 'react';
 import Main from '../components/Main';
-import { MyPageHeader, MyPageUserInfo } from '../components/MyPage';
+import MyPageHeader from '../components/MyPageHeader';
+import MyProfile from '../components/MyProfile';
 
 function MyPage() {
   return (
     <>
       <MyPageHeader />
       <Main>
-        <MyPageUserInfo />
+        <MyProfile />
       </Main>
     </>
   );
