@@ -5,10 +5,10 @@ import Main from '../components/Main';
 import Parties from '../components/Parties';
 import Footer from '../components/Footer';
 import PartyHeader from '../components/PartyHeader';
-import useParties from '../hooks/useParties';
+import useParty from '../hooks/useParty';
 
 function IndexPage() {
-  const { parties } = useParties();
+  const { parties } = useParty();
 
   return (
     <>

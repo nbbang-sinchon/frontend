@@ -33,7 +33,7 @@ const PartyContainer = styled.div`
   }
 `;
 
-function Parties({ parties }) {
+function Parties({ parties, detectorRef }) {
   return (
     <Container>
       <PartyContainer>
@@ -50,6 +50,7 @@ function Parties({ parties }) {
             id={party.id}
           />
         ))}
+        <div ref={detectorRef} />
       </PartyContainer>
     </Container>
   );
@@ -57,6 +58,7 @@ function Parties({ parties }) {
 
 Parties.propTypes = {
   parties: PropTypes.arrayOf(PropTypes.object),
+  detectorRef: PropTypes.object,
 };
 
 export default Parties;

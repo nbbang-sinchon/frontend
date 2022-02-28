@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { images } from '../assets/assets';
@@ -7,7 +7,7 @@ import { convertDateToTime } from '../utils/converter';
 
 const Container = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: ${(props) => (props.isNotice && 'center') || 'flex-start'};
   flex-direction: ${(props) => (props.isSender && 'row-reverse') || 'row'};
 
   margin-top: ${(props) => (props.isContinuous && '5px') || '15px'};
@@ -41,17 +41,20 @@ const Content = styled.div`
   flex-direction: column;
   justify-content: center;
 
-  max-width: 60%;
+  max-width: ${(props) => (props.isNotice && '90%') || '60%'};
   font-size: 14px;
 `;
 
 const InnerContent = styled.div`
   height: fit-content;
-  background: ${(props) => (props.isSender && COLORS.PRIMARY) || COLORS.GRAY};
-  padding: 7px 15px;
-  color: ${(props) => props.isSender && COLORS.WHITE};
+  background: ${(props) => (props.isNotice ? COLORS.DARK_GRAY : props.isSender ? COLORS.PRIMARY : COLORS.GRAY)};
+  padding: ${(props) => (props.isNotice ? '7px 30px' : '7px 15px')};
+  color: ${(props) => (props.isNotice || props.isSender) && COLORS.WHITE};
   border-radius: 20px;
   white-space: pre-wrap;
+  margin: ${(props) => props.isNotice && '15px 0'};
+  opacity: ${(props) => props.isNotice && '0.8'};
+  white-space: ${(props) => props.isNotice && 'nowrap'};
 `;
 
 const Time = styled.div`
@@ -64,10 +67,19 @@ const Time = styled.div`
   margin: 0 5px;
 `;
 
-function Chat({ chat, isContinuous }) {
+const Chat = forwardRef(({ chat, isContinuous }, ref) => {
+  if (chat.type === 'EXIT' || chat.type === 'ENTER') {
+    return (
+      <Container isNotice ref={ref}>
+        <Content isNotice>
+          <InnerContent isNotice>{chat.content}</InnerContent>
+        </Content>
+      </Container>
+    );
+  }
   if (isContinuous) {
     return (
-      <Container isSender={chat.isSender} isContinuous={isContinuous}>
+      <Container isSender={chat.isSender} isContinuous ref={ref}>
         {!chat.isSender && <Blank />}
         <Content>
           <InnerContent isSender={chat.isSender}>{chat.content}</InnerContent>
@@ -77,7 +89,7 @@ function Chat({ chat, isContinuous }) {
     );
   }
   return (
-    <Container isSender={chat.isSender}>
+    <Container isSender={chat.isSender} ref={ref}>
       {!chat.isSender && <Image src={images.logo} />}
       <Content>
         {!chat.isSender && <Nickname>{chat.sender.nickname}</Nickname>}
@@ -86,8 +98,9 @@ function Chat({ chat, isContinuous }) {
       <Time>{convertDateToTime(chat.createTime)}</Time>
     </Container>
   );
-}
+});
 
+Chat.displayName = 'Chat';
 Chat.propTypes = {
   chat: PropTypes.object,
   isContinuous: PropTypes.bool,

@@ -107,6 +107,11 @@ const CreatePartyBtn = styled(plainButton)`
 function PartyHeader({ header, isFiltered, setOption }) {
   const clickFilterItem = ({ target }) => {
     const item = target.closest('li');
+
+    if (!item) {
+      return;
+    }
+
     const place = item.dataset.place;
     const option = item.dataset.option;
 
