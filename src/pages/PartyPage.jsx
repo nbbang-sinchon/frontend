@@ -6,11 +6,11 @@ import Parties from '../components/Parties';
 import Footer from '../components/Footer';
 import { useParams } from 'react-router-dom';
 import PartyHeader from '../components/PartyHeader';
-import useParty from '../hooks/useParty';
+import usePartyDetail from '../hooks/usePartyDetail';
 
 function PartyPage() {
   const { id } = useParams();
-  const { party, parties } = useParty(id);
+  const { party, parties } = usePartyDetail(id);
 
   return (
     <>

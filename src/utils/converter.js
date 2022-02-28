@@ -56,4 +56,31 @@ const convertDateToTime = (dateString) => {
   return new Date(dateString).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
 };
 
-export { convertPlace, convertDate, convertStatus, convertDateToTime };
+const convertOptionToParam = (option) => {
+  const params = [];
+  const placeKeys = Object.keys(option.place);
+
+  if (option.search) {
+    params.push(`search=${option.search}`);
+  }
+
+  params.push(`status=OPEN`);
+  if (!option.OPEN) {
+    params.push(`status=CLOSED`);
+    params.push(`status=FULL`);
+  }
+
+  if (placeKeys.length === 0) {
+    params.push(`place=NONE`);
+  } else {
+    placeKeys.forEach((place) => {
+      if (option.place[place]) {
+        params.push(`place=${place}`);
+      }
+    });
+  }
+
+  return params;
+};
+
+export { convertPlace, convertDate, convertStatus, convertDateToTime, convertOptionToParam };

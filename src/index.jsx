@@ -10,27 +10,22 @@ import PartyPage from './pages/PartyPage';
 import ChatPage from './pages/ChatPage';
 import MyPartyPage from './pages/MyPartyPage';
 import NewPartyPage from './pages/NewPartyPage';
-import SocketStore from './components/SocketStore';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Reset />
-      <SocketStore>
-        <Routes>
-          <Route path="/" element={<IndexPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/main" element={<MainPage />} />
-          <Route path="/main/:search" element={<MainPage />} />
-          <Route path="/mypage" element={<MyPage />} />
-          <Route path="/parties/:id" element={<PartyPage />} />
-          <Route path="/my-party" element={<MyPartyPage />} />
-          <Route path="/chats/:id" element={<ChatPage />} />
-          <Route path="/newparty" element={<NewPartyPage />} />
-          <Route path="/newparty/:id" element={<NewPartyPage />} />
-        </Routes>
-      </SocketStore>
-    </BrowserRouter>
-  </React.StrictMode>,
+  <BrowserRouter>
+    <Reset />
+    <Routes>
+      <Route path="/" element={<IndexPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/main" element={<MainPage />} />
+      <Route path="/main/:search" element={<MainPage />} />
+      <Route path="/mypage" element={<MyPage />} />
+      <Route path="/parties/:id" element={<PartyPage />} />
+      <Route path="/my-party" element={<MyPartyPage />} />
+      <Route path="/chats/:id" element={<ChatPage />} />
+      <Route path="/newparty" element={<NewPartyPage />} />
+      <Route path="/newparty/:id" element={<NewPartyPage />} />
+    </Routes>
+  </BrowserRouter>,
   document.getElementById('root'),
 );

@@ -1,44 +1,56 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { CHAT_PAGE_SIZE, SERVER_URL } from '../config';
+import makeObserverCallback from '../utils/observer';
+import useInfiniteScroll from './useInfiniteScroll';
+import useSocket from './useSocket';
 
-function useChatUpdate(id, socket, pushOldChatRef, pushNewChat) {
-  const chatsRef = useRef();
-  const topRef = useRef();
+function useChatUpdate(id, chats, setChats) {
+  const fetchOldChatRef = useRef();
+  const [isReady, setIsReady] = useState(true);
+  const socket = useSocket();
+
+  const observerCallback = makeObserverCallback(fetchOldChatRef);
+  const detectorRef = useInfiniteScroll(observerCallback, [chats]);
 
   useEffect(() => {
-    const onNewChat = ({ body }) => {
-      pushNewChat(JSON.parse(body));
-      if (chatsRef.current) {
-        chatsRef.current.scroll({ top: chatsRef.current.scrollHeight, behavior: 'smooth' });
+    fetchOldChatRef.current = async () => {
+      if (!isReady || !chats.length) {
+        return;
       }
+
+      setIsReady(false);
+
+      const URL = `${SERVER_URL}/chats/${id}/messages?pageSize=${CHAT_PAGE_SIZE}${`&cursorId=${chats[0].id}`}`;
+      const res = await fetch(URL);
+      const json = await res.json();
+
+      if (json.data.messages.length > 0) {
+        setIsReady(true);
+        setChats((prev) => [...json.data.messages, ...prev]);
+      }
+    };
+  }, [chats, isReady]);
+
+  useEffect(() => {
+    const pushNewChat = ({ body }) => {
+      setChats((prev) => [...prev, JSON.parse(body)]);
     };
 
     const connectSocket = async () => {
       if (!socket.connected) {
         await new Promise((resolve) => socket.connect({}, () => resolve()));
       }
-      socket.subscribe('/topic/' + id, onNewChat);
-    };
-
-    const observerCallback = async ([entries]) => {
-      if (entries.isIntersecting) {
-        const newLength = await pushOldChatRef.current();
-        const first = chatsRef.current.querySelectorAll(':scope > div');
-        first[newLength].scrollIntoView();
-      }
+      socket.subscribe('/topic/' + id, pushNewChat);
     };
 
     connectSocket();
 
-    const observer = new IntersectionObserver(observerCallback);
-    observer.observe(topRef.current);
-
     return () => {
-      socket.unsubscribe('/topic/' + id, onNewChat);
-      observer.disconnect();
+      socket.unsubscribe('/topic/' + id, pushNewChat);
     };
   }, []);
 
-  return { topRef, chatsRef };
+  return detectorRef;
 }
 
 export default useChatUpdate;
