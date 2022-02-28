@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { SERVER_URL } from '../config';
+import { convertOptionToParam } from '../utils/converter';
 
 function useParties(search) {
   const [parties, setParties] = useState([]);
@@ -14,46 +15,20 @@ function useParties(search) {
     },
   });
 
-  const makeParams = (option) => {
-    const params = [];
-    const placeKeys = Object.keys(option.place);
-
-    if (option.search) {
-      params.push(`search=${option.search}`);
-    }
-
-    params.push(`status=OPEN`);
-    if (!option.OPEN) {
-      params.push(`status=CLOSED`);
-      params.push(`status=FULL`);
-    }
-
-    if (placeKeys.length === 0) {
-      params.push(`place=NONE`);
-    } else {
-      placeKeys.forEach((place) => {
-        if (option.place[place]) {
-          params.push(`place=${place}`);
-        }
-      });
-    }
-
-    return params;
-  };
-
   useEffect(() => {
-    const fetchParties = async () => {
-      const params = makeParams(option);
-      const res = await fetch(`${SERVER_URL}/parties?${params.join('&')}`);
+    const fetchParty = async () => {
+      const params = convertOptionToParam(option);
+      const URL = `${SERVER_URL}/parties?${params.join('&')}`;
+      const res = await fetch(URL);
       const json = await res.json();
 
-      setParties(json.data.parties);
+      setParties([...json.data.parties]);
     };
 
-    fetchParties();
+    fetchParty();
   }, [option]);
 
-  return { parties, setOption };
+  return { parties, setParties, option, setOption };
 }
 
 export default useParties;
