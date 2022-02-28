@@ -42,7 +42,6 @@ const ModalInner = styled.div`
   transform: translateY(-50%);
   margin: 0 auto;
   padding: 40px 40px;
-
   h1 {
     font-size: 20px;
     font-weight: 500;
@@ -50,7 +49,6 @@ const ModalInner = styled.div`
     margin-top: 25px;
     margin-bottom: 40px;
   }
-
   button {
     background-color: ${COLORS.PRIMARY};
     color: white;
@@ -61,17 +59,14 @@ const ModalInner = styled.div`
     width: 100%;
     opacity: 0.9;
   }
-
   button:hover {
     opacity: 1;
   }
-
   svg {
     position: relative;
     bottom: 30px;
     left: 160px;
     cursor: pointer;
-
     path {
       color: black;
     }

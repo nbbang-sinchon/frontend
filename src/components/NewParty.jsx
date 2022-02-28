@@ -192,7 +192,6 @@ function NewParty({ id, party }) {
 
   useEffect(() => {
     if (party) {
-      console.log(party);
       setInputs({
         title: party.title,
         content: party.content,
@@ -252,12 +251,9 @@ function NewParty({ id, party }) {
               openAlertModal();
               setIsConfirm(false);
             } else if (response.statusCode === 200) {
-              console.log('파티 수정 성공');
               navigate('/');
             }
           });
-      } else {
-        console.log('파티 수정 취소');
       }
     } else if (!party) {
       //파티 생성인 경우
@@ -276,12 +272,9 @@ function NewParty({ id, party }) {
               openAlertModal();
               setIsConfirm(false);
             } else if (response.statusCode === 200) {
-              console.log('파티 만들기 성공');
               navigate('/');
             }
           });
-      } else {
-        console.log('파티 만들기 취소');
       }
     }
   };
