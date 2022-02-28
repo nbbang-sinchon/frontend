@@ -80,10 +80,8 @@ function MyPageHeader() {
         <Logo />
       </Column>
       <Column>
-        <Link to="/">
-          <a href={`${SERVER_URL}/logout`}>
-            <LogOutButton>로그아웃</LogOutButton>
-          </a>
+        <Link to="/" href={`${SERVER_URL}/logout`}>
+          <LogOutButton>로그아웃</LogOutButton>
         </Link>
       </Column>
     </Container>
