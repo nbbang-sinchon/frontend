@@ -4,7 +4,7 @@ import ChatForm from '../components/ChatForm';
 import Chats from '../components/Chats';
 import Header from '../components/Header';
 import Main from '../components/Main';
-import PartyStatus from '../components/PartyStatus';
+import PartyDetailHeader from '../components/PartyDetailHeader';
 import useChat from '../hooks/useChat';
 import useChatUpdate from '../hooks/useChatUpdate';
 
@@ -17,7 +17,7 @@ function ChatPage() {
     <>
       <Header />
       <Main background="LIGHT_GRAY" fitHeight>
-        <PartyStatus party={party} />
+        <PartyDetailHeader party={party} />
         <Chats chats={chats} detectorRef={detectorRef} />
         <ChatForm partyId={id} />
       </Main>

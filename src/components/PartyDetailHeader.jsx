@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { COLORS, HOVER_CURSOR_PONTER, SIZES } from '../styles/constants';
 import { convertStatus, convertPlace, convertDate } from '../utils/converter';
 import { icons, images } from '../assets/assets';
 import plainButton from '../styles/plainButton';
-import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
@@ -100,7 +100,7 @@ const Profile = styled.div`
   }
 `;
 
-function PartyStatus({ party, isPartyPage }) {
+function PartyDetailHeader({ party, isPartyPage }) {
   if (!party) {
     return <Container />;
   }
@@ -132,9 +132,9 @@ function PartyStatus({ party, isPartyPage }) {
   );
 }
 
-PartyStatus.propTypes = {
+PartyDetailHeader.propTypes = {
   party: PropTypes.object,
   isPartyPage: PropTypes.bool,
 };
 
-export default PartyStatus;
+export default PartyDetailHeader;
