@@ -25,27 +25,22 @@ const StatusColumn = styled.div`
   font-size: 18px;
   font-weight: 500;
   white-space: nowrap;
-  padding-left: ${(props) => props.isChatPage && '60px'};
 
   @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
     font-size: 14px;
-    padding-left: ${(props) => props.isChatPage && '40px'};
   }
 
   @media only screen and (max-width: ${SIZES.SMALL_WIDTH}) {
     font-size: 12px;
-    padding-left: ${(props) => props.isChatPage && '30px'};
 
     &: nth-of-type(2) {
       flex-direction: column;
-
-      font-size: 10px;
     }
   }
 
   svg {
-    margin-right: 20px;
-    transform: scale(1.5, 1.5) translateY(-2px);
+    margin-right: 30px;
+    transform: scale(1.8, 1.8);
 
     path {
       fill: ${COLORS.PRIMARY};
@@ -54,7 +49,7 @@ const StatusColumn = styled.div`
     ${HOVER_CURSOR_PONTER};
 
     @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
-      transform: scale(1.2, 1.2) translateY(-2px);
+      transform: scale(1.5, 1.5);
       margin-right: 15px;
     }
   }
@@ -75,8 +70,9 @@ const Image = styled.img`
   width: 44px;
   height: 44px;
   object-fit: cover;
-  border-radius: 50%;
-  border: 1px solid ${COLORS.PRIMARY};
+  border-radius: ${(props) => props.isProfile && `50%`};
+  border: ${(props) => props.isProfile && `1px solid ${COLORS.PRIMARY}`};
+  ${(props) => !props.isProfile && HOVER_CURSOR_PONTER};
 
   @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
     width: 36px;
@@ -111,7 +107,7 @@ function PartyStatus({ party, isPartyPage }) {
   return (
     <Container>
       <StatusColumn>
-        <Image src={images.logo} />
+        <Image src={images.logo} isProfile />
         <Profile>
           <div>{party.ownerNickname}</div>
           <div> {convertPlace(party.place)}</div>
@@ -126,11 +122,11 @@ function PartyStatus({ party, isPartyPage }) {
       </StatusColumn>
       <StatusColumn isChatPage={!isPartyPage}>
         <icons.HeartIcon />
-        {isPartyPage && (
+        {(isPartyPage && (
           <Link to={'/chats/' + party.id}>
             <ChattingButton>채팅 입장</ChattingButton>
           </Link>
-        )}
+        )) || <Image src={images.bread} />}
       </StatusColumn>
     </Container>
   );
