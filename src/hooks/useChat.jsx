@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { CHAT_PAGE_SIZE, SERVER_URL } from '../config';
 
 function useChat(id) {
-  const [party, setParty] = useState();
+  const [party, setParty] = useState({ members: [] });
   const [chats, setChats] = useState([]);
 
   useEffect(() => {

@@ -101,7 +101,7 @@ const Profile = styled.div`
 `;
 
 function PartyDetailHeader({ party, isPartyPage, toggleBreadBoard }) {
-  if (!party) {
+  if (!party?.owner) {
     return <Container />;
   }
   return (
