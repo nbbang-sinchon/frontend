@@ -15,8 +15,9 @@ import kakao from './images/Kakao.png';
 import naver from './images/Naver.png';
 import google from './images/Google.png';
 import breadBoard from './images/bread-board.png';
+import delivery from './images/delivery.png';
 
-const images = { logo, bread, kakao, naver, google, breadBoard };
+const images = { logo, bread, kakao, naver, google, breadBoard, delivery };
 const icons = {
   NotificationIcon,
   PartyIcon,
