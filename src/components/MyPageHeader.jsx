@@ -3,7 +3,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { images } from '../assets/assets';
 import { COLORS, HOVER_CURSOR_PONTER, SIZES } from '../styles/constants';
-import { SERVER_URL } from '../config';
 
 function MyPageHeader() {
   const Logo = () => {
@@ -80,7 +79,7 @@ function MyPageHeader() {
         <Logo />
       </Column>
       <Column>
-        <Link to="/" href={`${SERVER_URL}/logout`}>
+        <Link to="/logout">
           <LogOutButton>로그아웃</LogOutButton>
         </Link>
       </Column>
