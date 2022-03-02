@@ -36,6 +36,7 @@ const SCROLL_PRIMARY = `
   }
   &::-webkit-scrollbar-track {
     background-color: ${COLORS.GRAY};
+  }
 `;
 
 export { COLORS, SIZES, HOVER_CURSOR_PONTER, SCROLL_PRIMARY, MODALS };

@@ -24,7 +24,7 @@ function ChatPage() {
         <Chats chats={chats} detectorRef={detectorRef} />
         <ChatForm partyId={id} />
       </Main>
-      <BreadBoard isShown={isShown} />
+      <BreadBoard isShown={isShown} party={party} />
     </>
   );
 }
