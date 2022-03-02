@@ -11,16 +11,7 @@ function useChat(id) {
       const res = await fetch(URL);
       const json = await res.json();
 
-      setParty({
-        ownerNickname: json.data.owner.nickname,
-        place: json.data.owner.place,
-        createTime: json.data.createTime,
-        joinNumber: json.data.joinNumber,
-        goalNumber: json.data.goalNumber,
-        status: json.data.status,
-        isSender: json.data.isSender,
-      });
-
+      setParty(json.data);
       setChats(json.data.messages);
     };
 

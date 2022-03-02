@@ -107,10 +107,10 @@ function PartyDetailHeader({ party, isPartyPage, toggleBreadBoard }) {
   return (
     <Container>
       <StatusColumn>
-        <Image src={images.logo} isProfile />
+        <Image src={party.owner.avatar || images.logo} isProfile />
         <Profile>
-          <div>{party.ownerNickname}</div>
-          <div> {convertPlace(party.place)}</div>
+          <div>{party.owner.nickname}</div>
+          <div> {convertPlace(party.owner.place)}</div>
         </Profile>
       </StatusColumn>
       <StatusColumn>

@@ -90,7 +90,7 @@ const Chat = forwardRef(({ chat, isContinuous }, ref) => {
   }
   return (
     <Container isSender={chat.isSender} ref={ref}>
-      {!chat.isSender && <Image src={images.logo} />}
+      {!chat.isSender && <Image src={chat.sender.avatar || images.logo} />}
       <Content>
         {!chat.isSender && <Nickname>{chat.sender.nickname}</Nickname>}
         <InnerContent isSender={chat.isSender}>{chat.content}</InnerContent>
