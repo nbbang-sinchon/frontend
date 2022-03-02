@@ -100,7 +100,7 @@ const Profile = styled.div`
   }
 `;
 
-function PartyDetailHeader({ party, isPartyPage }) {
+function PartyDetailHeader({ party, isPartyPage, toggleBreadBoard }) {
   if (!party) {
     return <Container />;
   }
@@ -126,7 +126,7 @@ function PartyDetailHeader({ party, isPartyPage }) {
           <Link to={'/chats/' + party.id}>
             <ChattingButton>채팅 입장</ChattingButton>
           </Link>
-        )) || <Image src={images.bread} />}
+        )) || <Image src={images.bread} onClick={toggleBreadBoard} />}
       </StatusColumn>
     </Container>
   );
@@ -135,6 +135,7 @@ function PartyDetailHeader({ party, isPartyPage }) {
 PartyDetailHeader.propTypes = {
   party: PropTypes.object,
   isPartyPage: PropTypes.bool,
+  toggleBreadBoard: PropTypes.func,
 };
 
 export default PartyDetailHeader;
