@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { images } from '../assets/assets';
+import { FRONT_URL } from '../config';
 import { COLORS, HOVER_CURSOR_PONTER, SIZES } from '../styles/constants';
 
 function MyPageHeader() {
@@ -34,7 +35,7 @@ function MyPageHeader() {
     justify-content: space-between;
     align-items: center;
 
-    padding: 10px;
+    padding: 10px 0px;
     border-bottom: 2px solid ${COLORS.PRIMARY};
     min-width: ${SIZES.HEADER_MIN_WIDTH};
     position: sticky;
@@ -72,6 +73,16 @@ function MyPageHeader() {
     }
   `;
 
+  const navigate = useNavigate();
+
+  const onClick = () => {
+    fetch(`${FRONT_URL}/logout`).then((response) => {
+      if (response.status == 200) {
+        navigate('/');
+      }
+    });
+  };
+
   return (
     <Container>
       <Column></Column>
@@ -79,9 +90,7 @@ function MyPageHeader() {
         <Logo />
       </Column>
       <Column>
-        <Link to="/logout">
-          <LogOutButton>로그아웃</LogOutButton>
-        </Link>
+        <LogOutButton onClick={onClick}>로그아웃</LogOutButton>
       </Column>
     </Container>
   );
