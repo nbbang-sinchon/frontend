@@ -3,7 +3,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 function ValidationRoute({ filter, fallback }) {
-  return filter ? <Navigate to={fallback} /> : <Outlet />;
+  return filter ? <Outlet /> : <Navigate to={fallback} />;
 }
 
 ValidationRoute.propTypes = {
