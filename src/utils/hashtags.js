@@ -2,7 +2,11 @@ const hashTagStringToList = (hashTagesString) => {
   if (!hashTagesString || hashTagesString === null || typeof hashTagesString !== 'string') {
     return [];
   } else {
-    return hashTagesString.split(' ');
+    return hashTagesString
+      .trim()
+      .replace(/ /gi, ',')
+      .split(',')
+      .filter((e) => e !== '');
   }
 };
 
