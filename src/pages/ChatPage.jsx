@@ -14,7 +14,7 @@ function ChatPage() {
   const { id } = useParams();
   const { party, chats, setChats } = useChat(id);
   const detectorRef = useChatUpdate(id, chats, setChats);
-  const { isShown, toggleBreadBoard } = useBreadBoard();
+  const { isShown, toggleBreadBoard, breadBoard, setBreadBoard } = useBreadBoard(id);
 
   return (
     <>
@@ -24,7 +24,7 @@ function ChatPage() {
         <Chats chats={chats} detectorRef={detectorRef} />
         <ChatForm partyId={id} />
       </Main>
-      <BreadBoard isShown={isShown} party={party} />
+      <BreadBoard isShown={isShown} party={party} breadBoard={breadBoard} setBreadBoard={setBreadBoard} />
     </>
   );
 }

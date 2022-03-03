@@ -3,6 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { images } from '../assets/assets';
 import { COLORS, SCROLL_PRIMARY } from '../styles/constants';
+import { convertPrice } from '../utils/converter';
+import BreadBoardPrice from './BreadBoardPrice';
 
 const Container = styled.div`
   position: absolute;
@@ -83,46 +85,34 @@ const User = styled.div`
     border-radius: 50%;
     border: ${(props) => !props.isDelivery && `1px solid ${COLORS.PRIMARY}`};
   }
-
-  > input {
-    text-align: right;
-    width: 30%;
-  }
-
-  > div:last-of-type {
-    display: flex;
-    justify-content: flex-end;
-
-    width: 50%;
-  }
 `;
 
-function BreadBoard({ isShown, party }) {
+function BreadBoard({ isShown, breadBoard }) {
   return (
     <Container isShown={isShown}>
       <Image src={images.breadBoard} />
       <Content>
         <Info>
           <div>TOTAL</div>
-          <div>27000원</div>
+          <div>{convertPrice(breadBoard.orderPrice)}</div>
         </Info>
         <Info>
           <input placeholder="은행이름" />
           <input placeholder="계좌번호" />
         </Info>
         <Users>
-          {party.members.map((member) => (
-            <User key={member.id}>
+          {breadBoard.memberBbangpanDtos?.map((member) => (
+            <User key={member.id || member.nickname}>
               <img src={member.avatar || images.logo} />
               <div>{member.nickname}</div>
-              <input placeholder="금액" />
+              <BreadBoardPrice price={member.price} />
             </User>
           ))}
         </Users>
         <User isDelivery>
           <img src={images.delivery} />
           <div>배달비</div>
-          <input placeholder="금액" />
+          <BreadBoardPrice price={breadBoard.fee} />
         </User>
       </Content>
     </Container>
@@ -131,7 +121,8 @@ function BreadBoard({ isShown, party }) {
 
 BreadBoard.propTypes = {
   isShown: PropTypes.bool,
-  party: PropTypes.object,
+  breadBoard: PropTypes.object,
+  setBreadBoard: PropTypes.func,
 };
 
 export default BreadBoard;
