@@ -7,7 +7,7 @@ import useSocket from './useSocket';
 function useChatUpdate(id, chats, setChats) {
   const fetchOldChatRef = useRef();
   const [isReady, setIsReady] = useState(true);
-  const socket = useSocket();
+  const { socket, waitSocket } = useSocket();
 
   const observerCallback = makeObserverCallback(fetchOldChatRef);
   const detectorRef = useInfiniteScroll(observerCallback, [chats]);
@@ -38,7 +38,7 @@ function useChatUpdate(id, chats, setChats) {
 
     const connectSocket = async () => {
       if (!socket.connected) {
-        await new Promise((resolve) => socket.connect({}, () => resolve()));
+        await waitSocket();
       }
       socket.subscribe('/topic/' + id, pushNewChat);
     };
