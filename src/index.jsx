@@ -10,23 +10,23 @@ import PartyPage from './pages/PartyPage';
 import ChatPage from './pages/ChatPage';
 import MyPartyPage from './pages/MyPartyPage';
 import NewPartyPage from './pages/NewPartyPage';
-import FilterRoute from './components/FilterRoute';
+import ValidationRoute from './components/ValidationRoute';
 import isLogin from './utils/isLogin';
 
 ReactDOM.render(
   <BrowserRouter>
     <Reset />
     <Routes>
-      <Route element={<FilterRoute filter={!isLogin()} fallback="/main" />}>
+      <Route element={<ValidationRoute filter={!isLogin()} fallback="/main" />}>
         <Route path="/" element={<IndexPage />} />
         <Route path="/login" element={<LoginPage />} />
       </Route>
 
-      <Route element={<FilterRoute filter={isLogin()} fallback="/" />}>
+      <Route element={<ValidationRoute filter={isLogin()} fallback="/" />}>
         <Route path="/main" element={<MainPage />} />
       </Route>
 
-      <Route element={<FilterRoute filter={isLogin()} fallback="/login" />}>
+      <Route element={<ValidationRoute filter={isLogin()} fallback="/login" />}>
         <Route path="/" element={<IndexPage />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/my-party" element={<MyPartyPage />} />
