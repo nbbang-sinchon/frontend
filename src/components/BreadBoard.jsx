@@ -87,9 +87,9 @@ const User = styled.div`
   }
 `;
 
-function BreadBoard({ isShown, breadBoard }) {
+function BreadBoard({ isShown, breadBoard, id }) {
   const getTotal = (breadBoard) =>
-    breadBoard?.members?.reduce((total, member) => total + member.price, 0) + breadBoard.deliveryFee;
+    breadBoard?.members?.reduce((total, member) => total + member.price, 0) + breadBoard?.deliveryFee;
 
   return (
     <Container isShown={isShown}>
@@ -104,18 +104,18 @@ function BreadBoard({ isShown, breadBoard }) {
           <input placeholder="계좌번호" />
         </Info>
         <Users>
-          {breadBoard.members?.map((member) => (
+          {breadBoard?.members?.map((member) => (
             <User key={member.id || member.nickname}>
               <img src={member.avatar || images.logo} />
               <div>{member.nickname}</div>
-              <BreadBoardPrice price={member.price} />
+              <BreadBoardPrice price={member.price} id={id} />
             </User>
           ))}
         </Users>
         <User isDelivery>
           <img src={images.delivery} />
           <div>배달비</div>
-          <BreadBoardPrice price={breadBoard.deliveryFee} />
+          <BreadBoardPrice price={breadBoard?.deliveryFee} id={id} isDelivery />
         </User>
       </Content>
     </Container>
@@ -125,7 +125,7 @@ function BreadBoard({ isShown, breadBoard }) {
 BreadBoard.propTypes = {
   isShown: PropTypes.bool,
   breadBoard: PropTypes.object,
-  setBreadBoard: PropTypes.func,
+  id: PropTypes.string,
 };
 
 export default BreadBoard;

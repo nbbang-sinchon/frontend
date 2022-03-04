@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { convertPrice } from '../utils/converter';
+import { SERVER_URL } from '../config';
 
 const Input = styled.input`
   display: flex;
@@ -12,7 +13,7 @@ const Input = styled.input`
   box-sizing: border-box;
 `;
 
-function BreadBoardPrice({ price }) {
+function BreadBoardPrice({ price, id, isDelivery }) {
   const inputRef = useRef();
 
   const submitPrice = (e) => {
@@ -20,6 +21,13 @@ function BreadBoardPrice({ price }) {
     const target = e.target.closest('input') || e.target.querySelector('input');
 
     if (target.validity.valid && target.value) {
+      fetch(`${SERVER_URL}/bread-board/${id}/${(isDelivery && 'delivery-fee') || 'price'}`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(target.value),
+      });
+
       inputRef.current.value = convertPrice(target.value);
       target.blur();
     }
@@ -66,6 +74,8 @@ function BreadBoardPrice({ price }) {
 
 BreadBoardPrice.propTypes = {
   price: PropTypes.number,
+  id: PropTypes.string,
+  isDelivery: PropTypes.bool,
 };
 
 export default BreadBoardPrice;

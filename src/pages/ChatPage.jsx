@@ -7,6 +7,7 @@ import Header from '../components/Header';
 import Main from '../components/Main';
 import PartyDetailHeader from '../components/PartyDetailHeader';
 import useBreadBoard from '../hooks/useBreadBoard';
+import useBreadBoardUpdate from '../hooks/useBreadBoardUpdate';
 import useChat from '../hooks/useChat';
 import useChatUpdate from '../hooks/useChatUpdate';
 
@@ -15,6 +16,7 @@ function ChatPage() {
   const { party, chats, setChats } = useChat(id);
   const detectorRef = useChatUpdate(id, chats, setChats);
   const { isShown, toggleBreadBoard, breadBoard, setBreadBoard } = useBreadBoard(id);
+  useBreadBoardUpdate(id, setBreadBoard);
 
   return (
     <>
@@ -24,7 +26,7 @@ function ChatPage() {
         <Chats chats={chats} detectorRef={detectorRef} />
         <ChatForm partyId={id} />
       </Main>
-      <BreadBoard isShown={isShown} party={party} breadBoard={breadBoard} setBreadBoard={setBreadBoard} />
+      <BreadBoard isShown={isShown} party={party} breadBoard={breadBoard} id={id} />
     </>
   );
 }
