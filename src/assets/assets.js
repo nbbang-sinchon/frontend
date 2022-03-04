@@ -9,6 +9,10 @@ import { ReactComponent as ArrowIcon } from './icons/arrow.svg';
 import { ReactComponent as CancelIcon } from './icons/cancel.svg';
 import { ReactComponent as CheckIcon } from './icons/check.svg';
 import { ReactComponent as PictureIcon } from './icons/picture.svg';
+import { ReactComponent as EditIcon } from './icons/edit.svg';
+import { ReactComponent as DeleteIcon } from './icons/delete.svg';
+import { ReactComponent as DeatilIcon } from './icons/detail.svg';
+
 import logo from './images/logo.png';
 import bread from './images/bread.png';
 import kakao from './images/Kakao.png';
@@ -28,6 +32,9 @@ const icons = {
   CheckIcon,
   CancelIcon,
   PictureIcon,
+  EditIcon,
+  DeleteIcon,
+  DeatilIcon,
 };
 
 export { icons, images };
