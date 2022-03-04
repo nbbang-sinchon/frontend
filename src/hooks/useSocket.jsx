@@ -4,11 +4,10 @@ import { SERVER_URL } from '../config';
 
 const option = { protocols: webstomp.VERSIONS.supportedProtocols(), debug: false };
 const socket = webstomp.over(new SockJS(`${SERVER_URL}/chat`), option);
+const isConnecting = new Promise((resolve) => socket.connect({}, resolve));
 
 function useSocket() {
-  const waitSocket = () => new Promise((resolve) => socket.connect({}, resolve));
-
-  return { socket, waitSocket };
+  return { socket, isConnecting };
 }
 
 export default useSocket;

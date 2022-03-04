@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import useSocket from './useSocket';
 
 function useBreadBoardUpdate(id, setBreadBoard) {
-  const { socket, waitSocket } = useSocket();
+  const { socket, isConnecting } = useSocket();
 
   useEffect(() => {
     const updateBreadBoard = ({ body }) => {
@@ -11,7 +11,7 @@ function useBreadBoardUpdate(id, setBreadBoard) {
 
     const connectSocket = async () => {
       if (!socket.connected) {
-        await waitSocket();
+        await isConnecting;
       }
       socket.subscribe('/breadBoard/' + id, updateBreadBoard);
     };
