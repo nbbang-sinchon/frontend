@@ -15,8 +15,6 @@ function useMyParty(isOnGoing) {
     fetchParty();
   }, [isOnGoing]);
 
-  console.log(parties);
-
   return { parties };
 }
 
