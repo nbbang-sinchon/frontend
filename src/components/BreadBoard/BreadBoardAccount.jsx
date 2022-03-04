@@ -49,6 +49,12 @@ function BreadBoardAccount({ id, bank, account }) {
     }
   };
 
+  const copyAccount = () => {
+    if (accountRef.current?.value) {
+      navigator.clipboard.writeText(accountRef.current.value);
+    }
+  };
+
   useEffect(() => {
     bankRef.current.value = bank;
     accountRef.current.value = account;
@@ -72,6 +78,7 @@ function BreadBoardAccount({ id, bank, account }) {
         onInput={checkAccount}
         onBlur={submitAccount}
         onKeyDown={checkEnter}
+        onClick={copyAccount}
       />
     </>
   );
