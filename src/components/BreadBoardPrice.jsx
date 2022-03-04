@@ -20,17 +20,22 @@ function BreadBoardPrice({ price, id, isDelivery }) {
     e.preventDefault();
     const target = e.target.closest('input') || e.target.querySelector('input');
 
-    if (target.validity.valid && target.value) {
+    if (!target.validity.valid || !target.value) {
+      formatPrice();
+      return;
+    }
+
+    if (target.value != price) {
       fetch(`${SERVER_URL}/bread-board/${id}/${(isDelivery && 'delivery-fee') || 'price'}`, {
         method: 'POST',
         mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(target.value),
       });
-
-      inputRef.current.value = convertPrice(target.value);
-      target.blur();
     }
+
+    formatPrice();
+    target.blur();
   };
 
   const checkPrice = (e) => {
@@ -39,7 +44,8 @@ function BreadBoardPrice({ price, id, isDelivery }) {
     if (e.target.validity.patternMismatch) {
       e.target.setCustomValidity('0원 이상의 금액을 입력하세요');
       e.target.reportValidity();
-      e.target.value = '';
+      formatPrice();
+      e.target.blur();
     }
   };
 
@@ -49,12 +55,16 @@ function BreadBoardPrice({ price, id, isDelivery }) {
     }
   };
 
-  const clearPrice = ({ target }) => {
-    target.value = price;
+  const clearPrice = () => {
+    inputRef.current.value = price;
+  };
+
+  const formatPrice = () => {
+    inputRef.current.value = convertPrice(price);
   };
 
   useEffect(() => {
-    inputRef.current.value = convertPrice(price);
+    formatPrice();
   }, [price]);
 
   return (
