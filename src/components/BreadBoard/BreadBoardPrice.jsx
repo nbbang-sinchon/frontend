@@ -9,7 +9,7 @@ const Input = styled.input`
   justify-content: flex-end;
 
   text-align: right;
-  width: 35%;
+  width: 100px;
   box-sizing: border-box;
 `;
 

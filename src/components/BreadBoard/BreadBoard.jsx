@@ -73,7 +73,6 @@ const Users = styled.div`
 const User = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
 
   width: 100%;
   padding: 10px 0;
@@ -86,7 +85,14 @@ const User = styled.div`
     object-fit: cover;
     border-radius: 50%;
     border: ${(props) => !props.isDelivery && `1px solid ${COLORS.PRIMARY}`};
+    box-sizing: border-box;
   }
+`;
+
+const UserName = styled.div`
+  text-align: left;
+  width: 80px;
+  padding: 0 10px;
 `;
 
 function BreadBoard({ isShown, breadBoard, id }) {
@@ -108,7 +114,15 @@ function BreadBoard({ isShown, breadBoard, id }) {
           {breadBoard?.members?.map((member) => (
             <User key={member.id || member.nickname}>
               <img src={member.avatar || images.logo} />
-              <div>{member.nickname}</div>
+              <UserName>{member.nickname}</UserName>
+              <BreadBoardPrice price={member.price} id={id} />
+              <BreadBoardStatus status={member?.sendStatus} id={id} />
+            </User>
+          ))}
+          {breadBoard?.members?.map((member) => (
+            <User key={member.id || member.nickname}>
+              <img src={member.avatar || images.logo} />
+              <UserName>{member.nickname}</UserName>
               <BreadBoardPrice price={member.price} id={id} />
               <BreadBoardStatus status={member?.sendStatus} id={id} />
             </User>
@@ -116,7 +130,7 @@ function BreadBoard({ isShown, breadBoard, id }) {
         </Users>
         <User isDelivery>
           <img src={images.delivery} />
-          <div>배달비</div>
+          <UserName>배달비</UserName>
           <BreadBoardPrice price={breadBoard?.deliveryFee} id={id} isDelivery />
         </User>
       </Content>

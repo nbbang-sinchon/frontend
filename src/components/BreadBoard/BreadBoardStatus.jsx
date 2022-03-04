@@ -10,6 +10,7 @@ const Container = styled.div`
   font-size: 5px;
   text-align: center;
   width: 50px;
+  padding-left: 5px;
   ${HOVER_CURSOR_PONTER};
 
   img {
