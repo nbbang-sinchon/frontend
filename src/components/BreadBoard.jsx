@@ -88,20 +88,23 @@ const User = styled.div`
 `;
 
 function BreadBoard({ isShown, breadBoard }) {
+  const getTotal = (breadBoard) =>
+    breadBoard?.members?.reduce((total, member) => total + member.price, 0) + breadBoard.deliveryFee;
+
   return (
     <Container isShown={isShown}>
       <Image src={images.breadBoard} />
       <Content>
         <Info>
           <div>TOTAL</div>
-          <div>{convertPrice(breadBoard.orderPrice)}</div>
+          <div>{convertPrice(getTotal(breadBoard))}</div>
         </Info>
         <Info>
           <input placeholder="은행이름" />
           <input placeholder="계좌번호" />
         </Info>
         <Users>
-          {breadBoard.memberBbangpanDtos?.map((member) => (
+          {breadBoard.members?.map((member) => (
             <User key={member.id || member.nickname}>
               <img src={member.avatar || images.logo} />
               <div>{member.nickname}</div>
@@ -112,7 +115,7 @@ function BreadBoard({ isShown, breadBoard }) {
         <User isDelivery>
           <img src={images.delivery} />
           <div>배달비</div>
-          <BreadBoardPrice price={breadBoard.fee} />
+          <BreadBoardPrice price={breadBoard.deliveryFee} />
         </User>
       </Content>
     </Container>

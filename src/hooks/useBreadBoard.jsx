@@ -7,15 +7,15 @@ function useBreadBoard(id) {
   const toggleBreadBoard = () => setIsShown((prev) => !prev);
 
   useEffect(() => {
-    const fetchPrice = async () => {
-      const URL = `${SERVER_URL}/bbangpans/${id}`;
+    const fetchBreadBoard = async () => {
+      const URL = `${SERVER_URL}/bread-board/${id}`;
       const res = await fetch(URL);
       const json = await res.json();
 
       setBreadBoard(json.data);
     };
 
-    fetchPrice();
+    fetchBreadBoard();
   }, []);
 
   return {
