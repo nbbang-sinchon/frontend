@@ -8,8 +8,8 @@ const Container = styled.div``;
 
 const PartyContainer = styled.div`
   display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
+  flex-flow: column wrap;
+  align-items: center;
 
   @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
     justify-content: center;

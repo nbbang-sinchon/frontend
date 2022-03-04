@@ -9,30 +9,6 @@ import { convertStatus } from '../utils/converter';
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-
-const Column = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
-  a {
-    width: 20px;
-  }
-`;
-
-const StatusContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  justify-content: space-between;
-  align-items: stretch;
-`;
-
-const RowContainer = styled.div`
-  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -41,6 +17,35 @@ const RowContainer = styled.div`
   svg {
     width: 20px;
   }
+`;
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const HashTagRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  width: 180px;
+  overflow: hidden;
+`;
+
+const StatusColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+  align-items: stretch;
 `;
 
 const Title = styled.div`
@@ -55,6 +60,12 @@ const Title = styled.div`
 
   &:hover {
     opacity: 0.8;
+  }
+
+  &:nth-of-type(1) {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 `;
 
@@ -96,15 +107,16 @@ const StatusBtn = styled.button`
 
 function MyParty({ title, hashtags, joinNumber, goalNumber, status, id }) {
   return (
-    <RowContainer>
-      <Container>
+    <Container>
+      <Column>
         <Link to={`parties/${id}`}>
           <Title>{title}</Title>
         </Link>
-
-        <Column>
-          <HashTags hashtags={hashtags} />
-          <Column>
+        <Row>
+          <HashTagRow>
+            <HashTags hashtags={hashtags} />
+          </HashTagRow>
+          <Row>
             <Link to={`parties/${id}`}>
               <icons.DeatilIcon />
             </Link>
@@ -114,16 +126,16 @@ function MyParty({ title, hashtags, joinNumber, goalNumber, status, id }) {
             <Link to="/">
               <icons.DeleteIcon />
             </Link>
-          </Column>
-        </Column>
-      </Container>
-      <Container>
-        <StatusContainer>
+          </Row>
+        </Row>
+      </Column>
+      <Column>
+        <StatusColumn>
           <Status>{convertStatus(status, joinNumber, goalNumber)}</Status>
           <StatusBtn>상태변경</StatusBtn>
-        </StatusContainer>
-      </Container>
-    </RowContainer>
+        </StatusColumn>
+      </Column>
+    </Container>
   );
 }
 
