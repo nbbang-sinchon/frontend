@@ -33,20 +33,20 @@ function useChatUpdate(id, chats, setChats) {
 
   useEffect(() => {
     const pushNewChat = ({ body }) => {
-      setChats((prev) => [...prev, JSON.parse(body)]);
+      setChats((prev) => [...prev, JSON.parse(body).data]);
     };
 
     const connectSocket = async () => {
       if (!socket.connected) {
         await isConnecting;
       }
-      socket.subscribe('/topic/' + id, pushNewChat);
+      socket.subscribe('/topic/chatting/' + id, pushNewChat);
     };
 
     connectSocket();
 
     return () => {
-      socket.unsubscribe('/topic/' + id, pushNewChat);
+      socket.unsubscribe('/topic/chatting/' + id, pushNewChat);
     };
   }, []);
 

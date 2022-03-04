@@ -13,13 +13,13 @@ function useBreadBoardUpdate(id, setBreadBoard) {
       if (!socket.connected) {
         await isConnecting;
       }
-      socket.subscribe('/breadBoard/' + id, updateBreadBoard);
+      socket.subscribe('/topic/breadBoard/' + id, updateBreadBoard);
     };
 
     connectSocket();
 
     return () => {
-      socket.unsubscribe('/breadBoard/' + id, updateBreadBoard);
+      socket.unsubscribe('/topic/breadBoard/' + id, updateBreadBoard);
     };
   }, []);
 
