@@ -6,6 +6,7 @@ import { COLORS, SCROLL_PRIMARY } from '../styles/constants';
 import { convertPrice } from '../utils/converter';
 import BreadBoardPrice from './BreadBoardPrice';
 import BreadBoardAccount from './BreadBoardAccount';
+import BreadBoardStatus from './BreadBoardStatus';
 
 const Container = styled.div`
   position: absolute;
@@ -25,7 +26,7 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
 
-  width: 270px;
+  width: 240px;
   z-index: 1;
   margin: 150px 0 0 80px;
 `;
@@ -60,9 +61,9 @@ const Users = styled.div`
   padding-top: 15px;
   padding-bottom: 20px;
 
-  width: 100%;
+  width: 125%;
   max-height: 200px;
-  padding-right: 15px;
+  padding-right: 10px;
   overflow-y: auto;
   overflow-x: hidden;
 
@@ -109,6 +110,7 @@ function BreadBoard({ isShown, breadBoard, id }) {
               <img src={member.avatar || images.logo} />
               <div>{member.nickname}</div>
               <BreadBoardPrice price={member.price} id={id} />
+              <BreadBoardStatus status={member?.sendStatus} id={id} />
             </User>
           ))}
         </Users>
