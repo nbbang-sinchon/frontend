@@ -5,6 +5,7 @@ import { images } from '../assets/assets';
 import { COLORS, SCROLL_PRIMARY } from '../styles/constants';
 import { convertPrice } from '../utils/converter';
 import BreadBoardPrice from './BreadBoardPrice';
+import BreadBoardAccount from './BreadBoardAccount';
 
 const Container = styled.div`
   position: absolute;
@@ -100,8 +101,7 @@ function BreadBoard({ isShown, breadBoard, id }) {
           <div>{convertPrice(getTotal(breadBoard))}</div>
         </Info>
         <Info>
-          <input placeholder="은행이름" />
-          <input placeholder="계좌번호" />
+          <BreadBoardAccount id={id} bank={breadBoard?.bank} account={breadBoard?.accountNumber} />
         </Info>
         <Users>
           {breadBoard?.members?.map((member) => (
