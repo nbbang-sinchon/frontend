@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Main from '../components/Main';
-import Parties from '../components/Parties';
-import PartyHeader from '../components/PartyHeader';
+import Parties from '../components/Party/Parties';
+import PartyHeader from '../components/Party/PartyHeader';
 import useParty from '../hooks/useParty';
 import usePartyUpdate from '../hooks/usePartyUpdate';
 

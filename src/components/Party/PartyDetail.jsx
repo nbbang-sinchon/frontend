@@ -1,12 +1,8 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import { COLORS } from '../styles/constants';
-
-import HashTags from './HashTags';
-
-import PartyStatus from './PartyStatus';
+import { COLORS } from '../../styles/constants';
+import HashTags from '../HashTags';
 
 const Container = styled.div`
   margin-bottom: 20px;
@@ -28,13 +24,12 @@ const Content = styled.div`
   }
 `;
 
-function PartyDetail({ party, isPartyPage }) {
+function PartyDetail({ party }) {
   if (!party) {
     return <Container />;
   }
   return (
     <Container>
-      <PartyStatus party={party} isPartyPage={isPartyPage} />
       <Title>{party.title}</Title>
       <Content>
         <div>{party.content}</div>
@@ -46,7 +41,6 @@ function PartyDetail({ party, isPartyPage }) {
 
 PartyDetail.propTypes = {
   party: PropTypes.object,
-  isPartyPage: PropTypes.bool,
 };
 
 export default PartyDetail;
