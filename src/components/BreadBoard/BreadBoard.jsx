@@ -119,14 +119,6 @@ function BreadBoard({ isShown, breadBoard, id }) {
               <BreadBoardStatus status={member?.sendStatus} id={id} />
             </User>
           ))}
-          {breadBoard?.members?.map((member) => (
-            <User key={member.id || member.nickname}>
-              <img src={member.avatar || images.logo} />
-              <UserName>{member.nickname}</UserName>
-              <BreadBoardPrice price={member.price} id={id} />
-              <BreadBoardStatus status={member?.sendStatus} id={id} />
-            </User>
-          ))}
         </Users>
         <User isDelivery>
           <img src={images.delivery} />
