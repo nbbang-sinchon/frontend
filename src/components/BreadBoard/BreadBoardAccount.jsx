@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { SERVER_URL } from '../config';
+import { SERVER_URL } from '../../config';
 
 function BreadBoardAccount({ id, bank, account }) {
   const bankRef = useRef();

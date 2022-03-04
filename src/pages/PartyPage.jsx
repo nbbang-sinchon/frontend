@@ -2,12 +2,12 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Main from '../components/Main';
-import PartyDetail from '../components/PartyDetail';
-import Parties from '../components/Parties';
+import PartyDetail from '../components/Party/PartyDetail';
+import Parties from '../components/Party/Parties';
 import Footer from '../components/Footer';
-import PartyHeader from '../components/PartyHeader';
+import PartyHeader from '../components/Party/PartyHeader';
 import usePartyDetail from '../hooks/usePartyDetail';
-import PartyDetailHeader from '../components/PartyDetailHeader';
+import PartyDetailHeader from '../components/Party/PartyDetailHeader';
 
 function PartyPage() {
   const { id } = useParams();

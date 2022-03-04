@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { images } from '../assets/assets';
-import { COLORS, SCROLL_PRIMARY } from '../styles/constants';
-import { convertPrice } from '../utils/converter';
+import { images } from '../../assets/assets';
+import { COLORS, SCROLL_PRIMARY } from '../../styles/constants';
+import { convertPrice } from '../../utils/converter';
 import BreadBoardPrice from './BreadBoardPrice';
 import BreadBoardAccount from './BreadBoardAccount';
 import BreadBoardStatus from './BreadBoardStatus';

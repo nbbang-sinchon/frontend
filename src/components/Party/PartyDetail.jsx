@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { COLORS } from '../styles/constants';
-import HashTags from './HashTags';
+import { COLORS } from '../../styles/constants';
+import HashTags from '../HashTags';
 
 const Container = styled.div`
   margin-bottom: 20px;

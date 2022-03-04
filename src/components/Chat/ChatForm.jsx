@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import { COLORS, HOVER_CURSOR_PONTER, SCROLL_PRIMARY } from '../styles/constants';
-import { icons } from '../assets/assets';
-import { SERVER_URL } from '../config';
+import { COLORS, HOVER_CURSOR_PONTER, SCROLL_PRIMARY } from '../../styles/constants';
+import { icons } from '../../assets/assets';
+import { SERVER_URL } from '../../config';
 
 const Container = styled.div`
   display: flex;

@@ -1,9 +1,9 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { images } from '../assets/assets';
-import { COLORS } from '../styles/constants';
-import { convertDateToTime } from '../utils/converter';
+import { images } from '../../assets/assets';
+import { COLORS } from '../../styles/constants';
+import { convertDateToTime } from '../../utils/converter';
 
 const Container = styled.div`
   display: flex;

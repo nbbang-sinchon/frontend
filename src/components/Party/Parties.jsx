@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Party from './Party';
-import { SIZES } from '../styles/constants';
+import { SIZES } from '../../styles/constants';
 
 const Container = styled.div``;
 

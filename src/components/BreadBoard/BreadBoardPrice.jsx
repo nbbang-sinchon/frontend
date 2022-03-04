@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { convertPrice } from '../utils/converter';
-import { SERVER_URL } from '../config';
+import { convertPrice } from '../../utils/converter';
+import { SERVER_URL } from '../../config';
 
 const Input = styled.input`
   display: flex;

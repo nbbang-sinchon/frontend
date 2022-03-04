@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Chat from './Chat';
-import { SCROLL_PRIMARY } from '../styles/constants';
+import { SCROLL_PRIMARY } from '../../styles/constants';
 
 const Container = styled.div`
   display: flex;

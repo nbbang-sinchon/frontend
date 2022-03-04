@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { icons, images } from '../assets/assets';
-import { HOVER_CURSOR_PONTER } from '../styles/constants';
-import { SERVER_URL } from '../config';
+import { icons, images } from '../../assets/assets';
+import { HOVER_CURSOR_PONTER } from '../../styles/constants';
+import { SERVER_URL } from '../../config';
 
 const Container = styled.div`
   position: relative;

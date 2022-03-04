@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { icons } from '../assets/assets';
-import { COLORS, HOVER_CURSOR_PONTER, SIZES } from '../styles/constants';
-import plainButton from '../styles/plainButton';
 import { Link } from 'react-router-dom';
+import { icons } from '../../assets/assets';
+import { COLORS, HOVER_CURSOR_PONTER, SIZES } from '../../styles/constants';
+import plainButton from '../../styles/plainButton';
 
 const Container = styled.div`
   display: flex;

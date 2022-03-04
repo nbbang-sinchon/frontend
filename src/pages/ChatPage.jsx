@@ -1,11 +1,11 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import BreadBoard from '../components/BreadBoard';
-import ChatForm from '../components/ChatForm';
-import Chats from '../components/Chats';
+import BreadBoard from '../components/BreadBoard/BreadBoard';
+import ChatForm from '../components/Chat/ChatForm';
+import Chats from '../components/Chat/Chats';
 import Header from '../components/Header';
 import Main from '../components/Main';
-import PartyDetailHeader from '../components/PartyDetailHeader';
+import PartyDetailHeader from '../components/Party/PartyDetailHeader';
 import useBreadBoard from '../hooks/useBreadBoard';
 import useBreadBoardUpdate from '../hooks/useBreadBoardUpdate';
 import useChat from '../hooks/useChat';
