@@ -16,7 +16,7 @@ const Container = styled.div`
 
   &:hover {
     cursor: pointer;
-    background-color: ${COLORS.PRIMARY2};
+    opacity: 0.8;
   }
 `;
 
@@ -43,19 +43,6 @@ const InnerContainer = styled.div`
     ${HOVER_CURSOR_PONTER};
 `;
 
-const Title = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  padding: 15px;
-  margin-bottom: 5px;
-  color: ${COLORS.BLACK};
-  font-size: 18px;
-  font-weight: bolder;
-  background: ${COLORS.PRIMARY};
-  border-radius: 10px;
-`;
-
 const TitleColumn = styled.div`
   align-items: center;
 
@@ -67,26 +54,6 @@ const TitleColumn = styled.div`
 
   svg {
     transform: scale(1.2, 1.2);
-  }
-`;
-
-const Status = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  width: 100px;
-  padding: 5px 10px;
-  color: ${COLORS.WHITE};
-  font-size: 12px;
-  font-weight: 500;
-  background: ${COLORS.PRIMARY};
-  border-radius: 10px;
-  white-space: nowrap;
-
-  > div:last-of-type {
-    font-size: 16px;
   }
 `;
 
@@ -107,11 +74,44 @@ const Info = styled.div`
   }
 `;
 
-function Party({ title, hashtags, place, createTime, joinNumber, goalNumber, status, id }) {
+const Title = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  padding: 15px;
+  margin-bottom: 5px;
+  color: ${COLORS.BLACK};
+  font-size: 18px;
+  font-weight: bolder;
+  background: ${(props) => props.color};
+  border-radius: 10px;
+`;
+
+const Status = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100px;
+  padding: 5px 10px;
+  color: ${COLORS.WHITE};
+  font-size: 12px;
+  font-weight: 500;
+  background: ${(props) => props.color};
+  border-radius: 10px;
+  white-space: nowrap;
+
+  > div:last-of-type {
+    font-size: 16px;
+  }
+`;
+
+function Party({ title, hashtags, place, createTime, joinNumber, goalNumber, status, id, color }) {
   return (
     <Container>
       <Link to={'/parties/' + id}>
-        <Title>
+        <Title color={color}>
           <TitleColumn>{title}</TitleColumn>
           <TitleColumn>
             <icons.HeartIcon />
@@ -120,7 +120,7 @@ function Party({ title, hashtags, place, createTime, joinNumber, goalNumber, sta
       </Link>
       <Content>
         <InnerContainer>
-          <HashTags hashtags={hashtags} />
+          <HashTags hashtags={hashtags} color={color} />
           <Info>
             <icons.LocationIcon />
             <div>{convertPlace(place)}</div>
@@ -128,7 +128,7 @@ function Party({ title, hashtags, place, createTime, joinNumber, goalNumber, sta
             <div>{convertDate(createTime)}</div>
           </Info>
         </InnerContainer>
-        <Status>
+        <Status color={color}>
           <div>
             {joinNumber} / {goalNumber} 명
           </div>
@@ -148,6 +148,7 @@ Party.propTypes = {
   goalNumber: PropTypes.number.isRequired,
   status: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
+  color: PropTypes.string.isRequired,
 };
 
 export default Party;

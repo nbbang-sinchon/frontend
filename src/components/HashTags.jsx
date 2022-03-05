@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { COLORS } from '../styles/constants';
 
 const Container = styled.div`
   position: relative;
@@ -16,18 +15,20 @@ const Tag = styled.div`
   height: 20px;
   margin: 2px;
   padding: 0 7px;
-  color: ${COLORS.PRIMARY};
-  border: 1px solid ${COLORS.PRIMARY};
+  color: ${(props) => props.color};
+  border: 1px solid ${(props) => props.color};
   border-radius: 3px;
   font-size: 12px;
   white-space: nowrap;
 `;
 
-function HashTags({ hashtags }) {
+function HashTags({ hashtags, color }) {
   return (
     <Container>
       {hashtags.map((tag) => (
-        <Tag key={tag}>{'#' + tag}</Tag>
+        <Tag key={tag} color={color}>
+          {'#' + tag}
+        </Tag>
       ))}
     </Container>
   );
@@ -35,6 +36,7 @@ function HashTags({ hashtags }) {
 
 HashTags.propTypes = {
   hashtags: PropTypes.arrayOf(PropTypes.string),
+  color: PropTypes.string,
 };
 
 export default HashTags;
