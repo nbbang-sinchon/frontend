@@ -67,6 +67,21 @@ const Time = styled.div`
   margin: 0 5px;
 `;
 
+const InfoColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+`;
+
+const NotRead = styled.div`
+  display: flex;
+  justify-content: ${(props) => (props.isSender ? 'flex-end' : 'flex-start')};
+
+  font-size: 12px;
+  color: ${COLORS.PRIMARY};
+  margin: 0 5px;
+`;
+
 const Chat = forwardRef(({ chat, isContinuous }, ref) => {
   if (chat.type === 'EXIT' || chat.type === 'ENTER') {
     return (
@@ -84,7 +99,10 @@ const Chat = forwardRef(({ chat, isContinuous }, ref) => {
         <Content>
           <InnerContent isSender={chat.isSender}>{chat.content}</InnerContent>
         </Content>
-        <Time>{convertDateToTime(chat.createTime)}</Time>
+        <InfoColumn>
+          <NotRead isSender={chat.isSender}>{chat.notReadNumber || ''}</NotRead>
+          <Time>{convertDateToTime(chat.createTime)}</Time>
+        </InfoColumn>
       </Container>
     );
   }
@@ -95,7 +113,10 @@ const Chat = forwardRef(({ chat, isContinuous }, ref) => {
         {!chat.isSender && <Nickname>{chat.sender.nickname}</Nickname>}
         <InnerContent isSender={chat.isSender}>{chat.content}</InnerContent>
       </Content>
-      <Time>{convertDateToTime(chat.createTime)}</Time>
+      <InfoColumn>
+        <NotRead isSender={chat.isSender}>{chat.notReadNumber || ''}</NotRead>
+        <Time>{convertDateToTime(chat.createTime)}</Time>
+      </InfoColumn>
     </Container>
   );
 });
