@@ -110,7 +110,7 @@ function MyParty({ title, hashtags, joinNumber, goalNumber, status, id, color })
   return (
     <Container>
       <Column>
-        <Link to={`/parties/${id}`}>
+        <Link to={`/chats/${id}`}>
           <Title color={color}>{title}</Title>
         </Link>
         <Row>
