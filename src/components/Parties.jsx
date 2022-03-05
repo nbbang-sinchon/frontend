@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Party from './Party';
-import { SIZES } from '../styles/constants';
+import { SIZES, PARTY_COLORS } from '../styles/constants';
 
 const Container = styled.div``;
 
@@ -37,19 +37,23 @@ function Parties({ parties, detectorRef }) {
   return (
     <Container>
       <PartyContainer>
-        {parties.map((party) => (
-          <Party
-            key={party.id}
-            title={party.title}
-            hashtags={party.hashtags}
-            place={party.place}
-            createTime={party.createTime}
-            status={party.status}
-            joinNumber={party.joinNumber}
-            goalNumber={party.goalNumber}
-            id={party.id}
-          />
-        ))}
+        {parties.map((party) => {
+          const color = PARTY_COLORS[Math.floor(Math.random() * PARTY_COLORS.length)];
+          return (
+            <Party
+              key={party.id}
+              title={party.title}
+              hashtags={party.hashtags}
+              place={party.place}
+              createTime={party.createTime}
+              status={party.status}
+              joinNumber={party.joinNumber}
+              goalNumber={party.goalNumber}
+              id={party.id}
+              color={color}
+            />
+          );
+        })}
         <div ref={detectorRef} />
       </PartyContainer>
     </Container>
