@@ -6,7 +6,8 @@ import plainButton from '../styles/plainButton';
 
 const Container = styled.header`
   display: flex;
-  align-items: space-between;
+  justify-content: space-between;
+  align-items: center;
   font-size: 25px;
 
   padding: 10px 30px;
@@ -21,16 +22,15 @@ const Container = styled.header`
 `;
 
 const ChangeBtn = styled(plainButton)`
-  font-size: 15px;
-  font-weight: 400;
-  margin-left: 10px;
+  font-size: 20px;
+  font-weight: 500;
 `;
 
-function MyPartyHeader({ header, onClick }) {
+function MyPartyHeader({ header, onClick, toggle }) {
   return (
     <Container>
       {header}
-      <ChangeBtn onClick={onClick}>변경</ChangeBtn>
+      <ChangeBtn onClick={onClick}>{toggle ? '종료된 파티' : '참여 중인 파티'}</ChangeBtn>
     </Container>
   );
 }
@@ -38,6 +38,7 @@ function MyPartyHeader({ header, onClick }) {
 export default MyPartyHeader;
 
 MyPartyHeader.propTypes = {
-  header: PropTypes.string,
-  onClick: PropTypes.func,
+  header: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  toggle: PropTypes.bool.isRequired,
 };
