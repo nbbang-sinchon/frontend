@@ -18,11 +18,14 @@ import bread from './images/bread.png';
 import kakao from './images/Kakao.png';
 import naver from './images/Naver.png';
 import google from './images/Google.png';
+import breadBoard from './images/bread-board.png';
+import delivery from './images/delivery.png';
 import member1 from './images/member1.png';
 import member2 from './images/member2.png';
 import member3 from './images/member3.png';
 
-const images = { logo, bread, kakao, naver, google, member1, member2, member3 };
+const images = { logo, bread, kakao, naver, google, breadBoard, delivery, member1, member2, member3 };
+
 const icons = {
   NotificationIcon,
   PartyIcon,

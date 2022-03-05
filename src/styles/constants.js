@@ -36,6 +36,7 @@ const SCROLL_PRIMARY = `
   }
   &::-webkit-scrollbar-track {
     background-color: ${COLORS.GRAY};
+  }
 `;
 
 const PARTY_COLORS = ['#FFA978', '#FAC05E', '#F79D5C', '#F4AC45'];

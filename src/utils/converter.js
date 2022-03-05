@@ -83,4 +83,6 @@ const convertOptionToParam = (option) => {
   return params;
 };
 
-export { convertPlace, convertDate, convertStatus, convertDateToTime, convertOptionToParam };
+const convertPrice = (priceString) => Number(priceString).toLocaleString() + '원';
+
+export { convertPlace, convertDate, convertStatus, convertDateToTime, convertOptionToParam, convertPrice };
