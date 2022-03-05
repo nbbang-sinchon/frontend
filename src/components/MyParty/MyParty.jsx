@@ -2,10 +2,10 @@ import styled from '@emotion/styled';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { icons } from '../assets/assets';
-import { COLORS, SIZES, HOVER_CURSOR_PONTER } from '../styles/constants';
-import HashTags from './HashTags';
-import { convertStatus } from '../utils/converter';
+import { icons } from '../../assets/assets';
+import { COLORS, SIZES, HOVER_CURSOR_PONTER } from '../../styles/constants';
+import HashTags from '../HashTags';
+import { convertStatus } from '../../utils/converter';
 
 const Container = styled.div`
   display: flex;

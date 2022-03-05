@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { images } from '../assets/assets';
-import { COLORS, HOVER_CURSOR_PONTER } from '../styles/constants';
+import { images } from '../../assets/assets';
+import { COLORS, HOVER_CURSOR_PONTER } from '../../styles/constants';
 
 const Container = styled.div`
   display: flex;

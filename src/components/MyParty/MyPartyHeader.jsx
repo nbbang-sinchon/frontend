@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { COLORS, SIZES } from '../styles/constants';
-import plainButton from '../styles/plainButton';
+import { COLORS, SIZES } from '../../styles/constants';
+import plainButton from '../../styles/plainButton';
 
 const Container = styled.header`
   display: flex;

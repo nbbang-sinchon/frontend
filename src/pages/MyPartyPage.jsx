@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Main2 from '../components/Main2';
-import MyParties from '../components/MyParties';
-import MyPartyHeader from '../components/MyPartyHeader';
-import MyClosedParties from '../components/MyClosedparties';
+import MyParties from '../components/MyParty/MyParties';
+import MyPartyHeader from '../components/MyParty/MyPartyHeader';
+import MyClosedParties from '../components/MyParty/MyClosedparties';
 import useMyParty from '../hooks/useMyParty';
 
 function MyPartyPage() {

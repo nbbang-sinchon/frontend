@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import PropTypes from 'prop-types';
-import MyClosedParty from './MyClosedParty';
-import { SIZES } from '../styles/constants';
+import MyParty from './MyParty';
+import { SIZES, PARTY_COLORS } from '../../styles/constants';
 
 const Container = styled.div``;
 
@@ -33,20 +33,32 @@ const PartyContainer = styled.div`
   }
 `;
 
-function MyClosedParties({ parties }) {
+function MyParties({ parties }) {
   return (
     <Container>
       <PartyContainer>
         {parties.map((party) => {
-          return <MyClosedParty key={party.id} title={party.title} />;
+          const color = PARTY_COLORS[Math.floor(Math.random() * PARTY_COLORS.length)];
+          return (
+            <MyParty
+              key={party.id}
+              title={party.title}
+              hashtags={party.hashtags}
+              status={party.status}
+              joinNumber={party.joinNumber}
+              goalNumber={party.goalNumber}
+              id={party.id}
+              color={color}
+            />
+          );
         })}
       </PartyContainer>
     </Container>
   );
 }
 
-MyClosedParties.propTypes = {
+MyParties.propTypes = {
   parties: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default MyClosedParties;
+export default MyParties;
