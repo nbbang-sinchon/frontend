@@ -53,7 +53,7 @@ const Title = styled.div`
   font-size: 30px;
   width: 200px;
 
-  background: ${COLORS.PRIMARY};
+  background: ${(props) => props.color};
   border-radius: 10px;
 
   ${HOVER_CURSOR_PONTER}
@@ -78,7 +78,7 @@ const Status = styled.div`
   font-size: 25px;
   text-align: center;
 
-  background: ${COLORS.PRIMARY};
+  background: ${(props) => props.color};
   border-radius: 5px;
   margin-bottom: 5px;
 `;
@@ -87,17 +87,18 @@ const StatusBtn = styled.button`
   margin-left: 10px;
 
   padding: 5px 10px;
-  color: ${COLORS.PRIMARY};
+  color: ${(props) => props.color};
   font-size: 15px;
   text-align: center;
 
   background: ${COLORS.WHITE};
-  border: 1px solid ${COLORS.PRIMARY};
+  border: 1px solid ${(props) => props.color};
   border-radius: 5px;
   ${HOVER_CURSOR_PONTER}
 
   &:hover {
-    background-color: ${COLORS.PRIMARY2};
+    background-color: ${(props) => props.color};
+    color: ${COLORS.WHITE};
   }
 
   @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
@@ -105,22 +106,22 @@ const StatusBtn = styled.button`
   }
 `;
 
-function MyParty({ title, hashtags, joinNumber, goalNumber, status, id }) {
+function MyParty({ title, hashtags, joinNumber, goalNumber, status, id, color }) {
   return (
     <Container>
       <Column>
-        <Link to={`parties/${id}`}>
-          <Title>{title}</Title>
+        <Link to={`/parties/${id}`}>
+          <Title color={color}>{title}</Title>
         </Link>
         <Row>
           <HashTagRow>
-            <HashTags hashtags={hashtags} />
+            <HashTags hashtags={hashtags} color={color} />
           </HashTagRow>
           <Row>
-            <Link to={`parties/${id}`}>
+            <Link to={`/parties/${id}`}>
               <icons.DeatilIcon />
             </Link>
-            <Link to={`newparty/${id}`}>
+            <Link to={`/newparty/${id}`}>
               <icons.EditIcon />
             </Link>
             <Link to="/">
@@ -131,8 +132,8 @@ function MyParty({ title, hashtags, joinNumber, goalNumber, status, id }) {
       </Column>
       <Column>
         <StatusColumn>
-          <Status>{convertStatus(status, joinNumber, goalNumber)}</Status>
-          <StatusBtn>상태변경</StatusBtn>
+          <Status color={color}>{convertStatus(status, joinNumber, goalNumber)}</Status>
+          <StatusBtn color={color}>상태변경</StatusBtn>
         </StatusColumn>
       </Column>
     </Container>
@@ -148,4 +149,5 @@ MyParty.propTypes = {
   goalNumber: PropTypes.number.isRequired,
   status: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
+  color: PropTypes.string.isRequired,
 };
