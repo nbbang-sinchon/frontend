@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { COLORS, HOVER_CURSOR_PONTER, SCROLL_PRIMARY } from '../../styles/constants';
 import { icons } from '../../assets/assets';
 import { SERVER_URL } from '../../config';
+import ChatUploadImage from './ChatUploadImage';
 
 const Container = styled.div`
   display: flex;
@@ -69,7 +70,7 @@ const Button = styled.input`
   ${HOVER_CURSOR_PONTER};
 `;
 
-function ChatForm({ partyId }) {
+function ChatForm({ id }) {
   const [chatLength, setChatLength] = useState(0);
   const chatRef = useRef();
   const submitRef = useRef();
@@ -88,7 +89,7 @@ function ChatForm({ partyId }) {
       return;
     }
 
-    fetch(`${SERVER_URL}/chats/${partyId}`, {
+    fetch(`${SERVER_URL}/chats/${id}`, {
       method: 'POST',
       mode: 'cors',
       headers: { 'Content-Type': 'application/json' },
@@ -123,7 +124,7 @@ function ChatForm({ partyId }) {
         <FormMenu>
           <FormColumn>
             <icons.LocationIcon />
-            <icons.PictureIcon />
+            <ChatUploadImage id={id} />
           </FormColumn>
           <FormColumn>
             <ChatCounter>{chatLength + '자'}</ChatCounter>
@@ -136,7 +137,7 @@ function ChatForm({ partyId }) {
 }
 
 ChatForm.propTypes = {
-  partyId: PropTypes.string,
+  id: PropTypes.string,
 };
 
 export default ChatForm;

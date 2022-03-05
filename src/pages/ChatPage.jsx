@@ -24,7 +24,7 @@ function ChatPage() {
       <Main background="LIGHT_GRAY" fitHeight>
         <PartyDetailHeader party={party} toggleBreadBoard={toggleBreadBoard} />
         <Chats chats={chats} detectorRef={detectorRef} />
-        <ChatForm partyId={id} />
+        <ChatForm id={id} />
       </Main>
       <BreadBoard isShown={isShown} party={party} breadBoard={breadBoard} id={id} />
     </>
