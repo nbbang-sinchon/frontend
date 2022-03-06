@@ -39,8 +39,9 @@ const StatusColumn = styled.div`
   }
 
   svg {
-    margin-right: 30px;
-    transform: scale(1.8, 1.8);
+    padding: 0 5px;
+    width: 40px;
+    height: 40px;
 
     path {
       fill: ${COLORS.PRIMARY};
@@ -49,8 +50,9 @@ const StatusColumn = styled.div`
     ${HOVER_CURSOR_PONTER};
 
     @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
-      transform: scale(1.5, 1.5);
-      margin-right: 15px;
+      padding: 0;
+      width: 32px;
+      height: 32px;
     }
   }
 `;
@@ -128,8 +130,8 @@ function PartyDetailHeader({ party, isPartyPage, toggleMenu }) {
           </Link>
         )) || (
           <>
+            <icons.MenuIcon onClick={toggleMenu('CHATMENU')} />
             <Image src={images.bread} onClick={toggleMenu('BREADBOARD')} />{' '}
-            <Image src={images.bread} onClick={toggleMenu('CHATMENU')} />
           </>
         )}
       </StatusColumn>
