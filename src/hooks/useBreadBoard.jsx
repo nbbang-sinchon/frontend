@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react';
 import { SERVER_URL } from '../config';
 
 function useBreadBoard(id) {
-  const [isShown, setIsShown] = useState(false);
+  const [isBreadBoardShown, setIsBreadBoardShown] = useState(false);
   const [breadBoard, setBreadBoard] = useState({});
-  const toggleBreadBoard = () => setIsShown((prev) => !prev);
 
   useEffect(() => {
     const fetchBreadBoard = async () => {
@@ -19,8 +18,8 @@ function useBreadBoard(id) {
   }, []);
 
   return {
-    isShown,
-    toggleBreadBoard,
+    isBreadBoardShown,
+    setIsBreadBoardShown,
     breadBoard,
     setBreadBoard,
   };
