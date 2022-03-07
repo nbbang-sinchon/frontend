@@ -36,6 +36,7 @@ const Info = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  width: 100%;
   font-weight: bold;
   font-size: 20px;
   border-bottom: 1px solid ${COLORS.GRAY};
@@ -44,16 +45,6 @@ const Info = styled.div`
 
   > div:first-of-type {
     font-size: 16px;
-  }
-
-  > input {
-    font-size: 16px;
-    width: 35%;
-
-    &:last-of-type {
-      text-align: right;
-      width: 65%;
-    }
   }
 `;
 
@@ -76,7 +67,6 @@ const User = styled.div`
 
   width: ${(props) => (props.isDelivery ? '125%' : '100%')};
   padding: 10px 0;
-  border-top: ${(props) => props.isDelivery && `1px solid ${COLORS.GRAY}`};
   padding-top: ${(props) => props.isDelivery && `20px`};
   white-space: pre-wrap;
 
@@ -88,6 +78,12 @@ const User = styled.div`
     border: ${(props) => !props.isDelivery && `1px solid ${COLORS.PRIMARY}`};
     box-sizing: border-box;
   }
+`;
+
+const Bar = styled.span`
+  width: 100%;
+  height: 1px;
+  background-color: ${COLORS.GRAY};
 `;
 
 const UserName = styled.div`
@@ -125,6 +121,7 @@ function BreadBoard({ isShown, breadBoard, id }) {
             </User>
           ))}
         </Users>
+        <Bar />
         <User isDelivery>
           <img src={images.delivery} />
           <UserName>배달비</UserName>
