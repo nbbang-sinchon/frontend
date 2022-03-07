@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { images } from '../../assets/assets';
 import { COLORS, SCROLL_PRIMARY } from '../../styles/constants';
@@ -74,10 +74,11 @@ const User = styled.div`
   display: flex;
   align-items: center;
 
-  width: 100%;
+  width: ${(props) => (props.isDelivery ? '125%' : '100%')};
   padding: 10px 0;
   border-top: ${(props) => props.isDelivery && `1px solid ${COLORS.GRAY}`};
   padding-top: ${(props) => props.isDelivery && `20px`};
+  white-space: pre-wrap;
 
   > img {
     width: 40px;
@@ -96,8 +97,12 @@ const UserName = styled.div`
 `;
 
 function BreadBoard({ isShown, breadBoard, id }) {
+  const [isNbbanged, setIsNbbanged] = useState(true);
+
   const getTotal = (breadBoard) =>
     breadBoard?.members?.reduce((total, member) => total + member.price, 0) + breadBoard?.deliveryFee;
+
+  const getPrice = (price) => price + (isNbbanged ? breadBoard.deliveryFee / breadBoard.members.length : 0);
 
   return (
     <Container isShown={isShown}>
@@ -115,7 +120,7 @@ function BreadBoard({ isShown, breadBoard, id }) {
             <User key={member.id || member.nickname}>
               <img src={member.avatar || images.logo} />
               <UserName>{member.nickname}</UserName>
-              <BreadBoardPrice price={member.price} id={id} />
+              <BreadBoardPrice price={getPrice(member.price)} id={id} />
               <BreadBoardStatus status={member?.sendStatus} id={id} />
             </User>
           ))}
@@ -124,6 +129,7 @@ function BreadBoard({ isShown, breadBoard, id }) {
           <img src={images.delivery} />
           <UserName>배달비</UserName>
           <BreadBoardPrice price={breadBoard?.deliveryFee} id={id} isDelivery />
+          <BreadBoardStatus status={isNbbanged} setIsNbbanged={setIsNbbanged} isDelivery />
         </User>
       </Content>
     </Container>
