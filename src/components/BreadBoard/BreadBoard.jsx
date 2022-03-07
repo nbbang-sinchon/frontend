@@ -11,7 +11,7 @@ import BreadBoardStatus from './BreadBoardStatus';
 const Container = styled.div`
   position: absolute;
   top: 200px;
-  right: ${(props) => (props.isShown && '-40px') || '-500px'};
+  right: ${(props) => (props.isVisible && '-40px') || '-500px'};
   transition: right ease-in-out 0.3s;
   width: 500px;
 `;
@@ -92,7 +92,7 @@ const UserName = styled.div`
   padding: 0 10px;
 `;
 
-function BreadBoard({ isShown, breadBoard, id }) {
+function BreadBoard({ isVisible, breadBoard, id }) {
   const [isNbbanged, setIsNbbanged] = useState(true);
 
   const getTotal = (breadBoard) =>
@@ -101,7 +101,7 @@ function BreadBoard({ isShown, breadBoard, id }) {
   const getPrice = (price) => price + (isNbbanged ? breadBoard.deliveryFee / breadBoard.members.length : 0);
 
   return (
-    <Container isShown={isShown}>
+    <Container isVisible={isVisible}>
       <Image src={images.breadBoard} />
       <Content>
         <Info>
@@ -134,7 +134,7 @@ function BreadBoard({ isShown, breadBoard, id }) {
 }
 
 BreadBoard.propTypes = {
-  isShown: PropTypes.bool,
+  isVisible: PropTypes.bool,
   breadBoard: PropTypes.object,
   id: PropTypes.string,
 };

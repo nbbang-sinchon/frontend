@@ -7,7 +7,7 @@ import plainButton from '../../styles/plainButton';
 const Container = styled.div`
   position: absolute;
   top: 200px;
-  right: ${(props) => (props.isShown && '-40px') || '-500px'};
+  right: ${(props) => (props.isVisible && '-40px') || '-500px'};
   transition: right ease-in-out 0.3s;
   width: 500px;
 `;
@@ -30,9 +30,9 @@ const Menu = styled(plainButton)`
   margin-bottom: 25px;
 `;
 
-function ChatMenu({ isShown }) {
+function ChatMenu({ isVisible }) {
   return (
-    <Container isShown={isShown}>
+    <Container isVisible={isVisible}>
       <Image src={images.breadBoard} />
       <Content>
         <Menu>파티 나가기</Menu>
@@ -46,7 +46,7 @@ function ChatMenu({ isShown }) {
 }
 
 ChatMenu.propTypes = {
-  isShown: PropTypes.bool,
+  isVisible: PropTypes.bool,
 };
 
 export default ChatMenu;

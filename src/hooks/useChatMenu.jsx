@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 function useChatMenu() {
-  const [isChatMenuShown, setIsChatMenuShown] = useState(false);
+  const [isChatMenuVisible, setIsChatMenuVisible] = useState(false);
 
-  return { isChatMenuShown, setIsChatMenuShown };
+  return { isChatMenuVisible, setIsChatMenuVisible };
 }
 
 export default useChatMenu;

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { SERVER_URL } from '../config';
 
 function useBreadBoard(id) {
-  const [isBreadBoardShown, setIsBreadBoardShown] = useState(false);
+  const [isBreadBoardVisible, setIsBreadBoardVisible] = useState(false);
   const [breadBoard, setBreadBoard] = useState({});
 
   useEffect(() => {
@@ -18,8 +18,8 @@ function useBreadBoard(id) {
   }, []);
 
   return {
-    isBreadBoardShown,
-    setIsBreadBoardShown,
+    isBreadBoardVisible,
+    setIsBreadBoardVisible,
     breadBoard,
     setBreadBoard,
   };

@@ -18,10 +18,10 @@ function ChatPage() {
   const { id } = useParams();
   const { party, chats, setChats } = useChat(id);
   const detectorRef = useChatUpdate(id, chats, setChats);
-  const { isBreadBoardShown, setIsBreadBoardShown, breadBoard, setBreadBoard } = useBreadBoard(id);
+  const { isBreadBoardVisible, setIsBreadBoardVisible, breadBoard, setBreadBoard } = useBreadBoard(id);
   useBreadBoardUpdate(id, setBreadBoard);
-  const { isChatMenuShown, setIsChatMenuShown } = useChatMenu();
-  const toggleMenu = useToggleMenu({ BREADBOARD: setIsBreadBoardShown, CHATMENU: setIsChatMenuShown });
+  const { isChatMenuVisible, setIsChatMenuVisible } = useChatMenu();
+  const toggleMenu = useToggleMenu({ BREADBOARD: setIsBreadBoardVisible, CHATMENU: setIsChatMenuVisible });
 
   return (
     <>
@@ -31,8 +31,8 @@ function ChatPage() {
         <Chats chats={chats} detectorRef={detectorRef} />
         <ChatForm id={id} />
       </Main>
-      <BreadBoard isShown={isBreadBoardShown} party={party} breadBoard={breadBoard} id={id} />
-      <ChatMenu isShown={isChatMenuShown} />
+      <BreadBoard isVisible={isBreadBoardVisible} party={party} breadBoard={breadBoard} id={id} />
+      <ChatMenu isVisible={isChatMenuVisible} />
     </>
   );
 }
