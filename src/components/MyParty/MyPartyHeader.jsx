@@ -26,10 +26,10 @@ const ChangeBtn = styled(plainButton)`
   font-weight: 500;
 `;
 
-function MyPartyHeader({ header, onClick, toggle }) {
+function MyPartyHeader({ onClick, toggle }) {
   return (
     <Container>
-      {header}
+      {toggle ? '참여 중인 파티' : '종료된 파티'}
       <ChangeBtn onClick={onClick}>{toggle ? '종료된 파티' : '참여 중인 파티'}</ChangeBtn>
     </Container>
   );
@@ -38,7 +38,6 @@ function MyPartyHeader({ header, onClick, toggle }) {
 export default MyPartyHeader;
 
 MyPartyHeader.propTypes = {
-  header: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   toggle: PropTypes.bool.isRequired,
 };
