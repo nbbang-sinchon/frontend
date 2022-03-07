@@ -18,12 +18,12 @@ function MyPartyPage() {
       <Main2>
         {isOnGoing ? (
           <>
-            <MyPartyHeader header={'참여 중인 파티 목록'} onClick={toggleParties} toggle={isOnGoing} />
+            <MyPartyHeader onClick={toggleParties} toggle={isOnGoing} />
             <MyParties parties={parties} />
           </>
         ) : (
           <>
-            <MyPartyHeader header={'종료된 파티'} onClick={toggleParties} toggle={isOnGoing} />
+            <MyPartyHeader onClick={toggleParties} toggle={isOnGoing} />
             <MyClosedParties parties={parties} />
           </>
         )}
