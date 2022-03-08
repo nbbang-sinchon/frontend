@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { images } from '../assets/assets';
-import { FRONT_URL } from '../config';
+import { SERVER_URL } from '../config';
 import { COLORS, HOVER_CURSOR_PONTER, SIZES } from '../styles/constants';
 
 function MyPageHeader() {
@@ -75,11 +75,13 @@ function MyPageHeader() {
 
   const navigate = useNavigate();
 
-  const onClick = () => {
-    fetch(`${FRONT_URL}/logout`).then((response) => {
-      if (response.status == 200) {
-        navigate('/');
-      }
+  const onClick = async () => {
+    navigate('/');
+
+    fetch(`${SERVER_URL}/gologout/`, {
+      method: 'POST',
+      mode: 'cors',
+      credentials: 'include',
     });
   };
 
