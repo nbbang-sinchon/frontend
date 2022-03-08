@@ -1,6 +1,34 @@
 import React, { useEffect, useRef } from 'react';
+import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { SERVER_URL } from '../../config';
+import { icons } from '../../assets/assets';
+import { HOVER_CURSOR_PONTER } from '../../styles/constants';
+
+const Container = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  > input {
+    font-size: 16px;
+    width: 35%;
+
+    &:last-of-type {
+      text-align: right;
+      width: 65%;
+    }
+  }
+
+  svg {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    right: -45px;
+    ${HOVER_CURSOR_PONTER};
+  }
+`;
 
 function BreadBoardAccount({ id, bank, account }) {
   const bankRef = useRef();
@@ -61,7 +89,7 @@ function BreadBoardAccount({ id, bank, account }) {
   }, [bank, account]);
 
   return (
-    <>
+    <Container>
       <input
         placeholder="은행이름"
         ref={bankRef}
@@ -78,9 +106,9 @@ function BreadBoardAccount({ id, bank, account }) {
         onInput={checkAccount}
         onBlur={submitAccount}
         onKeyDown={checkEnter}
-        onClick={copyAccount}
       />
-    </>
+      <icons.CopyIcon onClick={copyAccount} />
+    </Container>
   );
 }
 

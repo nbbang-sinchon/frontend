@@ -12,7 +12,8 @@ import { ReactComponent as PictureIcon } from './icons/picture.svg';
 import { ReactComponent as EditIcon } from './icons/edit.svg';
 import { ReactComponent as DeleteIcon } from './icons/delete.svg';
 import { ReactComponent as DeatilIcon } from './icons/detail.svg';
-
+import { ReactComponent as MenuIcon } from './icons/menu.svg';
+import { ReactComponent as CopyIcon } from './icons/copy.svg';
 import logo from './images/logo.png';
 import bread from './images/bread.png';
 import kakao from './images/Kakao.png';
@@ -41,6 +42,8 @@ const icons = {
   EditIcon,
   DeleteIcon,
   DeatilIcon,
+  MenuIcon,
+  CopyIcon,
 };
 
 export { icons, images };

@@ -39,8 +39,9 @@ const StatusColumn = styled.div`
   }
 
   svg {
-    margin-right: 30px;
-    transform: scale(1.8, 1.8);
+    padding: 0 5px;
+    width: 40px;
+    height: 40px;
 
     path {
       fill: ${COLORS.PRIMARY};
@@ -49,8 +50,9 @@ const StatusColumn = styled.div`
     ${HOVER_CURSOR_PONTER};
 
     @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
-      transform: scale(1.5, 1.5);
-      margin-right: 15px;
+      padding: 0;
+      width: 32px;
+      height: 32px;
     }
   }
 `;
@@ -100,7 +102,7 @@ const Profile = styled.div`
   }
 `;
 
-function PartyDetailHeader({ party, isPartyPage, toggleBreadBoard }) {
+function PartyDetailHeader({ party, isPartyPage, toggleMenu }) {
   if (!party?.owner) {
     return <Container />;
   }
@@ -126,7 +128,12 @@ function PartyDetailHeader({ party, isPartyPage, toggleBreadBoard }) {
           <Link to={'/chats/' + party.id}>
             <ChattingButton>채팅 입장</ChattingButton>
           </Link>
-        )) || <Image src={images.bread} onClick={toggleBreadBoard} />}
+        )) || (
+          <>
+            <icons.MenuIcon onClick={toggleMenu('CHATMENU')} />
+            <Image src={images.bread} onClick={toggleMenu('BREADBOARD')} />{' '}
+          </>
+        )}
       </StatusColumn>
     </Container>
   );
@@ -135,7 +142,7 @@ function PartyDetailHeader({ party, isPartyPage, toggleBreadBoard }) {
 PartyDetailHeader.propTypes = {
   party: PropTypes.object,
   isPartyPage: PropTypes.bool,
-  toggleBreadBoard: PropTypes.func,
+  toggleMenu: PropTypes.func,
 };
 
 export default PartyDetailHeader;
