@@ -30,8 +30,13 @@ const Container = styled.div`
   }
 `;
 
-function BreadBoardStatus({ id, status }) {
+function BreadBoardStatus({ id, status, isDelivery, setIsNbbanged }) {
   const toggleStatus = () => {
+    if (isDelivery) {
+      setIsNbbanged((prev) => !prev);
+      return;
+    }
+
     const newStatus = status === 'SEND' ? 'CHECK' : 'SEND';
 
     fetch(`${SERVER_URL}/bread-board/${id}/send-status`, {
@@ -45,15 +50,21 @@ function BreadBoardStatus({ id, status }) {
   return (
     <Container onClick={toggleStatus}>
       <img src={images.bread} />
-      {status === 'CHECK' && <icons.CheckIcon />}
-      <div>{status === 'CHECK' ? '송금완료!' : '송금 대기중'}</div>
+      {(status === 'CHECK' || status === true) && <icons.CheckIcon />}
+      {isDelivery ? (
+        <div>{status ? '배달비\n나누기' : '배달비\n안 나누기'}</div>
+      ) : (
+        <div>{status === 'CHECK' ? '송금완료!' : '송금 대기중'}</div>
+      )}
     </Container>
   );
 }
 
 BreadBoardStatus.propTypes = {
-  status: PropTypes.string,
+  status: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   id: PropTypes.string,
+  isDelivery: PropTypes.bool,
+  setIsNbbanged: PropTypes.func,
 };
 
 export default BreadBoardStatus;
