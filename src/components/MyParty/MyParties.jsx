@@ -1,15 +1,15 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Party from './Party';
+import MyParty from './MyParty';
 import { SIZES, PARTY_COLORS } from '../../styles/constants';
 
 const Container = styled.div``;
 
 const PartyContainer = styled.div`
   display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
+  flex-flow: column wrap;
+  align-items: center;
 
   @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
     justify-content: center;
@@ -33,19 +33,17 @@ const PartyContainer = styled.div`
   }
 `;
 
-function Parties({ parties, detectorRef }) {
+function MyParties({ parties }) {
   return (
     <Container>
       <PartyContainer>
         {parties.map((party) => {
           const color = PARTY_COLORS[Math.floor(Math.random() * PARTY_COLORS.length)];
           return (
-            <Party
+            <MyParty
               key={party.id}
               title={party.title}
               hashtags={party.hashtags}
-              place={party.place}
-              createTime={party.createTime}
               status={party.status}
               joinNumber={party.joinNumber}
               goalNumber={party.goalNumber}
@@ -54,15 +52,13 @@ function Parties({ parties, detectorRef }) {
             />
           );
         })}
-        <div ref={detectorRef} />
       </PartyContainer>
     </Container>
   );
 }
 
-Parties.propTypes = {
+MyParties.propTypes = {
   parties: PropTypes.arrayOf(PropTypes.object),
-  detectorRef: PropTypes.object,
 };
 
-export default Parties;
+export default MyParties;

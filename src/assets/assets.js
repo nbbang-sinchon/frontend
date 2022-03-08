@@ -9,6 +9,9 @@ import { ReactComponent as ArrowIcon } from './icons/arrow.svg';
 import { ReactComponent as CancelIcon } from './icons/cancel.svg';
 import { ReactComponent as CheckIcon } from './icons/check.svg';
 import { ReactComponent as PictureIcon } from './icons/picture.svg';
+import { ReactComponent as EditIcon } from './icons/edit.svg';
+import { ReactComponent as DeleteIcon } from './icons/delete.svg';
+import { ReactComponent as DeatilIcon } from './icons/detail.svg';
 import { ReactComponent as MenuIcon } from './icons/menu.svg';
 import { ReactComponent as CopyIcon } from './icons/copy.svg';
 import logo from './images/logo.png';
@@ -18,8 +21,12 @@ import naver from './images/Naver.png';
 import google from './images/Google.png';
 import breadBoard from './images/bread-board.png';
 import delivery from './images/delivery.png';
+import member1 from './images/member1.png';
+import member2 from './images/member2.png';
+import member3 from './images/member3.png';
 
-const images = { logo, bread, kakao, naver, google, breadBoard, delivery };
+const images = { logo, bread, kakao, naver, google, breadBoard, delivery, member1, member2, member3 };
+
 const icons = {
   NotificationIcon,
   PartyIcon,
@@ -32,6 +39,9 @@ const icons = {
   CheckIcon,
   CancelIcon,
   PictureIcon,
+  EditIcon,
+  DeleteIcon,
+  DeatilIcon,
   MenuIcon,
   CopyIcon,
 };
