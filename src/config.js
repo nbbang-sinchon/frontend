@@ -1,8 +1,7 @@
-const SERVER_URL = 'http://3.38.6.110:8094';
-const FRONT_URL = 'http://15.165.132.250:8094';
+const SERVER_URL = 'https://www.nbbang.shop/api';
+const FRONT_URL = 'https://www.nbbang.shop';
 const CHAT_PAGE_SIZE = '20';
-const GOOGLE_LOGIN_URL =
-  'http://ec2-15-165-132-250.ap-northeast-2.compute.amazonaws.com:8094/oauth2/authorization/google';
+const GOOGLE_LOGIN_URL = 'https://www.nbbang.shop/api/oauth2/authorization/google?redirect_uri=http://localhost:3000';
 
 const PARTY_PAGE_SIZE = '10';
 
