@@ -54,6 +54,7 @@ function BreadBoardAccount({ id, bank, account }) {
         mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
+        credentials: 'include',
       });
     }
 

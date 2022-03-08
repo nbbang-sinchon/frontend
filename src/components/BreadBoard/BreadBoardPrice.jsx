@@ -31,6 +31,7 @@ function BreadBoardPrice({ price, id, isDelivery }) {
         mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(target.value),
+        credentials: 'include',
       });
     }
 

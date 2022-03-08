@@ -30,7 +30,7 @@ function usePartyUpdate(parties, setParties, option) {
       const params = convertOptionToParam(option);
       const cursorId = parties.length && parties[parties.length - 1].id;
       const URL = `${SERVER_URL}/parties?${params.join('&')}&cursorId=${cursorId}&pageSize=${PARTY_PAGE_SIZE}`;
-      const res = await fetch(URL);
+      const res = await fetch(URL, { credentials: 'include' });
       const json = await res.json();
 
       if (json.data.parties.length > 0) {

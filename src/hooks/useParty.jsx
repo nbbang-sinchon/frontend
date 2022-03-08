@@ -19,7 +19,7 @@ function useParty(search) {
     const fetchParty = async () => {
       const params = convertOptionToParam(option);
       const URL = `${SERVER_URL}/parties?${params.join('&')}&pageSize=${PARTY_PAGE_SIZE}`;
-      const res = await fetch(URL);
+      const res = await fetch(URL, { credentials: 'include' });
       const json = await res.json();
 
       setParties([...json.data.parties]);

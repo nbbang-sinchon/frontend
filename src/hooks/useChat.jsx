@@ -8,7 +8,7 @@ function useChat(id) {
   useEffect(() => {
     const fetchChat = async () => {
       const URL = `${SERVER_URL}/chats/${id}?pageSize=${CHAT_PAGE_SIZE}`;
-      const res = await fetch(URL);
+      const res = await fetch(URL, { credentials: 'include' });
       const json = await res.json();
 
       setParty(json.data);

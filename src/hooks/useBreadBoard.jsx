@@ -8,7 +8,7 @@ function useBreadBoard(id) {
   useEffect(() => {
     const fetchBreadBoard = async () => {
       const URL = `${SERVER_URL}/bread-board/${id}`;
-      const res = await fetch(URL);
+      const res = await fetch(URL, { credentials: 'include' });
       const json = await res.json();
 
       setBreadBoard(json.data);

@@ -44,6 +44,7 @@ function BreadBoardStatus({ id, status, isDelivery, setIsNbbanged }) {
       mode: 'cors',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ sendStatus: newStatus }),
+      credentials: 'include',
     });
   };
 

@@ -11,7 +11,7 @@ function usePartyDetail(id) {
     }
 
     const fetchParty = async () => {
-      const res = await fetch(`${SERVER_URL}/parties/${id}`);
+      const res = await fetch(`${SERVER_URL}/parties/${id}`, { credentials: 'include' });
       const json = await res.json();
 
       setParties(json.data.parties);

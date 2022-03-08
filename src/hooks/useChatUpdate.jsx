@@ -21,7 +21,7 @@ function useChatUpdate(id, chats, setChats) {
       setIsReady(false);
 
       const URL = `${SERVER_URL}/chats/${id}/messages?pageSize=${CHAT_PAGE_SIZE}${`&cursorId=${chats[0].id}`}`;
-      const res = await fetch(URL);
+      const res = await fetch(URL, { credentials: 'include' });
       const json = await res.json();
 
       if (json.data.messages.length > 0) {

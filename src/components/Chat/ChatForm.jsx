@@ -94,6 +94,7 @@ function ChatForm({ id }) {
       mode: 'cors',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(chat),
+      credentials: 'include',
     });
 
     if (chatRef.current) {
