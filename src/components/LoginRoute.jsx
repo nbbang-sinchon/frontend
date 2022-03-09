@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import useLogin from '../hooks/useLogin';
+import { LoginStoreContext } from './LoginStore';
 
 function LoginRoute({ isLoginNecessary, fallback }) {
-  const isLoggedin = useLogin();
+  const { isLoggedin } = useContext(LoginStoreContext);
 
   return isLoginNecessary === isLoggedin ? <Outlet /> : <Navigate to={fallback} />;
 }
