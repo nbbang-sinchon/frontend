@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
-import useSocket from './useSocket';
+import { useEffect, useContext } from 'react';
+import { SocketStoreContext } from '../components/SocketStore';
 
 function useBreadBoardUpdate(id, setBreadBoard) {
-  const { socket, isConnecting } = useSocket();
+  const { socket, isConnecting } = useContext(SocketStoreContext);
 
   useEffect(() => {
     const updateBreadBoard = ({ body }) => {

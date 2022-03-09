@@ -1,13 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useContext } from 'react';
+import { SocketStoreContext } from '../components/SocketStore';
 import { CHAT_PAGE_SIZE, SERVER_URL } from '../config';
 import makeObserverCallback from '../utils/observer';
 import useInfiniteScroll from './useInfiniteScroll';
-import useSocket from './useSocket';
 
 function useChatUpdate(id, chats, setChats) {
   const fetchOldChatRef = useRef();
   const [isReady, setIsReady] = useState(true);
-  const { socket, isConnecting } = useSocket();
+  const { socket, isConnecting } = useContext(SocketStoreContext);
 
   const observerCallback = makeObserverCallback(fetchOldChatRef);
   const detectorRef = useInfiniteScroll(observerCallback, [chats]);
