@@ -8,19 +8,18 @@ const convertPlace = (placeString) => {
   } else if (upper === 'YEONHUI') {
     return '연희동';
   } else {
-    return 'ERROR';
+    return '';
   }
 };
 
 const convertDate = (dateString) => {
-  const TIME_ZONE = 9;
   const MILLI_TO_SECOND = 1000;
   const SECOND_TO_MINUTE = 60;
   const MINUTE_TO_HOUR = 60;
   const HOUR_TO_DAY = 24;
 
   const date = new Date(dateString);
-  date.setHours(date.getHours() - TIME_ZONE);
+  date.setHours(date.getHours());
 
   const now = new Date();
   const diff = (now.getTime() - date.getTime()) / MILLI_TO_SECOND;
