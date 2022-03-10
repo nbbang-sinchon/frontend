@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { images } from '../../assets/assets';
 import { COLORS, SCROLL_PRIMARY } from '../../styles/constants';
@@ -7,6 +7,7 @@ import { convertPrice } from '../../utils/converter';
 import BreadBoardPrice from './BreadBoardPrice';
 import BreadBoardAccount from './BreadBoardAccount';
 import BreadBoardStatus from './BreadBoardStatus';
+import { LoginStoreContext } from '../Stores/LoginStore';
 
 const Container = styled.div`
   position: absolute;
@@ -94,11 +95,14 @@ const UserName = styled.div`
 
 function BreadBoard({ isVisible, breadBoard, id }) {
   const [isNbbanged, setIsNbbanged] = useState(true);
+  const { loginId } = useContext(LoginStoreContext);
 
   const getTotal = (breadBoard) =>
     breadBoard?.members?.reduce((total, member) => total + member.price, 0) + breadBoard?.deliveryFee;
 
   const getPrice = (price) => price + (isNbbanged ? breadBoard.deliveryFee / breadBoard.members.length : 0);
+
+  const getOwnerId = (breadBoard) => breadBoard?.members?.find((member) => member.isOwner).id;
 
   return (
     <Container isVisible={isVisible}>
@@ -109,15 +113,20 @@ function BreadBoard({ isVisible, breadBoard, id }) {
           <div>{convertPrice(getTotal(breadBoard))}</div>
         </Info>
         <Info>
-          <BreadBoardAccount id={id} bank={breadBoard?.bank} account={breadBoard?.accountNumber} />
+          <BreadBoardAccount
+            id={id}
+            bank={breadBoard?.bank}
+            account={breadBoard?.accountNumber}
+            disabled={getOwnerId(breadBoard) !== loginId}
+          />
         </Info>
         <Users>
           {breadBoard?.members?.map((member) => (
             <User key={member.id || member.nickname}>
               <img src={member.avatar || images.logo} />
               <UserName>{member.nickname}</UserName>
-              <BreadBoardPrice price={getPrice(member.price)} id={id} />
-              <BreadBoardStatus status={member?.isSent} id={id} />
+              <BreadBoardPrice price={getPrice(member.price)} id={id} disabled={member.id !== loginId} />
+              <BreadBoardStatus status={member?.isSent} id={id} disabled={member.id !== loginId} />
             </User>
           ))}
         </Users>
@@ -125,8 +134,18 @@ function BreadBoard({ isVisible, breadBoard, id }) {
         <User isDelivery>
           <img src={images.delivery} />
           <UserName>배달비</UserName>
-          <BreadBoardPrice price={breadBoard?.deliveryFee} id={id} isDelivery />
-          <BreadBoardStatus status={isNbbanged} setIsNbbanged={setIsNbbanged} isDelivery />
+          <BreadBoardPrice
+            price={breadBoard?.deliveryFee}
+            id={id}
+            isDelivery
+            disabled={getOwnerId(breadBoard) !== loginId}
+          />
+          <BreadBoardStatus
+            status={isNbbanged}
+            setIsNbbanged={setIsNbbanged}
+            isDelivery
+            disabled={getOwnerId(breadBoard) !== loginId}
+          />
         </User>
       </Content>
     </Container>

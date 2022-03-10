@@ -30,10 +30,14 @@ const Container = styled.div`
   }
 `;
 
-function BreadBoardStatus({ id, status, isDelivery, setIsNbbanged }) {
+function BreadBoardStatus({ id, status, isDelivery, setIsNbbanged, disabled }) {
   const { customFetch } = useFetch();
 
   const toggleStatus = () => {
+    if (disabled) {
+      return;
+    }
+
     if (isDelivery) {
       setIsNbbanged((prev) => !prev);
       return;
@@ -60,6 +64,7 @@ BreadBoardStatus.propTypes = {
   id: PropTypes.string,
   isDelivery: PropTypes.bool,
   setIsNbbanged: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 export default BreadBoardStatus;

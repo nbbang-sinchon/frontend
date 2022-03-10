@@ -52,12 +52,12 @@ const LogOutButton = styled.div`
 function MyPageHeader() {
   const navigate = useNavigate();
   const { customFetch } = useFetch();
-  const { setIsLoggedin } = useContext(LoginStoreContext);
+  const { setLoginId } = useContext(LoginStoreContext);
 
   const onClick = async () => {
     await customFetch('/gologout', 'POST');
 
-    setIsLoggedin(false);
+    setLoginId(-1);
     setTimeout(() => navigate('/'), 0);
   };
 

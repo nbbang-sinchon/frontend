@@ -13,7 +13,7 @@ const Input = styled.input`
   box-sizing: border-box;
 `;
 
-function BreadBoardPrice({ price, id, isDelivery }) {
+function BreadBoardPrice({ price, id, isDelivery, disabled }) {
   const inputRef = useRef();
   const { customFetch } = useFetch();
 
@@ -71,7 +71,7 @@ function BreadBoardPrice({ price, id, isDelivery }) {
     <Input
       placeholder="금액"
       pattern="\d*"
-      disabled={false}
+      disabled={disabled}
       onBlur={submitPrice}
       onInput={checkPrice}
       onKeyDown={checkEnter}
@@ -86,6 +86,7 @@ BreadBoardPrice.propTypes = {
   price: PropTypes.number,
   id: PropTypes.string,
   isDelivery: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export default BreadBoardPrice;
