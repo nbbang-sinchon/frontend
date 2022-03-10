@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export const LoginStoreContext = createContext();
 
 function LoginStore({ children }) {
-  const [isLoggedin, setIsLoggedin] = useState(false);
+  const [isLoggedin, setIsLoggedin] = useState(true);
 
   return <LoginStoreContext.Provider value={{ isLoggedin, setIsLoggedin }}>{children}</LoginStoreContext.Provider>;
 }
