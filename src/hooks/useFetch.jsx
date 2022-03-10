@@ -19,17 +19,17 @@ function useFetch() {
 
     setFetchState('PENDING');
 
-    const res = await fetch(fullURL, options);
-    const json = await res.json();
+    try {
+      const res = await fetch(fullURL, options);
+      const json = await res.json();
 
-    if (json.statusCode === 401) {
-      setLoginId(-1);
-      setFetchState('FAIL');
-    } else {
       setFetchState('SUCCESS');
-    }
 
-    return json;
+      return json;
+    } catch {
+      setFetchState('FAIL');
+      setLoginId(-1);
+    }
   };
 
   return { fetchState, customFetch };
