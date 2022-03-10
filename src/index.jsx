@@ -27,21 +27,18 @@ ReactDOM.render(
               <Route path="/login" element={<LoginPage />} />
             </Route>
 
-            <Route element={<LoginRoute isLoginNecessary fallback="/" />}>
-              <Route path="/main" element={<MainPage />} />
-            </Route>
-
             <Route element={<LoginRoute isLoginNecessary fallback="/login" />}>
               <Route path="/" element={<IndexPage />} />
               <Route path="/mypage" element={<MyPage />} />
               <Route path="/my-party" element={<MyPartyPage />} />
               <Route path="/chats/:id" element={<ChatPage />} />
               <Route path="/newparty" element={<NewPartyPage />} />
+              <Route path="/newparty/:id" element={<NewPartyPage />} />
             </Route>
 
+            <Route path="/main" element={<MainPage />} />
             <Route path="/main/:search" element={<MainPage />} />
             <Route path="/parties/:id" element={<PartyPage />} />
-            <Route path="/newparty/:id" element={<NewPartyPage />} />
           </Routes>
         </SocketStore>
       </LoginStore>
