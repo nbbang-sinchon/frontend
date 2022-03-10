@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { icons } from '../assets/assets';
 import { COLORS, MODALS } from '../styles/constants';
 import { SERVER_URL } from '../config';
-import Logo2 from './Logo2';
+import Logo from './Logo';
 import Modal from './Modal';
 import { hashTagStringToList, hashTagListToString } from '../utils/hashtags';
 import useConfirm from '../hooks/useConfirm';
@@ -190,28 +190,6 @@ function PatchParty({ id, party }) {
     });
   };
 
-  const patchParty = () => {
-    if (isConfirm) {
-      fetch(`${SERVER_URL}/parties/${id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newParty),
-      })
-        .then((response) => response.json())
-        .then((response) => {
-          if (response.statusCode === 400) {
-            setAlertMessage(response.errors[0].errorMessage);
-            openAlertModal();
-            setIsConfirm(false);
-          } else if (response.statusCode === 200) {
-            navigate('/');
-          }
-        });
-    }
-  };
-
   const onClick = () => {
     const form = new FormData(formRef.current);
     const newParty = {
@@ -225,7 +203,31 @@ function PatchParty({ id, party }) {
     openConfirmModal();
   };
 
-  useEffect(patchParty, [isConfirm, newParty]);
+  useEffect(() => {
+    const fetchPatchParty = async () => {
+      const options = {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newParty),
+      };
+
+      const res = await fetch(`${SERVER_URL}/parties/${id}`, options);
+      const json = await res.json();
+
+      if (json.statusCode === 400) {
+        setAlertMessage(json.errors[0].errorMessage);
+        openAlertModal();
+        setIsConfirm(false);
+      } else if (json.statusCode === 200) {
+        navigate('/');
+      }
+    };
+
+    if (isConfirm) fetchPatchParty();
+    else return;
+  }, [isConfirm, newParty]);
 
   return (
     <>
@@ -236,7 +238,7 @@ function PatchParty({ id, party }) {
           </Link>
         </Column>
         <Column>
-          <Logo2 />
+          <Logo titleVisible={false} />
         </Column>
         <Column>
           <SaveButton onClick={onClick}>완료</SaveButton>

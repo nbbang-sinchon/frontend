@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { icons } from '../assets/assets';
 import { COLORS, MODALS } from '../styles/constants';
 import { SERVER_URL } from '../config';
-import Logo2 from './Logo2';
+import Logo from './Logo';
 import Modal from './Modal';
 import { hashTagStringToList } from '../utils/hashtags';
 import useConfirm from '../hooks/useConfirm';
@@ -161,28 +161,6 @@ function NewParty() {
     goalNumber: 0,
   });
 
-  const createParty = () => {
-    if (isConfirm) {
-      fetch(`${SERVER_URL}/parties/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newParty),
-      })
-        .then((response) => response.json())
-        .then((response) => {
-          if (response.statusCode === 400) {
-            setAlertMessage(response.errors[0].errorMessage);
-            openAlertModal();
-            setIsConfirm(false);
-          } else if (response.statusCode === 200) {
-            navigate('/');
-          }
-        });
-    }
-  };
-
   const onClick = () => {
     const form = new FormData(formRef.current);
     const newParty = {
@@ -196,7 +174,31 @@ function NewParty() {
     openConfirmModal();
   };
 
-  useEffect(createParty, [isConfirm, newParty]);
+  useEffect(() => {
+    const fetchNewParty = async () => {
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newParty),
+      };
+
+      const res = await fetch(`${SERVER_URL}/parties`, options);
+      const json = await res.json();
+
+      if (json.statusCode === 400) {
+        setAlertMessage(json.errors[0].errorMessage);
+        openAlertModal();
+        setIsConfirm(false);
+      } else if (json.statusCode === 200) {
+        navigate('/');
+      }
+    };
+
+    if (isConfirm) fetchNewParty();
+    else return;
+  }, [isConfirm, newParty]);
 
   return (
     <>
@@ -207,7 +209,7 @@ function NewParty() {
           </Link>
         </Column>
         <Column>
-          <Logo2 />
+          <Logo isTitleVisible={false} />
         </Column>
         <Column>
           <SaveButton onClick={onClick}>완료</SaveButton>
