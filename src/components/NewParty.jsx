@@ -197,7 +197,6 @@ function NewParty() {
     };
 
     if (isConfirm) fetchNewParty();
-    else return;
   }, [isConfirm, newParty]);
 
   return (

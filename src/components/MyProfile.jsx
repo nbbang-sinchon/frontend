@@ -1,10 +1,13 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { images } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
 import { SERVER_URL } from '../config';
+import { MODALS } from '../styles/constants';
+import Modal from './Modal';
 import useProfile from '../hooks/useProfile';
+import useConfirm from '../hooks/useConfirm';
 
 const Container = styled.div`
   height: 100vh;
@@ -113,7 +116,7 @@ const SaveButton = styled.button`
   }
 `;
 
-const SecessionButton = styled.button`
+const SecessionButton = styled.div`
   font-size: 15px;
   font-weight: 400;
   border: 1.5px solid;
@@ -147,6 +150,7 @@ const Image = styled.img`
 function MyProfile() {
   const navigate = useNavigate();
 
+  const { isConfirm, setIsConfirm, openConfirmModal, confirmModalVisible, onConfirm, onDisconfirm } = useConfirm();
   const { profile, setProfile } = useProfile();
 
   const onChange = (event) => {
@@ -160,42 +164,64 @@ function MyProfile() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch(`${SERVER_URL}/members`, {
-      method: 'PATCH',
-      mode: 'cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(profile),
-    });
-
-    navigate('/');
+    openConfirmModal();
   };
 
+  useEffect(() => {
+    const fetchPatchProfile = async () => {
+      const options = {
+        method: 'PATCH',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(profile),
+      };
+
+      const res = await fetch(`${SERVER_URL}/members`, options);
+      const json = await res.json();
+
+      if (json.statusCode === 400) {
+        setIsConfirm(false);
+      } else if (json.statusCode === 200) {
+        navigate('/');
+      }
+    };
+
+    if (isConfirm) fetchPatchProfile();
+  }, [isConfirm, profile]);
+
   return (
-    <Container>
-      <Profile>
-        <img src={images.logo}></img>
-      </Profile>
-      <form onSubmit={handleSubmit}>
-        <UserInfo>
-          <h3>닉네임</h3>
-          <input name="nickname" onChange={onChange} value={profile.nickname}></input>
-          <h3>지역</h3>
-          <select name="place" onChange={onChange} value={profile.place}>
-            <option value="SINCHON">신촌동</option>
-            <option value="YEONHUI">연희동</option>
-            <option value="CHANGCHEON">창천동</option>
-          </select>
-          <h3>닉네임</h3>
-          <h3>받은 추천 수</h3>
-          <InnerContainer>
-            <Image src={images.bread} />
-            <h3>10개</h3>
-          </InnerContainer>
-        </UserInfo>
-        <SaveButton type="submit">저장하기</SaveButton>
-        <SecessionButton>탈퇴하기</SecessionButton>
-      </form>
-    </Container>
+    <>
+      <Container>
+        <Profile>
+          <img src={images.logo}></img>
+        </Profile>
+        <form onSubmit={handleSubmit}>
+          <UserInfo>
+            <h3>닉네임</h3>
+            <input name="nickname" onChange={onChange} value={profile.nickname}></input>
+            <h3>지역</h3>
+            <select name="place" onChange={onChange} value={profile.place}>
+              <option value="SINCHON">신촌동</option>
+              <option value="YEONHUI">연희동</option>
+              <option value="CHANGCHEON">창천동</option>
+            </select>
+            <h3>닉네임</h3>
+            <h3>받은 추천 수</h3>
+            <InnerContainer>
+              <Image src={images.bread} />
+              <h3>10개</h3>
+            </InnerContainer>
+          </UserInfo>
+          <SaveButton type="submit">저장하기</SaveButton>
+          <SecessionButton>탈퇴하기</SecessionButton>
+        </form>
+      </Container>
+      {confirmModalVisible && !isConfirm && (
+        <Modal type={MODALS.CONFIRM} visible={confirmModalVisible} onConfirm={onConfirm} onDisconfirm={onDisconfirm}>
+          <h1>프로피를 수정하시겠습니까?</h1>
+        </Modal>
+      )}
+    </>
   );
 }
 
