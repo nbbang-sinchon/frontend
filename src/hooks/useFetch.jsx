@@ -6,12 +6,15 @@ function useFetch() {
   const [fetchState, setFetchState] = useState('IDLE');
   const { setIsLoggedin } = useContext(LoginStoreContext);
 
-  const customFetch = async (url, method = 'GET', body) => {
+  const customFetch = async (url, method = 'GET', body = '') => {
     const fullURL = (process.env?.NODE_ENV === 'development' ? SERVER_URL : '') + url;
     const options = { method, mode: 'cors', credentials: 'include' };
 
     if (method === 'POST') {
-      Object.defineProperties(options, { headers: { 'Content-Type': 'application/json' }, body });
+      Object.defineProperties(options, {
+        headers: { value: { 'Content-Type': 'application/json' } },
+        body: { value: body },
+      });
     }
 
     setFetchState('PENDING');
