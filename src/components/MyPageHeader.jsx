@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FRONT_URL } from '../config';
-import Logo2 from './Logo2';
+import Logo from './Logo';
 import { COLORS, SIZES } from '../styles/constants';
 
 const Container = styled.header`
@@ -63,7 +63,7 @@ function MyPageHeader() {
     <Container>
       <Column></Column>
       <Column>
-        <Logo2 />
+        <Logo titleVisible={false} />
       </Column>
       <Column>
         <LogOutButton onClick={onClick}>로그아웃</LogOutButton>
