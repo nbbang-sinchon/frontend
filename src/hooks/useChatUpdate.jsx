@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useContext } from 'react';
-import { SocketStoreContext } from '../components/SocketStore';
+import { SocketStoreContext } from '../components/Stores/SocketStore';
 import { CHAT_PAGE_SIZE, SERVER_URL } from '../config';
 import makeObserverCallback from '../utils/observer';
 import useInfiniteScroll from './useInfiniteScroll';

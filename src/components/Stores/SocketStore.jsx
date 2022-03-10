@@ -2,7 +2,7 @@ import React, { createContext, useRef, useContext } from 'react';
 import PropTypes from 'prop-types';
 import webstomp from 'webstomp-client';
 import SockJS from 'sockjs-client';
-import { SERVER_URL } from '../config';
+import { SERVER_URL } from '../../config';
 import { LoginStoreContext } from './LoginStore';
 
 export const SocketStoreContext = createContext();

@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { LoginStoreContext } from '../components/LoginStore';
+import { LoginStoreContext } from '../components/Stores/LoginStore';
 import { SERVER_URL } from '../config';
 
 function useFetch() {
