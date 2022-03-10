@@ -17,7 +17,7 @@ const InnerContainer = styled.div`
   flex-direction: column;
 
   position: relative;
-  padding: 20px;
+  padding: ${(props) => (props.isMyPartyPage ? '0px' : '20px')};
   width: 100%;
   max-width: ${SIZES.MAIN_MAX_WIDTH};
   box-sizing: border-box;
@@ -32,10 +32,12 @@ const InnerContainer = styled.div`
   }
 `;
 
-function Main({ children, background, fitHeight }) {
+function Main({ children, background, fitHeight, isMyPartyPage }) {
   return (
     <Container background={background?.toUpperCase()}>
-      <InnerContainer fitHeight={fitHeight}>{children}</InnerContainer>
+      <InnerContainer fitHeight={fitHeight} isMyPartyPage={isMyPartyPage}>
+        {children}
+      </InnerContainer>
     </Container>
   );
 }
@@ -44,6 +46,7 @@ Main.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
   background: PropTypes.string,
   fitHeight: PropTypes.bool,
+  isMyPartyPage: PropTypes.bool,
 };
 
 export default Main;
