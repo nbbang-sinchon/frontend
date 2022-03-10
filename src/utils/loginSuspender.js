@@ -5,16 +5,8 @@ const makeLoginSuspender = () => {
   let status = 'INIT';
 
   const fetchLogin = async () => {
-    const res = await fetch(`${SERVER_URL}/members`, { credentials: 'include', mode: 'no-cors' });
-
-    if (res.type === 'opaque') {
-      status = 'DONE';
-      return false;
-    }
-
+    const res = await fetch(`${SERVER_URL}/members`, { credentials: 'include' });
     const json = await res.json();
-
-    status = 'DONE';
 
     return json.statusCode !== 401;
   };
