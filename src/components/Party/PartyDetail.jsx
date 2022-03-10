@@ -33,7 +33,7 @@ function PartyDetail({ party }) {
       <Title>{party.title}</Title>
       <Content>
         <div>{party.content}</div>
-        <HashTags hashtags={party.hashtags} />
+        <HashTags hashtags={party.hashtags} color={COLORS.BLACK} />
       </Content>
     </Container>
   );

@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import Main from '../components/Main';
 import NewParty from '../components/NewParty';
+import PatchParty from '../components/PatchParty';
 import usePartyDetail from '../hooks/usePartyDetail';
 
 function NewPartyPage() {
@@ -10,7 +11,7 @@ function NewPartyPage() {
 
   return (
     <>
-      <Main background="WHITE">{id ? <NewParty id={id} party={party} /> : <NewParty />}</Main>
+      <Main background="WHITE">{id ? <PatchParty id={id} party={party} /> : <NewParty />}</Main>
     </>
   );
 }

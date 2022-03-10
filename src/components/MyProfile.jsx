@@ -11,11 +11,15 @@ function MyProfile() {
     justify-content: flex-start;
     align-items: center;
 
-    padding: 150px;
+    padding: 40px 200px;
     min-width: ${SIZES.HEADER_MIN_WIDTH};
     position: sticky;
     top: 0;
     background-color: ${COLORS.WHITE};
+
+    @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
+      padding: 40px 50px;
+    }
   `;
 
   const InnerContainer = styled.div`
@@ -52,6 +56,8 @@ function MyProfile() {
   `;
 
   const UserInfo = styled.div`
+    width: 100%;
+
     h3 {
       font-size: 12px;
       font-weight: 600;
@@ -63,16 +69,14 @@ function MyProfile() {
     input {
       font-size: 20px;
       font-weight: 600;
-      width: 335px;
-      height: 13px;
-      padding: 13px;
+      width: 100%;
+
       background-color: ${COLORS.LIGHT_GRAY};
       color: ${COLORS.DARK_GRAY};
     }
 
     select {
-      width: 361px;
-      height: 30px;
+      width: 100%;
 
       padding: 5px 30px 5px 10px;
       background-color: ${COLORS.LIGHT_GRAY};
@@ -81,7 +85,7 @@ function MyProfile() {
 
     select option {
       background-color: ${COLORS.WHITE};
-      padding: 3px 0;
+      width: 100%;
     }
   `;
 
@@ -93,7 +97,9 @@ function MyProfile() {
 
     color: ${COLORS.WHITE};
     background-color: ${COLORS.PRIMARY};
-    padding: 15px 153px;
+    width: 100%;
+    text-align: center;
+    padding: 15px 0px;
     margin-top: 30px;
 
     flex-grow: 0;
@@ -113,8 +119,10 @@ function MyProfile() {
 
     color: ${COLORS.WHITE};
     background-color: ${COLORS.DARK_GRAY};
-    padding: 15px 153px;
 
+    width: 100%;
+    text-align: center;
+    padding: 15px 0px;
     margin-top: 30px;
 
     flex-grow: 0;
