@@ -117,7 +117,7 @@ function BreadBoard({ isVisible, breadBoard, id }) {
               <img src={member.avatar || images.logo} />
               <UserName>{member.nickname}</UserName>
               <BreadBoardPrice price={getPrice(member.price)} id={id} />
-              <BreadBoardStatus status={member?.sendStatus} id={id} />
+              <BreadBoardStatus status={member?.isSent} id={id} />
             </User>
           ))}
         </Users>

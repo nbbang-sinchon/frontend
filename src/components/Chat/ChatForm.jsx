@@ -3,8 +3,8 @@ import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { COLORS, HOVER_CURSOR_PONTER, SCROLL_PRIMARY } from '../../styles/constants';
 import { icons } from '../../assets/assets';
-import { SERVER_URL } from '../../config';
 import ChatUploadImage from './ChatUploadImage';
+import useFetch from '../../hooks/useFetch';
 
 const Container = styled.div`
   display: flex;
@@ -74,6 +74,7 @@ function ChatForm({ id }) {
   const [chatLength, setChatLength] = useState(0);
   const chatRef = useRef();
   const submitRef = useRef();
+  const { customFetch } = useFetch();
 
   const onChatChange = ({ target }) => {
     setChatLength(target.value.length);
@@ -89,13 +90,7 @@ function ChatForm({ id }) {
       return;
     }
 
-    fetch(`${SERVER_URL}/chats/${id}`, {
-      method: 'POST',
-      mode: 'cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(chat),
-      credentials: 'include',
-    });
+    customFetch(`/chats/${id}`, 'POST', JSON.stringify(chat));
 
     if (chatRef.current) {
       chatRef.current.value = '';

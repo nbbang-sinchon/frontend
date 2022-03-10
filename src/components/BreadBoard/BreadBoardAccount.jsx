@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import { SERVER_URL } from '../../config';
 import { icons } from '../../assets/assets';
 import { HOVER_CURSOR_PONTER } from '../../styles/constants';
+import useFetch from '../../hooks/useFetch';
 
 const Container = styled.div`
   position: relative;
@@ -33,6 +33,7 @@ const Container = styled.div`
 function BreadBoardAccount({ id, bank, account }) {
   const bankRef = useRef();
   const accountRef = useRef();
+  const { customFetch } = useFetch();
 
   const submitAccount = (e) => {
     e.preventDefault();
@@ -49,13 +50,7 @@ function BreadBoardAccount({ id, bank, account }) {
     const body = { bank: bankRef.current?.value, accountNumber: accountRef.current?.value };
 
     if (isUpdated) {
-      fetch(`${SERVER_URL}/bread-board/${id}/account`, {
-        method: 'POST',
-        mode: 'cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-        credentials: 'include',
-      });
+      customFetch(`/bread-board/${id}/account`, 'POST', JSON.stringify(body));
     }
 
     e.target.blur();

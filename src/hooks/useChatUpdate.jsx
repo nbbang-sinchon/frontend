@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState, useContext } from 'react';
 import { SocketStoreContext } from '../components/Stores/SocketStore';
-import { CHAT_PAGE_SIZE, SERVER_URL } from '../config';
+import { CHAT_PAGE_SIZE } from '../config';
 import makeObserverCallback from '../utils/observer';
+import useFetch from './useFetch';
 import useInfiniteScroll from './useInfiniteScroll';
 
 function useChatUpdate(id, chats, setChats) {
   const fetchOldChatRef = useRef();
   const [isReady, setIsReady] = useState(true);
   const { socket, isConnecting } = useContext(SocketStoreContext);
+  const { customFetch } = useFetch();
 
   const observerCallback = makeObserverCallback(fetchOldChatRef);
   const detectorRef = useInfiniteScroll(observerCallback, [chats]);
@@ -20,9 +22,8 @@ function useChatUpdate(id, chats, setChats) {
 
       setIsReady(false);
 
-      const URL = `${SERVER_URL}/chats/${id}/messages?pageSize=${CHAT_PAGE_SIZE}${`&cursorId=${chats[0].id}`}`;
-      const res = await fetch(URL, { credentials: 'include' });
-      const json = await res.json();
+      const URL = `/chats/${id}/messages?pageSize=${CHAT_PAGE_SIZE}${`&cursorId=${chats[0].id}`}`;
+      const json = await customFetch(URL);
 
       if (json.data.messages.length > 0) {
         setIsReady(true);

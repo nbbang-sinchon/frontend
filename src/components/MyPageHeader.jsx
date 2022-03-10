@@ -56,8 +56,9 @@ function MyPageHeader() {
 
   const onClick = async () => {
     await customFetch('/gologout', 'POST');
-    navigate('/');
+
     setIsLoggedin(false);
+    setTimeout(() => navigate('/'), 0);
   };
 
   return (

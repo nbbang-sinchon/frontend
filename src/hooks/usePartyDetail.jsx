@@ -1,24 +1,20 @@
 import { useEffect, useState } from 'react';
-import { SERVER_URL } from '../config';
+import useFetch from './useFetch';
 
 function usePartyDetail(id) {
   const [party, setParty] = useState();
   const [parties, setParties] = useState([]);
+  const { customFetch } = useFetch();
 
-  useEffect(() => {
+  useEffect(async () => {
     if (!id) {
       return;
     }
 
-    const fetchParty = async () => {
-      const res = await fetch(`${SERVER_URL}/parties/${id}`, { credentials: 'include' });
-      const json = await res.json();
+    const json = await customFetch(`/parties/${id}`);
 
-      setParties(json.data.parties);
-      setParty({ ...json.data, id });
-    };
-
-    fetchParty();
+    setParties(json.data.parties);
+    setParty({ ...json.data, id });
   }, [id]);
 
   return { party, parties };

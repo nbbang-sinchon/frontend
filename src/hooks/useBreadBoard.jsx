@@ -1,20 +1,15 @@
 import { useEffect, useState } from 'react';
-import { SERVER_URL } from '../config';
+import useFetch from './useFetch';
 
 function useBreadBoard(id) {
   const [isBreadBoardVisible, setIsBreadBoardVisible] = useState(false);
   const [breadBoard, setBreadBoard] = useState({});
+  const { customFetch } = useFetch();
 
-  useEffect(() => {
-    const fetchBreadBoard = async () => {
-      const URL = `${SERVER_URL}/bread-board/${id}`;
-      const res = await fetch(URL, { credentials: 'include' });
-      const json = await res.json();
+  useEffect(async () => {
+    const json = await customFetch(`/bread-board/${id}`);
 
-      setBreadBoard(json.data);
-    };
-
-    fetchBreadBoard();
+    setBreadBoard(json.data);
   }, []);
 
   return {

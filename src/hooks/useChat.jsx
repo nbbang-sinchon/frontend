@@ -1,21 +1,17 @@
 import { useEffect, useState } from 'react';
-import { CHAT_PAGE_SIZE, SERVER_URL } from '../config';
+import { CHAT_PAGE_SIZE } from '../config';
+import useFetch from './useFetch';
 
 function useChat(id) {
   const [party, setParty] = useState({ members: [] });
   const [chats, setChats] = useState([]);
+  const { customFetch } = useFetch();
 
-  useEffect(() => {
-    const fetchChat = async () => {
-      const URL = `${SERVER_URL}/chats/${id}?pageSize=${CHAT_PAGE_SIZE}`;
-      const res = await fetch(URL, { credentials: 'include' });
-      const json = await res.json();
+  useEffect(async () => {
+    const json = await customFetch(`/chats/${id}?pageSize=${CHAT_PAGE_SIZE}`);
 
-      setParty(json.data);
-      setChats(json.data.messages);
-    };
-
-    fetchChat();
+    setParty(json.data);
+    setChats(json.data.messages);
   }, []);
 
   return { party, chats, setChats };

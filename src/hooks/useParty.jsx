@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
-import { PARTY_PAGE_SIZE, SERVER_URL } from '../config';
+import { PARTY_PAGE_SIZE } from '../config';
 import { convertOptionToParam } from '../utils/converter';
+import useFetch from './useFetch';
 
 function useParty(search) {
+  const { customFetch } = useFetch();
   const [parties, setParties] = useState([]);
   const [option, setOption] = useState({
     search: search || '',
@@ -18,11 +20,12 @@ function useParty(search) {
   useEffect(() => {
     const fetchParty = async () => {
       const params = convertOptionToParam(option);
-      const URL = `${SERVER_URL}/manyparties?${params.join('&')}&pageSize=${PARTY_PAGE_SIZE}`;
-      const res = await fetch(URL, { credentials: 'include' });
-      const json = await res.json();
+      const URL = `/parties?${params.join('&')}&pageSize=${PARTY_PAGE_SIZE}`;
+      const json = await customFetch(URL);
 
-      setParties([...json.data.parties]);
+      if (json.data?.parties) {
+        setParties([...json.data.parties]);
+      }
     };
 
     fetchParty();

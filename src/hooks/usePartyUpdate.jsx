@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
-import { PARTY_PAGE_SIZE, SERVER_URL } from '../config';
+import { PARTY_PAGE_SIZE } from '../config';
 import { convertOptionToParam } from '../utils/converter';
 import makeObserverCallback from '../utils/observer';
+import useFetch from './useFetch';
 import useInfiniteScroll from './useInfiniteScroll';
 
 function usePartyUpdate(parties, setParties, option) {
   const fetchOldPartyRef = useRef();
   const [isReady, setIsReady] = useState(true);
+  const { customFetch } = useFetch();
 
   const observerCallback = makeObserverCallback(fetchOldPartyRef);
   const detectorRef = useInfiniteScroll(observerCallback, [parties, option]);
@@ -29,9 +31,8 @@ function usePartyUpdate(parties, setParties, option) {
 
       const params = convertOptionToParam(option);
       const cursorId = parties.length && parties[parties.length - 1].id;
-      const URL = `${SERVER_URL}/parties?${params.join('&')}&cursorId=${cursorId}&pageSize=${PARTY_PAGE_SIZE}`;
-      const res = await fetch(URL, { credentials: 'include' });
-      const json = await res.json();
+      const URL = `/parties?${params.join('&')}&cursorId=${cursorId}&pageSize=${PARTY_PAGE_SIZE}`;
+      const json = await customFetch(URL);
 
       if (json.data.parties.length > 0) {
         setIsReady(true);
