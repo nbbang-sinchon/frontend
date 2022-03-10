@@ -4,7 +4,7 @@ import { SERVER_URL } from '../config';
 
 function useFetch() {
   const [fetchState, setFetchState] = useState('IDLE');
-  const { setIsLoggedin } = useContext(LoginStoreContext);
+  const { setLoginId } = useContext(LoginStoreContext);
 
   const customFetch = async (url, method = 'GET', body = '') => {
     const fullURL = (process.env?.NODE_ENV === 'development' ? SERVER_URL : '') + url;
@@ -23,7 +23,7 @@ function useFetch() {
     const json = await res.json();
 
     if (json.statusCode === 401) {
-      setIsLoggedin(false);
+      setLoginId(-1);
       setFetchState('FAIL');
     } else {
       setFetchState('SUCCESS');
