@@ -1,55 +1,8 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { images } from '../assets/assets';
 import { COLORS, HOVER_CURSOR_PONTER, SIZES } from '../styles/constants';
 import { GOOGLE_LOGIN_URL } from '../config';
-
-function LoginPageHeader() {
-  const Logo = () => {
-    const Container = styled.div`
-      display: flex;
-
-      ${HOVER_CURSOR_PONTER};
-    `;
-
-    const Image = styled.img`
-      height: 60px;
-
-      @media only screen and (max-width: ${SIZES.HEADER_MIDDLE_WIDTH}) {
-        height: 40px;
-      }
-    `;
-
-    return (
-      <Link to="/main">
-        <Container>
-          <Image src={images.logo} />
-        </Container>
-      </Link>
-    );
-  };
-
-  const Container = styled.header`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 10px;
-    border-bottom: 2px solid ${COLORS.PRIMARY};
-    min-width: ${SIZES.HEADER_MIN_WIDTH};
-    position: sticky;
-    top: 0;
-    background-color: white;
-    z-index: 1;
-  `;
-
-  return (
-    <Container>
-      <Logo />
-    </Container>
-  );
-}
 
 function Login() {
   const Container = styled.div`
@@ -90,10 +43,12 @@ function Login() {
     height: 50px;
     padding-top: 20px;
 
+    ${HOVER_CURSOR_PONTER}
+
     &:hover {
       opacity: 0.8;
-      cursor: pointer;
     }
+
     @media only screen and (max-width: ${SIZES.HEADER_MIDDLE_WIDTH}) {
       height: 40px;
     }
@@ -115,4 +70,4 @@ function Login() {
   );
 }
 
-export { LoginPageHeader, Login };
+export default Login;
