@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
-import Main2 from '../components/Main2';
+import Main from '../components/Main';
 import MyParties from '../components/MyParty/MyParties';
 import MyPartyHeader from '../components/MyParty/MyPartyHeader';
 import MyClosedParties from '../components/MyParty/MyClosedparties';
@@ -15,7 +15,7 @@ function MyPartyPage() {
   return (
     <>
       <Header />
-      <Main2>
+      <Main isMyPartyPage={true}>
         {isOnGoing ? (
           <>
             <MyPartyHeader onClick={toggleParties} toggle={isOnGoing} />
@@ -27,7 +27,7 @@ function MyPartyPage() {
             <MyClosedParties parties={parties} />
           </>
         )}
-      </Main2>
+      </Main>
     </>
   );
 }
