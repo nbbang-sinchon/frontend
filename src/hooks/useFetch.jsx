@@ -9,7 +9,7 @@ function useFetch() {
   const navigate = useNavigate();
 
   const customFetch = async (url, method = 'GET', body = '') => {
-    const fullURL = (process.env?.NODE_ENV === 'development' ? SERVER_URL : '') + url;
+    const fullURL = (process.env?.NODE_ENV === 'development' ? SERVER_URL : '/api') + url;
     const options = { method, mode: 'cors', credentials: 'include' };
 
     if (method === 'POST') {
