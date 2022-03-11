@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FRONT_URL } from '../config';
 import Logo from './Logo';
 import { COLORS, SIZES } from '../styles/constants';
+import useFetch from '../hooks/useFetch';
+import { LoginStoreContext } from './Stores/LoginStore';
 
 const Container = styled.header`
   display: flex;
@@ -50,13 +51,14 @@ const LogOutButton = styled.div`
 
 function MyPageHeader() {
   const navigate = useNavigate();
+  const { customFetch } = useFetch();
+  const { setIsLoggedin } = useContext(LoginStoreContext);
 
-  const onClick = () => {
-    fetch(`${FRONT_URL}/logout`).then((response) => {
-      if (response.status == 200) {
-        navigate('/');
-      }
-    });
+  const onClick = async () => {
+    await customFetch('/gologout', 'POST');
+
+    setIsLoggedin(false);
+    setTimeout(() => navigate('/'), 0);
   };
 
   return (

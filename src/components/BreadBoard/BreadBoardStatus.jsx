@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { icons, images } from '../../assets/assets';
 import { HOVER_CURSOR_PONTER } from '../../styles/constants';
-import { SERVER_URL } from '../../config';
+import useFetch from '../../hooks/useFetch';
 
 const Container = styled.div`
   position: relative;
@@ -31,26 +31,21 @@ const Container = styled.div`
 `;
 
 function BreadBoardStatus({ id, status, isDelivery, setIsNbbanged }) {
+  const { customFetch } = useFetch();
+
   const toggleStatus = () => {
     if (isDelivery) {
       setIsNbbanged((prev) => !prev);
       return;
     }
 
-    const newStatus = status === 'SEND' ? 'CHECK' : 'SEND';
-
-    fetch(`${SERVER_URL}/bread-board/${id}/send-status`, {
-      method: 'POST',
-      mode: 'cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sendStatus: newStatus }),
-    });
+    customFetch(`/bread-board/${id}/send-status`, 'POST', JSON.stringify({ isSent: !status }));
   };
 
   return (
     <Container onClick={toggleStatus}>
       <img src={images.bread} />
-      {(status === 'CHECK' || status === true) && <icons.CheckIcon />}
+      {status && <icons.CheckIcon />}
       {isDelivery ? (
         <div>{status ? '배달비\n나누기' : '배달비\n안 나누기'}</div>
       ) : (
@@ -61,7 +56,7 @@ function BreadBoardStatus({ id, status, isDelivery, setIsNbbanged }) {
 }
 
 BreadBoardStatus.propTypes = {
-  status: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  status: PropTypes.bool,
   id: PropTypes.string,
   isDelivery: PropTypes.bool,
   setIsNbbanged: PropTypes.func,

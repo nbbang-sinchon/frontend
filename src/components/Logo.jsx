@@ -42,7 +42,7 @@ const Title = styled.div`
 
 function Logo({ isTitleVisible }) {
   return (
-    <Link to="/main">
+    <Link to="/">
       <Container>
         <Image src={images.logo} />
         <Title isTitleVisible={isTitleVisible}>엔빵</Title>

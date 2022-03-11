@@ -1,18 +1,14 @@
 import { useEffect, useState } from 'react';
-import { SERVER_URL } from '../config';
+import useFetch from './useFetch';
 
 function useMyParty(isOnGoing) {
   const [parties, setParties] = useState([]);
+  const { customFetch } = useFetch();
 
-  useEffect(() => {
-    const fetchParty = async () => {
-      const res = await fetch(`${SERVER_URL}/members/parties/${isOnGoing ? 'on' : 'closed'}`);
-      const json = await res.json();
+  useEffect(async () => {
+    const json = await customFetch(`/members/parties/${isOnGoing ? 'on' : 'closed'}`);
 
-      setParties(json.data.parties);
-    };
-
-    fetchParty();
+    setParties(json.data.parties);
   }, [isOnGoing]);
 
   return { parties };

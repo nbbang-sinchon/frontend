@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { convertPrice } from '../../utils/converter';
-import { SERVER_URL } from '../../config';
+import useFetch from '../../hooks/useFetch';
 
 const Input = styled.input`
   display: flex;
@@ -15,6 +15,7 @@ const Input = styled.input`
 
 function BreadBoardPrice({ price, id, isDelivery }) {
   const inputRef = useRef();
+  const { customFetch } = useFetch();
 
   const submitPrice = (e) => {
     e.preventDefault();
@@ -26,12 +27,11 @@ function BreadBoardPrice({ price, id, isDelivery }) {
     }
 
     if (target.value != price) {
-      fetch(`${SERVER_URL}/bread-board/${id}/${(isDelivery && 'delivery-fee') || 'price'}`, {
-        method: 'POST',
-        mode: 'cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(target.value),
-      });
+      customFetch(
+        `/bread-board/${id}/${(isDelivery && 'delivery-fee') || 'price'}`,
+        'POST',
+        JSON.stringify(target.value),
+      );
     }
 
     formatPrice();
