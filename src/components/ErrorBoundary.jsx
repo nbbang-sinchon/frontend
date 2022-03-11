@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import { images } from '../assets/assets';
-import { Link } from 'react-router-dom';
 import plainButton from '../styles/plainButton';
 
 const Container = styled.div`
@@ -60,9 +59,9 @@ class ErrorBoundary extends React.Component {
           <Image src={images.breadBoardError} />
           <Content>
             <Title>{'이런 세상에! \n뭔가 잘못됐어요!!'}</Title>
-            <Link to="/">
+            <a href="/">
               <Back>메인 페이지로 돌아가기</Back>
-            </Link>
+            </a>
           </Content>
         </Container>
       );
