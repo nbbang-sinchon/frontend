@@ -147,9 +147,9 @@ function PartyDetailHeader({ party, isPartyPage, toggleMenu }) {
   const joinParty = async () => {
     const json = await customFetch(`/parties/${party.id}/join`, 'POST');
 
-    if (json.statusCode === 200) {
+    if (json?.statusCode === 200) {
       navigate(`/chats/${party.id}`);
-    } else {
+    } else if (json?.statusCode) {
       setModalState((prev) => ({ ...prev, content: json.message, type: 'ALERT' }));
     }
   };
