@@ -7,6 +7,7 @@ import useFetch from '../../hooks/useFetch';
 
 const Container = styled.div`
   position: relative;
+  top: 5px;
   font-size: 5px;
   text-align: center;
   width: 50px;
@@ -14,13 +15,13 @@ const Container = styled.div`
   ${HOVER_CURSOR_PONTER};
 
   img {
-    width: 28px;
+    width: 24px;
   }
 
   svg {
     position: absolute;
-    right: 14px;
-    top: 8px;
+    right: 16px;
+    top: 6px;
     width: 20px;
     height: 20px;
 
