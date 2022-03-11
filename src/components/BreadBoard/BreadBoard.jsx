@@ -53,8 +53,9 @@ const Users = styled.div`
   padding-top: 15px;
   padding-bottom: 20px;
 
-  width: 125%;
+  width: 145%;
   max-height: 200px;
+  margin-left: -20%;
   padding-right: 10px;
   overflow-y: auto;
   overflow-x: hidden;
@@ -66,7 +67,7 @@ const User = styled.div`
   display: flex;
   align-items: center;
 
-  width: ${(props) => (props.isDelivery ? '125%' : '100%')};
+  width: 125%;
   padding: 10px 0;
   padding-top: ${(props) => props.isDelivery && `20px`};
   white-space: pre-wrap;
@@ -88,9 +89,33 @@ const Bar = styled.span`
 `;
 
 const UserName = styled.div`
-  text-align: left;
-  width: 80px;
+  display: flex;
+  align-items: center;
+
+  width: 100px;
   padding: 0 10px;
+`;
+
+const Tag = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 20px;
+  height: 20px;
+  box-sizing: border-box;
+  background-color: ${COLORS.GRAY};
+  border-radius: 50%;
+  font-size: 10px;
+  margin-right: 3px;
+`;
+
+const TagColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  width: 11%;
 `;
 
 function BreadBoard({ isVisible, breadBoard, id }) {
@@ -103,6 +128,16 @@ function BreadBoard({ isVisible, breadBoard, id }) {
   const getPrice = (price) => price + (isNbbanged ? breadBoard.deliveryFee / breadBoard.members.length : 0);
 
   const getOwnerId = (breadBoard) => breadBoard?.members?.find((member) => member.isOwner).id;
+
+  const sortMember = (memberA, memberB) => {
+    if (memberB.id === loginId || (memberB.isOwner && memberA.id !== loginId)) {
+      return 1;
+    } else if (memberA.id === loginId || (memberA.isOwner && memberB.id !== loginId)) {
+      return -1;
+    } else {
+      return memberA.id - memberB.id;
+    }
+  };
 
   return (
     <Container isVisible={isVisible}>
@@ -121,10 +156,16 @@ function BreadBoard({ isVisible, breadBoard, id }) {
           />
         </Info>
         <Users>
-          {breadBoard?.members?.map((member) => (
+          {breadBoard?.members?.sort(sortMember).map((member) => (
             <User key={member.id || member.nickname}>
+              <TagColumn>
+                {member.id === loginId && <Tag>나</Tag>}
+                {member.isOwner && <Tag>방장</Tag>}
+              </TagColumn>
               <img src={member.avatar || images.logo} />
-              <UserName>{member.nickname}</UserName>
+              <UserName>
+                <div>{member.nickname}</div>
+              </UserName>
               <BreadBoardPrice price={getPrice(member.price)} id={id} disabled={member.id !== loginId} />
               <BreadBoardStatus status={member?.isSent} id={id} disabled={member.id !== loginId} />
             </User>

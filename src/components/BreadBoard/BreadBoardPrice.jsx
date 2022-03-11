@@ -9,7 +9,7 @@ const Input = styled.input`
   justify-content: flex-end;
 
   text-align: right;
-  width: 100px;
+  width: 80px;
   box-sizing: border-box;
 `;
 
@@ -78,6 +78,7 @@ function BreadBoardPrice({ price, id, isDelivery, disabled }) {
       onFocus={clearPrice}
       title=""
       ref={inputRef}
+      maxLength="8"
     />
   );
 }
