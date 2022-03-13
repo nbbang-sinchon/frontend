@@ -181,28 +181,6 @@ function MyProfile() {
     }
   }, [isConfirm, profile]);
 
-  // useEffect(() => {
-  //   const fetchPatchProfile = async () => {
-  //     const options = {
-  //       method: 'PATCH',
-  //       mode: 'cors',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       body: JSON.stringify(profile),
-  //     };
-
-  //     const res = await fetch(`${SERVER_URL}/members`, options);
-  //     const json = await res.json();
-
-  //     if (json.statusCode === 400) {
-  //       setIsConfirm(false);
-  //     } else if (json.statusCode === 200) {
-  //       navigate('/');
-  //     }
-  //   };
-
-  //   if (isConfirm) fetchPatchProfile();
-  // }, [isConfirm, profile]);
-
   return (
     <>
       <Container>
@@ -223,7 +201,7 @@ function MyProfile() {
             <h3>받은 추천 수</h3>
             <InnerContainer>
               <Image src={images.bread} />
-              <h3>10개</h3>
+              <h3>{profile.breadNumber === null ? 0 : profile.breadNumber}개</h3>
             </InnerContainer>
           </UserInfo>
           <SaveButton type="submit">저장하기</SaveButton>
