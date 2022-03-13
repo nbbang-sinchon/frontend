@@ -17,6 +17,13 @@ function useFetch() {
       });
     }
 
+    if (method === 'PATCH') {
+      Object.defineProperties(options, {
+        headers: { value: { 'Content-Type': 'application/json' } },
+        body: { value: body },
+      });
+    }
+
     setFetchState('PENDING');
 
     const res = await fetch(fullURL, options);
