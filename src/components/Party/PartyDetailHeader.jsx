@@ -150,7 +150,7 @@ function PartyDetailHeader({ party, isPartyPage, toggleMenu }) {
     if (json?.statusCode === 200) {
       navigate(`/chats/${party.id}`);
     } else if (json?.statusCode) {
-      setModalState((prev) => ({ ...prev, content: json.message, type: 'ALERT' }));
+      setModalState(() => ({ visible: true, content: json.message, type: 'ALERT' }));
     }
   };
 
