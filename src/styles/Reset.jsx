@@ -31,6 +31,7 @@ const reset = css`
   input,
   section,
   textarea,
+  button,
   summary {
     margin: 0;
     padding: 0;
