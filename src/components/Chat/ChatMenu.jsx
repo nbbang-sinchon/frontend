@@ -25,16 +25,16 @@ const Content = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 
   width: 280px;
   height: 300px;
-  margin: 150px 0 0 80px;
+  margin: 200px 0 0 80px;
 `;
 
 const Menu = styled(plainButton)`
   width: 100%;
   margin-bottom: 25px;
+  margin-top: ${(props) => props.bottom && '40px'};
 `;
 
 const ModalText = styled.div`
@@ -53,6 +53,7 @@ function ChatMenu({ isVisible, party }) {
     content: '파티에서 나가시겠습니까?',
     type: 'CONFIRM',
   });
+  const [isChangingStatus, setIsChangingStatus] = useState(false);
 
   const isOwner = party?.owner?.id === loginId;
 
@@ -66,7 +67,35 @@ function ChatMenu({ isVisible, party }) {
     }
   };
 
-  if (isOwner) {
+  const patchStatus = async ({ target }) => {
+    const status = target.dataset.status;
+
+    if (!status) {
+      return;
+    }
+
+    const json = await customFetch(`/parties/${party.id}/status`, 'PATCH', JSON.stringify({ status }));
+
+    if (json?.statusCode === 200) {
+      navigate(`/parties/${party.id}`);
+    }
+  };
+
+  if (isChangingStatus) {
+    return (
+      <Container isVisible={isVisible}>
+        <Image src={images.breadBoard} />
+        <Content onClick={patchStatus}>
+          <Menu data-status="OPEN">모집 중</Menu>
+          <Menu data-status="FULL">모집 완료</Menu>
+          <Menu data-status="CLOSED">모집 종료</Menu>
+          <Menu bottom onClick={() => setIsChangingStatus(false)}>
+            이전으로
+          </Menu>
+        </Content>
+      </Container>
+    );
+  } else if (isOwner) {
     return (
       <Container isVisible={isVisible}>
         <Image src={images.breadBoard} />
@@ -74,7 +103,7 @@ function ChatMenu({ isVisible, party }) {
           <Link to={`/parties/${party.id}`}>
             <Menu>파티 보기</Menu>
           </Link>
-          <Menu>모집 상태 변경</Menu>
+          <Menu onClick={() => setIsChangingStatus(true)}>모집 상태 변경</Menu>
           <Link to={`/newparty/${party.id}`}>
             <Menu>파티 수정</Menu>
           </Link>
