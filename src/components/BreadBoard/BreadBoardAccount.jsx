@@ -30,7 +30,7 @@ const Container = styled.div`
   }
 `;
 
-function BreadBoardAccount({ id, bank, account }) {
+function BreadBoardAccount({ id, bank, account, disabled }) {
   const bankRef = useRef();
   const accountRef = useRef();
   const { customFetch } = useFetch();
@@ -90,14 +90,14 @@ function BreadBoardAccount({ id, bank, account }) {
         placeholder="은행이름"
         ref={bankRef}
         maxLength="8"
-        disabled={false}
+        disabled={disabled}
         onBlur={submitAccount}
         onKeyDown={checkEnter}
       />
       <input
         placeholder="계좌번호"
         ref={accountRef}
-        disabled={false}
+        disabled={disabled}
         pattern="[0-9\-]*"
         onInput={checkAccount}
         onBlur={submitAccount}
@@ -112,6 +112,7 @@ BreadBoardAccount.propTypes = {
   id: PropTypes.string,
   bank: PropTypes.string,
   account: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 export default BreadBoardAccount;

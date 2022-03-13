@@ -7,11 +7,13 @@ export const LoginStoreContext = createContext();
 const loginSuspender = makeLoginSuspender();
 
 function LoginStore({ children }) {
-  const [isLoggedin, setIsLoggedin] = useState(loginSuspender);
+  const [loginId, setLoginId] = useState(loginSuspender);
 
   return (
     <Suspense fallback={<div>loafing...</div>}>
-      <LoginStoreContext.Provider value={{ isLoggedin, setIsLoggedin }}>{children}</LoginStoreContext.Provider>
+      <LoginStoreContext.Provider value={{ loginId, setLoginId, isLoggedin: loginId >= 0 }}>
+        {children}
+      </LoginStoreContext.Provider>
     </Suspense>
   );
 }

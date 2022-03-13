@@ -1,11 +1,13 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { COLORS, HOVER_CURSOR_PONTER, SIZES } from '../../styles/constants';
 import { convertStatus, convertPlace, convertDate } from '../../utils/converter';
 import { icons, images } from '../../assets/assets';
 import plainButton from '../../styles/plainButton';
+import useFetch from '../../hooks/useFetch';
+import Modal from '../Modal';
 
 const Container = styled.div`
   display: flex;
@@ -82,7 +84,7 @@ const Image = styled.img`
   }
 `;
 
-const ChattingButton = styled(plainButton)`
+const JoinButton = styled(plainButton)`
   @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
     font-size: 14px;
   }
@@ -102,40 +104,90 @@ const Profile = styled.div`
   }
 `;
 
+const ModalText = styled.div`
+  font-size: 20px;
+  font-weight: 500;
+  padding-top: 25px;
+  padding-bottom: 40px;
+`;
+
 function PartyDetailHeader({ party, isPartyPage, toggleMenu }) {
+  const { customFetch } = useFetch();
+  const navigate = useNavigate();
+  const [modalState, setModalState] = useState({
+    visible: false,
+    content: '파티에 참여하시겠습니까?',
+    type: 'CONFIRM',
+  });
+
+  const makeButton = (party, isPartyPage) => {
+    if (!isPartyPage) {
+      return (
+        <>
+          <icons.MenuIcon onClick={toggleMenu('CHATMENU')} />
+          <Image src={images.bread} onClick={toggleMenu('BREADBOARD')} />
+        </>
+      );
+    }
+    if (party?.isMember) {
+      return (
+        <Link to={'/chats/' + party.id}>
+          <JoinButton>채팅 입장</JoinButton>
+        </Link>
+      );
+    } else {
+      return (
+        <JoinButton onClick={() => setModalState((prev) => ({ ...prev, visible: !prev.visible }))}>
+          파티 참여
+        </JoinButton>
+      );
+    }
+  };
+
+  const joinParty = async () => {
+    const json = await customFetch(`/parties/${party.id}/join`, 'POST');
+
+    if (json?.statusCode === 200) {
+      navigate(`/chats/${party.id}`);
+    } else if (json?.statusCode) {
+      setModalState(() => ({ visible: true, content: json.message, type: 'ALERT' }));
+    }
+  };
+
   if (!party?.owner) {
     return <Container />;
   }
   return (
-    <Container>
-      <StatusColumn>
-        <Image src={party.owner.avatar || images.logo} isProfile />
-        <Profile>
-          <div>{party.owner.nickname}</div>
-          <div> {convertPlace(party.owner.place)}</div>
-        </Profile>
-      </StatusColumn>
-      <StatusColumn>
-        <div>{`${party.joinNumber} / ${party.goalNumber} 명`}</div>
-        <Bar />
-        <div>{convertStatus(party.status, party.joinNumber, party.goalNumber)}</div>
-        <Bar />
-        <div>{convertDate(party.createTime)}</div>
-      </StatusColumn>
-      <StatusColumn isChatPage={!isPartyPage}>
-        <icons.HeartIcon />
-        {(isPartyPage && (
-          <Link to={'/chats/' + party.id}>
-            <ChattingButton>채팅 입장</ChattingButton>
-          </Link>
-        )) || (
-          <>
-            <icons.MenuIcon onClick={toggleMenu('CHATMENU')} />
-            <Image src={images.bread} onClick={toggleMenu('BREADBOARD')} />{' '}
-          </>
-        )}
-      </StatusColumn>
-    </Container>
+    <>
+      <Container>
+        <StatusColumn>
+          <Image src={party.owner.avatar || images.logo} isProfile />
+          <Profile>
+            <div>{party.owner.nickname}</div>
+            <div> {convertPlace(party.owner.place)}</div>
+          </Profile>
+        </StatusColumn>
+        <StatusColumn>
+          <div>{`${party.joinNumber} / ${party.goalNumber} 명`}</div>
+          <Bar />
+          <div>{convertStatus(party.status, party.joinNumber, party.goalNumber)}</div>
+          <Bar />
+          <div>{convertDate(party.createTime)}</div>
+        </StatusColumn>
+        <StatusColumn isChatPage={!isPartyPage}>
+          <icons.HeartIcon />
+          {makeButton(party, isPartyPage)}
+        </StatusColumn>
+      </Container>
+      <Modal
+        type={modalState.type}
+        visible={modalState.visible}
+        onConfirm={joinParty}
+        onDisconfirm={() => setModalState((prev) => ({ ...prev, visible: false }))}
+        onClose={() => setModalState((prev) => ({ ...prev, visible: false }))}>
+        <ModalText>{modalState.content}</ModalText>
+      </Modal>
+    </>
   );
 }
 

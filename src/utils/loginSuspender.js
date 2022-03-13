@@ -1,23 +1,27 @@
 import { SERVER_URL } from '../config';
 
 const makeLoginSuspender = () => {
-  let state;
+  let id;
   let status = 'INIT';
 
   const fetchLogin = async () => {
     const res = await fetch(`${SERVER_URL}/members`, { credentials: 'include' });
     const json = await res.json();
 
-    return json.statusCode !== 401;
+    if (json.statusCode === 200) {
+      return json.data.id;
+    } else {
+      return -1;
+    }
   };
 
   const fetchingUser = fetchLogin()
-    .then((isLoggedin) => {
-      state = isLoggedin;
+    .then((code) => {
+      id = code;
       status = 'DONE';
     })
     .catch(() => {
-      state = false;
+      id = -1;
       status = 'DONE';
     });
 
@@ -26,7 +30,7 @@ const makeLoginSuspender = () => {
       throw fetchingUser;
     }
 
-    return state;
+    return id;
   };
 };
 

@@ -34,7 +34,10 @@ function useChatUpdate(id, chats, setChats) {
 
   useEffect(() => {
     const pushNewChat = ({ body }) => {
-      setChats((prev) => [...prev, JSON.parse(body).data]);
+      const parsedBody = JSON.parse(body);
+      if (parsedBody?.type === 'chatting') {
+        setChats((prev) => [...prev, parsedBody.data]);
+      }
     };
 
     const connectSocket = async () => {
