@@ -31,8 +31,8 @@ function ChatPage() {
         <Chats chats={chats} detectorRef={detectorRef} />
         <ChatForm id={id} />
       </Main>
-      <BreadBoard isVisible={isBreadBoardVisible} party={party} breadBoard={breadBoard} id={id} />
-      <ChatMenu isVisible={isChatMenuVisible} />
+      <BreadBoard isVisible={isBreadBoardVisible} breadBoard={breadBoard} id={id} />
+      <ChatMenu isVisible={isChatMenuVisible} party={party} />
     </>
   );
 }
