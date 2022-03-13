@@ -182,6 +182,7 @@ function NewParty() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(newParty),
+        credentials: 'include',
       };
 
       const res = await fetch(`${SERVER_URL}/parties`, options);

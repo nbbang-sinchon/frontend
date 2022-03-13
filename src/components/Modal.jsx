@@ -120,7 +120,7 @@ Modal.propTypes = {
   children: PropTypes.object.isRequired,
   onConfirm: PropTypes.func,
   onDisconfirm: PropTypes.func,
-  onClose: PropTypes.bool,
+  onClose: PropTypes.func,
 };
 
 export default Modal;

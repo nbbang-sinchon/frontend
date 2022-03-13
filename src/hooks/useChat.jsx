@@ -11,7 +11,7 @@ function useChat(id) {
     const json = await customFetch(`/chats/${id}?pageSize=${CHAT_PAGE_SIZE}`);
 
     setParty(json.data);
-    setChats(json.data.messages);
+    setChats(json.data?.messages);
   }, []);
 
   return { party, chats, setChats };

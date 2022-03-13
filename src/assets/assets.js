@@ -20,12 +20,13 @@ import kakao from './images/Kakao.png';
 import naver from './images/Naver.png';
 import google from './images/Google.png';
 import breadBoard from './images/bread-board.png';
+import breadBoardError from './images/bread-board-error.png';
 import delivery from './images/delivery.png';
 import member1 from './images/member1.png';
 import member2 from './images/member2.png';
 import member3 from './images/member3.png';
 
-const images = { logo, bread, kakao, naver, google, breadBoard, delivery, member1, member2, member3 };
+const images = { logo, bread, kakao, naver, google, breadBoard, delivery, member1, member2, member3, breadBoardError };
 
 const icons = {
   NotificationIcon,
