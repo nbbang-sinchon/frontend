@@ -193,7 +193,7 @@ function MyParty({ title, hashtags, joinNumber, goalNumber, status, id, color, n
         <Column>
           <Status color={color}>{convertStatus(status, joinNumber, goalNumber)}</Status>
           <StatusBtn color={color} onClick={() => setIsChangingStatus((prev) => !prev)}>
-            {isOwner ? '상태변경' : '방장이 아닙니다'}{' '}
+            {isOwner ? '상태변경' : '방장이 아닙니다'}
           </StatusBtn>
         </Column>
         <MenuColumn visible={isOwner && isChangingStatus} onClick={patchStatus}>
