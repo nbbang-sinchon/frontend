@@ -1,21 +1,17 @@
 import { useEffect, useState } from 'react';
-import { SERVER_URL } from '../config';
+import useFetch from './useFetch';
 
 function useProfile() {
   const [profile, setProfile] = useState({
     nickname: '',
-    place: 'SINCHON',
+    place: '',
   });
+  const { customFetch } = useFetch();
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      const res = await fetch(`${SERVER_URL}/members`);
-      const json = await res.json();
+  useEffect(async () => {
+    const json = await customFetch(`/members`);
 
-      setProfile(json.data);
-    };
-
-    fetchProfile();
+    setProfile(json.data);
   }, []);
 
   return { profile, setProfile };

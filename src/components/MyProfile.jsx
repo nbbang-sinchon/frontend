@@ -3,11 +3,11 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { images } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
-import { SERVER_URL } from '../config';
 import { MODALS } from '../styles/constants';
 import Modal from './Modal';
 import useProfile from '../hooks/useProfile';
 import useConfirm from '../hooks/useConfirm';
+import useFetch from '../hooks/useFetch';
 
 const Container = styled.div`
   height: 100vh;
@@ -149,6 +149,7 @@ const Image = styled.img`
 
 function MyProfile() {
   const navigate = useNavigate();
+  const { customFetch } = useFetch();
 
   const { isConfirm, setIsConfirm, openConfirmModal, confirmModalVisible, onConfirm, onDisconfirm } = useConfirm();
   const { profile, setProfile } = useProfile();
@@ -167,27 +168,40 @@ function MyProfile() {
     openConfirmModal();
   };
 
-  useEffect(() => {
-    const fetchPatchProfile = async () => {
-      const options = {
-        method: 'PATCH',
-        mode: 'cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(profile),
-      };
-
-      const res = await fetch(`${SERVER_URL}/members`, options);
-      const json = await res.json();
+  useEffect(async () => {
+    if (isConfirm) {
+      const body = profile;
+      const json = await customFetch(`/members`, 'PATCH', JSON.stringify(body));
 
       if (json.statusCode === 400) {
         setIsConfirm(false);
       } else if (json.statusCode === 200) {
         navigate('/');
       }
-    };
-
-    if (isConfirm) fetchPatchProfile();
+    }
   }, [isConfirm, profile]);
+
+  // useEffect(() => {
+  //   const fetchPatchProfile = async () => {
+  //     const options = {
+  //       method: 'PATCH',
+  //       mode: 'cors',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify(profile),
+  //     };
+
+  //     const res = await fetch(`${SERVER_URL}/members`, options);
+  //     const json = await res.json();
+
+  //     if (json.statusCode === 400) {
+  //       setIsConfirm(false);
+  //     } else if (json.statusCode === 200) {
+  //       navigate('/');
+  //     }
+  //   };
+
+  //   if (isConfirm) fetchPatchProfile();
+  // }, [isConfirm, profile]);
 
   return (
     <>
