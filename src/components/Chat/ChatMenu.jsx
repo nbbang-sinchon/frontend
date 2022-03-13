@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { images } from '../../assets/assets';
 import plainButton from '../../styles/plainButton';
 import { LoginStoreContext } from '../Stores/LoginStore';
@@ -33,6 +33,7 @@ const Content = styled.div`
 `;
 
 const Menu = styled(plainButton)`
+  width: 100%;
   margin-bottom: 25px;
 `;
 
@@ -70,9 +71,13 @@ function ChatMenu({ isVisible, party }) {
       <Container isVisible={isVisible}>
         <Image src={images.breadBoard} />
         <Content>
-          <Menu>파티 보기</Menu>
+          <Link to={`/parties/${party.id}`}>
+            <Menu>파티 보기</Menu>
+          </Link>
           <Menu>모집 상태 변경</Menu>
-          <Menu>파티 수정</Menu>
+          <Link to={`/newparty/${party.id}`}>
+            <Menu>파티 수정</Menu>
+          </Link>
         </Content>
       </Container>
     );
@@ -82,7 +87,9 @@ function ChatMenu({ isVisible, party }) {
         <Container isVisible={isVisible}>
           <Image src={images.breadBoard} />
           <Content>
-            <Menu>파티 보기</Menu>
+            <Link to={`/parties/${party.id}`}>
+              <Menu>파티 보기</Menu>
+            </Link>
             <Menu onClick={() => setModalState((prev) => ({ ...prev, visible: true }))}>파티 나가기</Menu>
           </Content>
         </Container>
