@@ -15,7 +15,7 @@ function MyPartyPage() {
   return (
     <>
       <Header />
-      <Main isMyPartyPage={true}>
+      <Main isMyPartyPage>
         {isOnGoing ? (
           <>
             <MyPartyHeader onClick={toggleParties} toggle={isOnGoing} />

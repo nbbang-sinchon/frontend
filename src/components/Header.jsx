@@ -135,7 +135,7 @@ function Header({ setOption, search }) {
   return (
     <Container>
       <HeaderColumn>
-        <Logo isTitleVisible={true} />
+        <Logo isTitleVisible />
       </HeaderColumn>
       <HeaderColumn>
         <SearchBar onSubmit={searchKeyword}>

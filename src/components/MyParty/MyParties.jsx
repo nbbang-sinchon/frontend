@@ -49,6 +49,8 @@ function MyParties({ parties }) {
               goalNumber={party.goalNumber}
               id={party.id}
               color={color}
+              notReadNumber={party.notReadNumber}
+              isOwner={party.isOwner}
             />
           );
         })}

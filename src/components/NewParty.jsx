@@ -3,12 +3,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { icons } from '../assets/assets';
 import { COLORS, MODALS } from '../styles/constants';
-import { SERVER_URL } from '../config';
 import Logo from './Logo';
 import Modal from './Modal';
 import { hashTagStringToList } from '../utils/hashtags';
 import useConfirm from '../hooks/useConfirm';
 import useAlert from '../hooks/useAlert';
+import useFetch from '../hooks/useFetch';
 
 const Header = styled.header`
   display: flex;
@@ -148,6 +148,7 @@ const ContentInput = styled.textarea`
 
 function NewParty() {
   const navigate = useNavigate();
+  const { customFetch } = useFetch();
   const formRef = useRef();
 
   const { isConfirm, setIsConfirm, openConfirmModal, confirmModalVisible, onConfirm, onDisconfirm } = useConfirm();
@@ -174,19 +175,10 @@ function NewParty() {
     openConfirmModal();
   };
 
-  useEffect(() => {
-    const fetchNewParty = async () => {
-      const options = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newParty),
-        credentials: 'include',
-      };
-
-      const res = await fetch(`${SERVER_URL}/parties`, options);
-      const json = await res.json();
+  useEffect(async () => {
+    if (isConfirm) {
+      const body = newParty;
+      const json = await customFetch(`/parties`, 'POST', JSON.stringify(body));
 
       if (json.statusCode === 400) {
         setAlertMessage(json.errors[0].errorMessage);
@@ -195,10 +187,7 @@ function NewParty() {
       } else if (json.statusCode === 200) {
         navigate('/');
       }
-    };
-
-    if (isConfirm) fetchNewParty();
-    else return;
+    }
   }, [isConfirm, newParty]);
 
   return (

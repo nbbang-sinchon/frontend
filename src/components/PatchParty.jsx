@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
 import { icons } from '../assets/assets';
 import { COLORS, MODALS } from '../styles/constants';
-import { SERVER_URL } from '../config';
 import Logo from './Logo';
 import Modal from './Modal';
 import { hashTagStringToList, hashTagListToString } from '../utils/hashtags';
 import useConfirm from '../hooks/useConfirm';
 import useAlert from '../hooks/useAlert';
+import useFetch from '../hooks/useFetch';
 
 const Header = styled.header`
   display: flex;
@@ -149,6 +149,7 @@ const ContentInput = styled.textarea`
 
 function PatchParty({ id, party }) {
   const navigate = useNavigate();
+  const { customFetch } = useFetch();
   const formRef = useRef();
 
   const { isConfirm, setIsConfirm, openConfirmModal, confirmModalVisible, onConfirm, onDisconfirm } = useConfirm();
@@ -203,18 +204,10 @@ function PatchParty({ id, party }) {
     openConfirmModal();
   };
 
-  useEffect(() => {
-    const fetchPatchParty = async () => {
-      const options = {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newParty),
-      };
-
-      const res = await fetch(`${SERVER_URL}/parties/${id}`, options);
-      const json = await res.json();
+  useEffect(async () => {
+    if (isConfirm) {
+      const body = newParty;
+      const json = await customFetch(`/parties/${id}`, 'PATCH', JSON.stringify(body));
 
       if (json.statusCode === 400) {
         setAlertMessage(json.errors[0].errorMessage);
@@ -223,10 +216,7 @@ function PatchParty({ id, party }) {
       } else if (json.statusCode === 200) {
         navigate('/');
       }
-    };
-
-    if (isConfirm) fetchPatchParty();
-    else return;
+    }
   }, [isConfirm, newParty]);
 
   return (
