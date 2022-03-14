@@ -19,7 +19,7 @@ function useBreadBoardUpdate(id, setBreadBoard) {
     connectSocket();
 
     return () => {
-      socket.unsubscribe('/topic/breadBoard/' + id, updateBreadBoard);
+      socket.unsubscribe('/topic/breadBoard/' + id);
     };
   }, []);
 

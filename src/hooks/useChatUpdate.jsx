@@ -50,7 +50,7 @@ function useChatUpdate(id, chats, setChats) {
     connectSocket();
 
     return () => {
-      socket.unsubscribe('/topic/chatting/' + id, pushNewChat);
+      socket.unsubscribe('/topic/chatting/' + id);
     };
   }, []);
 
