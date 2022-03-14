@@ -53,7 +53,7 @@ const InnerContent = styled.div`
   color: ${(props) => (props.isNotice || props.isSender) && COLORS.WHITE};
   border-radius: 20px;
   white-space: pre-wrap;
-  margin: ${(props) => props.isNotice && '15px 0'};
+  margin: ${(props) => props.isNotice && '10px 0'};
   opacity: ${(props) => props.isNotice && '0.8'};
 `;
 
