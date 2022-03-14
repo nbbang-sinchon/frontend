@@ -87,6 +87,10 @@ const Row = styled.div`
   flex-direction: ${(props) => (props.isSender && 'row-reverse') || 'row'};
 `;
 
+const Wrapper = styled.div`
+  width: 100%;
+`;
+
 const Chat = forwardRef(({ chat, isContinuous, isSender }, ref) => {
   if (chat.type === 'EXIT' || chat.type === 'ENTER') {
     return (
@@ -114,7 +118,7 @@ const Chat = forwardRef(({ chat, isContinuous, isSender }, ref) => {
   return (
     <Container isSender={isSender} ref={ref}>
       {!isSender && <Image src={chat.sender.avatar || images.logo} />}
-      <div>
+      <Wrapper>
         {!isSender && <Nickname>{chat.sender.nickname}</Nickname>}
         <Row isSender={isSender}>
           <Content>
@@ -125,7 +129,7 @@ const Chat = forwardRef(({ chat, isContinuous, isSender }, ref) => {
             <Time>{convertDateToTime(chat.createTime)}</Time>
           </InfoColumn>
         </Row>
-      </div>
+      </Wrapper>
     </Container>
   );
 });
