@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Chat from './Chat';
 import { SCROLL_PRIMARY } from '../../styles/constants';
+import { LoginStoreContext } from '../Stores/LoginStore';
 
 const Container = styled.div`
   display: flex;
@@ -23,15 +24,17 @@ function Chats({ chats, detectorRef }) {
   const firstChatRef = useRef();
   const oldChatRef = useRef();
   const chatsRef = useRef();
+  const { loginId } = useContext(LoginStoreContext);
 
   const makeChats = (chats) =>
     chats.map((chat, i, arr) => {
       const isContinuous = i > 0 && arr[i - 1].sender.id === chat.sender.id;
+      const isSender = chat.sender.id === loginId;
 
       if (i === 0) {
-        return <Chat key={chat.id} chat={chat} isContinuous={isContinuous} ref={firstChatRef} />;
+        return <Chat key={chat.id} chat={chat} isContinuous={isContinuous} isSender={isSender} ref={firstChatRef} />;
       } else {
-        return <Chat key={chat.id} chat={chat} isContinuous={isContinuous} />;
+        return <Chat key={chat.id} chat={chat} isContinuous={isContinuous} isSender={isSender} />;
       }
     });
 

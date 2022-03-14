@@ -82,7 +82,7 @@ const NotRead = styled.div`
   margin: 0 5px;
 `;
 
-const Chat = forwardRef(({ chat, isContinuous }, ref) => {
+const Chat = forwardRef(({ chat, isContinuous, isSender }, ref) => {
   if (chat.type === 'EXIT' || chat.type === 'ENTER') {
     return (
       <Container isNotice ref={ref}>
@@ -94,27 +94,27 @@ const Chat = forwardRef(({ chat, isContinuous }, ref) => {
   }
   if (isContinuous) {
     return (
-      <Container isSender={chat.isSender} isContinuous ref={ref}>
-        {!chat.isSender && <Blank />}
+      <Container isSender={isSender} isContinuous ref={ref}>
+        {!isSender && <Blank />}
         <Content>
-          <InnerContent isSender={chat.isSender}>{chat.content}</InnerContent>
+          <InnerContent isSender={isSender}>{chat.content}</InnerContent>
         </Content>
         <InfoColumn>
-          <NotRead isSender={chat.isSender}>{chat.notReadNumber || ''}</NotRead>
+          <NotRead isSender={isSender}>{chat.notReadNumber || ''}</NotRead>
           <Time>{convertDateToTime(chat.createTime)}</Time>
         </InfoColumn>
       </Container>
     );
   }
   return (
-    <Container isSender={chat.isSender} ref={ref}>
-      {!chat.isSender && <Image src={chat.sender.avatar || images.logo} />}
+    <Container isSender={isSender} ref={ref}>
+      {!isSender && <Image src={chat.sender.avatar || images.logo} />}
       <Content>
-        {!chat.isSender && <Nickname>{chat.sender.nickname}</Nickname>}
-        <InnerContent isSender={chat.isSender}>{chat.content}</InnerContent>
+        {!isSender && <Nickname>{chat.sender.nickname}</Nickname>}
+        <InnerContent isSender={isSender}>{chat.content}</InnerContent>
       </Content>
       <InfoColumn>
-        <NotRead isSender={chat.isSender}>{chat.notReadNumber || ''}</NotRead>
+        <NotRead isSender={isSender}>{chat.notReadNumber || ''}</NotRead>
         <Time>{convertDateToTime(chat.createTime)}</Time>
       </InfoColumn>
     </Container>
@@ -125,6 +125,7 @@ Chat.displayName = 'Chat';
 Chat.propTypes = {
   chat: PropTypes.object,
   isContinuous: PropTypes.bool,
+  isSender: PropTypes.bool,
 };
 
 export default Chat;
