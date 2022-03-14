@@ -33,10 +33,17 @@ function useChatUpdate(id, chats, setChats) {
   }, [chats, isReady]);
 
   useEffect(() => {
-    const pushNewChat = ({ body }) => {
+    const receiveChat = ({ body }) => {
       const parsedBody = JSON.parse(body);
+
       if (parsedBody?.type === 'chatting') {
         setChats((prev) => [...prev, parsedBody.data]);
+      } else if (parsedBody?.type === 'reading') {
+        const { lastReadMessageId } = parsedBody.data;
+        const decreaseNotRead = (chat) =>
+          chat.id > lastReadMessageId ? { ...chat, notReadNumber: chat.notReadNumber - 1 } : chat;
+
+        setChats((prev) => prev.map(decreaseNotRead));
       }
     };
 
@@ -44,7 +51,7 @@ function useChatUpdate(id, chats, setChats) {
       if (!socket.connected) {
         await isConnecting;
       }
-      socket.subscribe('/topic/chatting/' + id, pushNewChat);
+      socket.subscribe('/topic/chatting/' + id, receiveChat);
     };
 
     connectSocket();
