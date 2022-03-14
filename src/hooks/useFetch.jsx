@@ -12,7 +12,7 @@ function useFetch() {
     const fullURL = (process.env?.NODE_ENV === 'development' ? SERVER_URL : '/api') + url;
     const options = { method, mode: 'cors', credentials: 'include' };
 
-    if (method === 'POST') {
+    if (method === 'POST' || method === 'PATCH') {
       Object.defineProperties(options, {
         headers: { value: { 'Content-Type': 'application/json' } },
         body: { value: body },
