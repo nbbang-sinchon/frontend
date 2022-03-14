@@ -28,7 +28,7 @@ function Chats({ chats, detectorRef }) {
 
   const makeChats = (chats) =>
     chats.map((chat, i, arr) => {
-      const isContinuous = i > 0 && arr[i - 1].sender.id === chat.sender.id;
+      const isContinuous = i > 0 && arr[i - 1].type === 'CHAT' && arr[i - 1].sender.id === chat.sender.id;
       const isSender = chat.sender.id === loginId;
 
       if (i === 0) {
