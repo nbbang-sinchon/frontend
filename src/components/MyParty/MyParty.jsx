@@ -179,7 +179,7 @@ function MyParty({ title, hashtags, joinNumber, goalNumber, status, id, color, n
             </HashTagRow>
             <Row>
               <Link to={`/parties/${id}`}>
-                <icons.DeatilIcon />
+                <icons.DetailIcon />
               </Link>
               <Link to={`/newparty/${id}`}>
                 <icons.EditIcon />
