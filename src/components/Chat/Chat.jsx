@@ -46,6 +46,7 @@ const Content = styled.div`
 `;
 
 const InnerContent = styled.div`
+  width: fit-content;
   height: fit-content;
   background: ${(props) => (props.isNotice ? COLORS.DARK_GRAY : props.isSender ? COLORS.PRIMARY : COLORS.GRAY)};
   padding: ${(props) => (props.isNotice ? '7px 30px' : '7px 15px')};
@@ -54,7 +55,6 @@ const InnerContent = styled.div`
   white-space: pre-wrap;
   margin: ${(props) => props.isNotice && '15px 0'};
   opacity: ${(props) => props.isNotice && '0.8'};
-  white-space: ${(props) => props.isNotice && 'nowrap'};
 `;
 
 const Time = styled.div`
@@ -80,6 +80,11 @@ const NotRead = styled.div`
   font-size: 12px;
   color: ${COLORS.PRIMARY};
   margin: 0 5px;
+`;
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: ${(props) => (props.isSender && 'row-reverse') || 'row'};
 `;
 
 const Chat = forwardRef(({ chat, isContinuous, isSender }, ref) => {
@@ -109,14 +114,18 @@ const Chat = forwardRef(({ chat, isContinuous, isSender }, ref) => {
   return (
     <Container isSender={isSender} ref={ref}>
       {!isSender && <Image src={chat.sender.avatar || images.logo} />}
-      <Content>
+      <div>
         {!isSender && <Nickname>{chat.sender.nickname}</Nickname>}
-        <InnerContent isSender={isSender}>{chat.content}</InnerContent>
-      </Content>
-      <InfoColumn>
-        <NotRead isSender={isSender}>{chat.notReadNumber || ''}</NotRead>
-        <Time>{convertDateToTime(chat.createTime)}</Time>
-      </InfoColumn>
+        <Row isSender={isSender}>
+          <Content>
+            <InnerContent isSender={isSender}>{chat.content}</InnerContent>
+          </Content>
+          <InfoColumn>
+            <NotRead isSender={isSender}>{chat.notReadNumber || ''}</NotRead>
+            <Time>{convertDateToTime(chat.createTime)}</Time>
+          </InfoColumn>
+        </Row>
+      </div>
     </Container>
   );
 });
