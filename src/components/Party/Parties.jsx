@@ -3,8 +3,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Party from './Party';
 import { SIZES, PARTY_COLORS } from '../../styles/constants';
+import { images } from '../../assets/assets';
 
-const Container = styled.div``;
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
 const PartyContainer = styled.div`
   display: flex;
@@ -33,7 +37,41 @@ const PartyContainer = styled.div`
   }
 `;
 
+const ErrorContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+  height: 500px;
+`;
+
+const ErrorContent = styled.div`
+  padding-right: 40px;
+  font-size: 22px;
+  font-weight: bold;
+  white-space: pre-line;
+  z-index: 1;
+`;
+
+const Image = styled.img`
+  position: absolute;
+  height: 500px;
+  z-index: 0;
+`;
+
 function Parties({ parties, detectorRef }) {
+  if (parties.length === 0) {
+    return (
+      <Container>
+        <ErrorContainer>
+          <ErrorContent>{`검색 결과가 없습니다!\n조건을 바꿔서 \n다시 시도해보세요`}</ErrorContent>
+          <Image src={images.breadBoardError} />
+          <div ref={detectorRef} />
+        </ErrorContainer>
+      </Container>
+    );
+  }
   return (
     <Container>
       <PartyContainer>
