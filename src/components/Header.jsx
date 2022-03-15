@@ -38,18 +38,18 @@ const HeaderColumn = styled.div`
 
   &:nth-of-type(3) svg {
     min-width: 24px;
-    margin-left: 8px;
+    margin-left: 15px;
 
     ${HOVER_CURSOR_PONTER};
 
     @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
-      margin-left: 5px;
+      margin-left: 10px;
       width: 24px;
       height: 24px;
     }
 
     @media only screen and (max-width: ${SIZES.SMALL_WIDTH}) {
-      margin-left: 3px;
+      margin-left: 5px;
       width: 20px;
       height: 20px;
     }
@@ -152,7 +152,6 @@ function Header({ setOption, search }) {
         <Link to="/mypage">
           <icons.ProfileIcon />
         </Link>
-        <icons.NotificationIcon />
       </HeaderColumn>
     </Container>
   );
