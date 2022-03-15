@@ -24,6 +24,10 @@ const Row = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  svg {
+    margin-right: 2px;
+  }
 `;
 
 const Column = styled.div`
@@ -186,10 +190,7 @@ function MyParty({ title, hashtags, joinNumber, goalNumber, status, id, color, n
                 <icons.DetailIcon />
               </Link>
               <Link to={`/newparty/${id}`}>
-                <icons.EditIcon />
-              </Link>
-              <Link to="/">
-                <icons.DeleteIcon />
+                <icons.EditIcon style={{ display: `${isOwner ? 'block' : 'none'}` }} />
               </Link>
             </Row>
           </Row>
