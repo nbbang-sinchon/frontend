@@ -89,6 +89,7 @@ function Parties({ parties, detectorRef }) {
               goalNumber={party.goalNumber}
               id={party.id}
               color={color}
+              isWishlist={party.isWishlist}
             />
           );
         })}

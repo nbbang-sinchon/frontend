@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
 import { COLORS, HOVER_CURSOR_PONTER, SIZES } from '../../styles/constants';
@@ -42,7 +42,7 @@ const StatusColumn = styled.div`
   }
 
   svg {
-    padding: 0 5px;
+    padding: 0 15px;
     width: 40px;
     height: 40px;
 
@@ -53,7 +53,7 @@ const StatusColumn = styled.div`
     ${HOVER_CURSOR_PONTER};
 
     @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
-      padding: 0;
+      padding: 0 10px;
       width: 32px;
       height: 32px;
     }
@@ -115,6 +115,7 @@ const ModalText = styled.div`
 function PartyDetailHeader({ party, isPartyPage, toggleMenu }) {
   const { customFetch } = useFetch();
   const navigate = useNavigate();
+  const [isWishlist, setIsWishlist] = useState(false);
   const [modalState, setModalState] = useState({
     visible: false,
     content: '파티에 참여하시겠습니까?',
@@ -162,11 +163,27 @@ function PartyDetailHeader({ party, isPartyPage, toggleMenu }) {
     }
   };
 
-  const toggleWishList = () => {
+  const toggleWishList = async (isWishlist) => {
     if (!isLoggedin) {
       navigate('/login');
+      return;
+    }
+
+    let json;
+    if (isWishlist) {
+      json = await customFetch(`/parties/${party.id}/wishlist`, 'DELETE');
+    } else {
+      json = await customFetch(`/parties/${party.id}/wishlist`, 'POST');
+    }
+
+    if (json.statusCode === 200) {
+      setIsWishlist((prev) => !prev);
     }
   };
+
+  useEffect(() => {
+    setIsWishlist(party?.isWishlist);
+  }, [party]);
 
   if (!party?.owner) {
     return <Container />;
@@ -189,7 +206,12 @@ function PartyDetailHeader({ party, isPartyPage, toggleMenu }) {
           <div>{convertDate(party.createTime)}</div>
         </StatusColumn>
         <StatusColumn isChatPage={!isPartyPage}>
-          <icons.HeartIcon onClick={toggleWishList} />
+          {isWishlist ? (
+            <icons.FilledHeartIcon onClick={() => toggleWishList(isWishlist)} />
+          ) : (
+            <icons.HeartIcon onClick={() => toggleWishList(isWishlist)} />
+          )}
+
           {makeButton(party, isPartyPage)}
         </StatusColumn>
       </Container>
