@@ -13,7 +13,7 @@ const InnerContainer = styled.div`
   position: fixed;
   display: flex;
   flex-direction: column-reverse;
-  bottom: 20px;
+  bottom: 200px;
 
   z-index: 2;
 `;
@@ -25,7 +25,8 @@ const Alarm = styled.div`
 
   width: 270px;
   margin: 5px 0;
-  padding: 8px 25px 8px 15px;
+  margin-right: -10px;
+  padding: 8px 30px 8px 15px;
   box-sizing: border-box;
   background-color: #859527;
   color: ${COLORS.WHITE};
