@@ -80,6 +80,8 @@ const NotReadChat = styled.div`
   position: relative;
   bottom: 15px;
   left: 15px;
+
+  display: ${(props) => (props.visible ? 'block' : 'none')};
 `;
 
 const Status = styled.div`
@@ -170,7 +172,9 @@ function MyParty({ title, hashtags, joinNumber, goalNumber, status, id, color, n
           <Link to={`/chats/${id}`}>
             <Title color={color}>
               {title}
-              <NotReadChat notReadNumber={notReadNumber}>{notReadNumber > 99 ? '99+' : notReadNumber}</NotReadChat>
+              <NotReadChat visible={notReadNumber > 0} notReadNumber={notReadNumber}>
+                {notReadNumber > 99 ? '99+' : notReadNumber}
+              </NotReadChat>
             </Title>
           </Link>
           <Row>
