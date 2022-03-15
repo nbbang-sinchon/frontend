@@ -57,25 +57,27 @@ const convertDateToTime = (dateString) => {
 
 const convertOptionToParam = (option) => {
   const params = [];
-  const placeKeys = Object.keys(option.place);
+  const places = Object.entries(option.place).filter((entry) => entry[1]);
 
   if (option.search) {
     params.push(`search=${option.search}`);
   }
+  if (option.WISHLIST) {
+    params.push(`isWishlist=true`);
+  }
 
-  params.push(`status=OPEN`);
-  if (!option.OPEN) {
+  if (option.OPEN) {
+    params.push(`status=OPEN`);
+  } else {
     params.push(`status=CLOSED`);
     params.push(`status=FULL`);
   }
 
-  if (placeKeys.length === 0) {
+  if (places.length === 0) {
     params.push(`place=NONE`);
   } else {
-    placeKeys.forEach((place) => {
-      if (option.place[place]) {
-        params.push(`place=${place}`);
-      }
+    places.forEach((place) => {
+      params.push(`place=${place[0]}`);
     });
   }
 
