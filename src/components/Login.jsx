@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 import { images } from '../assets/assets';
 import { COLORS, HOVER_CURSOR_PONTER, SIZES } from '../styles/constants';
-import { GOOGLE_LOGIN_URL } from '../config';
+import { LOGIN_URLS } from '../config';
 
 function Login() {
   const Container = styled.div`
@@ -59,9 +59,13 @@ function Login() {
       <Container>
         <InnerContainer>
           <h1>어서 파티를 만들러 가고싶어요!</h1>
-          <Image src={images.kakao} />
-          <Image src={images.naver} />
-          <a href={GOOGLE_LOGIN_URL}>
+          <a href={LOGIN_URLS.KAKAO_LOGIN_URL}>
+            <Image src={images.kakao} />
+          </a>
+          <a href={LOGIN_URLS.NAVER_LOGIN_URL}>
+            <Image src={images.naver} />
+          </a>
+          <a href={LOGIN_URLS.GOOGLE_LOGIN_URL}>
             <Image src={images.google}></Image>
           </a>
         </InnerContainer>
