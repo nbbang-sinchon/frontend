@@ -162,6 +162,12 @@ function PartyDetailHeader({ party, isPartyPage, toggleMenu }) {
     }
   };
 
+  const toggleWishList = () => {
+    if (!isLoggedin) {
+      navigate('/login');
+    }
+  };
+
   if (!party?.owner) {
     return <Container />;
   }
@@ -183,7 +189,7 @@ function PartyDetailHeader({ party, isPartyPage, toggleMenu }) {
           <div>{convertDate(party.createTime)}</div>
         </StatusColumn>
         <StatusColumn isChatPage={!isPartyPage}>
-          <icons.HeartIcon />
+          <icons.HeartIcon onClick={toggleWishList} />
           {makeButton(party, isPartyPage)}
         </StatusColumn>
       </Container>

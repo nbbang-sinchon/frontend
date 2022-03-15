@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { icons } from '../../assets/assets';
 import { COLORS, HOVER_CURSOR_PONTER, SIZES } from '../../styles/constants';
 import plainButton from '../../styles/plainButton';
+import { LoginStoreContext } from '../Stores/LoginStore';
 
 const Container = styled.div`
   display: flex;
@@ -105,6 +106,9 @@ const CreatePartyBtn = styled(plainButton)`
 `;
 
 function PartyHeader({ header, isFiltered, setOption }) {
+  const { isLoggedin } = useContext(LoginStoreContext);
+  const navigate = useNavigate();
+
   const clickFilterItem = ({ target }) => {
     const item = target.closest('li');
 
@@ -114,6 +118,10 @@ function PartyHeader({ header, isFiltered, setOption }) {
 
     const place = item.dataset.place;
     const option = item.dataset.option;
+
+    if (option === 'WISHLIST' && !isLoggedin) {
+      navigate('/login');
+    }
 
     item.classList.toggle('isActive');
 
