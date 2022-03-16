@@ -66,9 +66,6 @@ const Profile = styled.div`
   input {
     display: none;
   }
-
-  button {
-  }
 `;
 
 const UserInfo = styled.div`
@@ -194,8 +191,8 @@ function MyProfile() {
     setModalState((prev) => ({ ...prev, visible: !prev.visible, content: '프로필을 수정하시겠습니까?' }));
   };
 
-  const LeaveNbbang = () => {
-    customFetch(`/members`, 'DELETE');
+  const LeaveNbbang = async () => {
+    await customFetch(`/members`, 'DELETE');
     navigate('/');
   };
 
