@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { images } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
+import { SERVER_URL } from '../config';
 import Modal from './Modal';
 import useProfile from '../hooks/useProfile';
 import useFetch from '../hooks/useFetch';
@@ -51,10 +52,22 @@ const Profile = styled.div`
   overflow: hidden;
   margin-bottom: 20px;
 
+  &:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  input {
+    display: none;
+  }
+
+  button {
   }
 `;
 
@@ -155,14 +168,18 @@ const ModalText = styled.div`
 function MyProfile() {
   const navigate = useNavigate();
   const { customFetch } = useFetch();
+  const { profile, setProfile } = useProfile();
+  const inputRef = useRef();
+
+  const [preview, setPreview] = useState();
+  const [files, setFiles] = useState();
+
   const [modalState, setModalState] = useState({
     visible: false,
     content: '',
     type: 'CONFIRM',
     isPatchProfilebutton: true,
   });
-
-  const { profile, setProfile } = useProfile();
 
   const onChange = (event) => {
     const { value, name } = event.target;
@@ -183,6 +200,8 @@ function MyProfile() {
   };
 
   const PatchProfile = async () => {
+    PatchAvatar();
+
     const body = profile;
     const json = await customFetch(`/members`, 'PATCH', JSON.stringify(body));
 
@@ -191,11 +210,49 @@ function MyProfile() {
     }
   };
 
+  const onImgChange = (e) => {
+    const file = e.target.files;
+    setFiles(file);
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setPreview(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  };
+
+  const PatchAvatar = () => {
+    const formData = new FormData();
+    formData.append('imgFile', files[0]);
+
+    const options = {
+      method: 'POST',
+      mode: 'cors',
+      credentials: 'include',
+      body: formData,
+    };
+    fetch(`${SERVER_URL}/members/avatar`, options);
+  };
+
   return (
     <>
       <Container>
         <Profile>
-          <img src={images.logo}></img>
+          <input
+            ref={inputRef}
+            type="file"
+            name="profile_avatar"
+            accept="image/png, image/jpeg"
+            onChange={onImgChange}
+          />
+          <img
+            src={preview ? preview : profile.avatar || images.logo}
+            onClick={() => {
+              inputRef.current.click();
+            }}
+          />
         </Profile>
         <form onSubmit={handleSubmit}>
           <UserInfo>
