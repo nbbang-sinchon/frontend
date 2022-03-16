@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { images } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
@@ -7,6 +7,7 @@ import { SERVER_URL } from '../config';
 import Modal from './Modal';
 import useProfile from '../hooks/useProfile';
 import useFetch from '../hooks/useFetch';
+import { LoginStoreContext } from './Stores/LoginStore';
 
 const Container = styled.div`
   height: 100vh;
@@ -165,6 +166,7 @@ const ModalText = styled.div`
 function MyProfile() {
   const navigate = useNavigate();
   const { customFetch } = useFetch();
+  const { refreshUser } = useContext(LoginStoreContext);
   const { profile, setProfile } = useProfile();
   const inputRef = useRef();
 
@@ -191,18 +193,19 @@ function MyProfile() {
     setModalState((prev) => ({ ...prev, visible: !prev.visible, content: '프로필을 수정하시겠습니까?' }));
   };
 
-  const LeaveNbbang = async () => {
+  const leaveNbbang = async () => {
     await customFetch(`/members`, 'DELETE');
     navigate('/');
   };
 
-  const PatchProfile = async () => {
-    PatchAvatar();
+  const patchProfile = async () => {
+    patchAvatar();
 
     const body = profile;
     const json = await customFetch(`/members`, 'PATCH', JSON.stringify(body));
 
     if (json.statusCode === 200) {
+      refreshUser();
       navigate('/');
     }
   };
@@ -220,7 +223,7 @@ function MyProfile() {
     reader.readAsDataURL(e.target.files[0]);
   };
 
-  const PatchAvatar = () => {
+  const patchAvatar = () => {
     const formData = new FormData();
     formData.append('imgFile', files[0]);
 
@@ -230,7 +233,9 @@ function MyProfile() {
       credentials: 'include',
       body: formData,
     };
+
     fetch(`${SERVER_URL}/members/avatar`, options);
+    refreshUser();
   };
 
   return (
@@ -285,7 +290,7 @@ function MyProfile() {
       <Modal
         type={modalState.type}
         visible={modalState.visible}
-        onConfirm={modalState.isPatchProfilebutton ? PatchProfile : LeaveNbbang}
+        onConfirm={modalState.isPatchProfilebutton ? patchProfile : leaveNbbang}
         onDisconfirm={() => setModalState((prev) => ({ ...prev, visible: false }))}
         onClose={() => setModalState((prev) => ({ ...prev, visible: false }))}>
         <ModalText>{modalState.content}</ModalText>
