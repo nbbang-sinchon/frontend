@@ -1,7 +1,7 @@
 import { SERVER_URL } from '../config';
 
 const makeLoginSuspender = () => {
-  let id;
+  let user;
   let status = 'INIT';
 
   const fetchLogin = async () => {
@@ -9,19 +9,19 @@ const makeLoginSuspender = () => {
     const json = await res.json();
 
     if (json.statusCode === 200) {
-      return json.data.id;
+      return json.data;
     } else {
-      return -1;
+      return { id: -1 };
     }
   };
 
   const fetchingUser = fetchLogin()
-    .then((code) => {
-      id = code;
+    .then((data) => {
+      user = data;
       status = 'DONE';
     })
     .catch(() => {
-      id = -1;
+      user = { id: -1 };
       status = 'DONE';
     });
 
@@ -30,7 +30,7 @@ const makeLoginSuspender = () => {
       throw fetchingUser;
     }
 
-    return id;
+    return user;
   };
 };
 
