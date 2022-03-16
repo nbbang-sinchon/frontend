@@ -15,6 +15,7 @@ import LoginStore from './components/Stores/LoginStore';
 import SocketStore from './components/Stores/SocketStore';
 import Loading from './components/Loading';
 import ErrorBoundary from './components/ErrorBoundary';
+import GlobalAlarm from './components/GlobalAlarm';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -23,6 +24,8 @@ ReactDOM.render(
       <Suspense fallback={<Loading />}>
         <LoginStore>
           <SocketStore>
+            <GlobalAlarm />
+
             <Routes>
               <Route element={<LoginRoute isLoginNecessary={false} fallback="/main" />}>
                 <Route path="/" element={<IndexPage />} />

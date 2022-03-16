@@ -107,15 +107,13 @@ const Status = styled.div`
   }
 `;
 
-function Party({ title, hashtags, place, createTime, joinNumber, goalNumber, status, id, color }) {
+function Party({ title, hashtags, place, createTime, joinNumber, goalNumber, status, id, color, isWishlist }) {
   return (
     <Container>
       <Link to={'/parties/' + id}>
         <Title color={color}>
           <TitleColumn>{title}</TitleColumn>
-          <TitleColumn>
-            <icons.HeartIcon />
-          </TitleColumn>
+          <TitleColumn>{isWishlist ? <icons.FilledHeartIcon /> : <icons.HeartIcon />}</TitleColumn>
         </Title>
       </Link>
       <Content>
@@ -149,6 +147,7 @@ Party.propTypes = {
   status: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   color: PropTypes.string.isRequired,
+  isWishlist: PropTypes.bool.isRequired,
 };
 
 export default Party;
