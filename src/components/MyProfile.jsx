@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { images } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
@@ -8,6 +8,7 @@ import Modal from './Modal';
 import useProfile from '../hooks/useProfile';
 import useConfirm from '../hooks/useConfirm';
 import useFetch from '../hooks/useFetch';
+import { LoginStoreContext } from './Stores/LoginStore';
 
 const Container = styled.div`
   height: 100vh;
@@ -150,6 +151,7 @@ const Image = styled.img`
 function MyProfile() {
   const navigate = useNavigate();
   const { customFetch } = useFetch();
+  const { refreshUser } = useContext(LoginStoreContext);
 
   const { isConfirm, setIsConfirm, openConfirmModal, confirmModalVisible, onConfirm, onDisconfirm } = useConfirm();
   const { profile, setProfile } = useProfile();
@@ -176,6 +178,7 @@ function MyProfile() {
       if (json.statusCode === 400) {
         setIsConfirm(false);
       } else if (json.statusCode === 200) {
+        refreshUser();
         navigate('/');
       }
     }

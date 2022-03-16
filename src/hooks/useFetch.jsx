@@ -5,7 +5,7 @@ import { SERVER_URL } from '../config';
 
 function useFetch() {
   const [fetchState, setFetchState] = useState('IDLE');
-  const { logout } = useContext(LoginStoreContext);
+  const { refreshUser } = useContext(LoginStoreContext);
   const navigate = useNavigate();
 
   const customFetch = async (url, method = 'GET', body = '') => {
@@ -27,7 +27,7 @@ function useFetch() {
 
       if (json.statusCode === 401) {
         setFetchState('FAIL');
-        logout();
+        refreshUser();
         navigate('/login');
       } else {
         setFetchState('SUCCESS');
@@ -35,7 +35,7 @@ function useFetch() {
       return json;
     } catch {
       setFetchState('FAIL');
-      logout();
+      refreshUser();
       navigate('/login');
     }
   };
