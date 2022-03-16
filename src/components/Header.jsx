@@ -134,6 +134,7 @@ const Avatar = styled.img`
 const Profile = styled.div`
   display: flex;
   align-items: center;
+  color: ${COLORS.PRIMARY};
 
   > div {
     max-width: 80px;
