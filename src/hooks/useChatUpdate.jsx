@@ -39,9 +39,12 @@ function useChatUpdate(id, chats, setChats) {
       if (parsedBody?.type === 'chatting') {
         setChats((prev) => [...prev, parsedBody.data]);
       } else if (parsedBody?.type === 'reading') {
-        const { lastReadMessageId } = parsedBody.data;
+        const { lastReadMessageId, senderId } = parsedBody.data;
+
         const decreaseNotRead = (chat) =>
-          chat.id > lastReadMessageId ? { ...chat, notReadNumber: chat.notReadNumber - 1 } : chat;
+          chat.id > lastReadMessageId && chat.id !== senderId
+            ? { ...chat, notReadNumber: chat.notReadNumber - 1 }
+            : chat;
 
         setChats((prev) => prev.map(decreaseNotRead));
       }

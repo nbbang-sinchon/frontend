@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
 import { COLORS, HOVER_CURSOR_PONTER, SIZES } from '../../styles/constants';
@@ -8,6 +8,7 @@ import { icons, images } from '../../assets/assets';
 import plainButton from '../../styles/plainButton';
 import useFetch from '../../hooks/useFetch';
 import Modal from '../Modal';
+import { LoginStoreContext } from '../Stores/LoginStore';
 
 const Container = styled.div`
   display: flex;
@@ -119,6 +120,7 @@ function PartyDetailHeader({ party, isPartyPage, toggleMenu }) {
     content: '파티에 참여하시겠습니까?',
     type: 'CONFIRM',
   });
+  const { isLoggedin } = useContext(LoginStoreContext);
 
   const makeButton = (party, isPartyPage) => {
     if (!isPartyPage) {
@@ -129,7 +131,13 @@ function PartyDetailHeader({ party, isPartyPage, toggleMenu }) {
         </>
       );
     }
-    if (party?.isMember) {
+    if (!isLoggedin) {
+      return (
+        <Link to={'/login'}>
+          <JoinButton>파티 참여</JoinButton>
+        </Link>
+      );
+    } else if (party?.isMember) {
       return (
         <Link to={'/chats/' + party.id}>
           <JoinButton>채팅 입장</JoinButton>

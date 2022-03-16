@@ -7,6 +7,7 @@ const COLORS = {
   PRIMARY2: '#F3DAC2',
   WHITE: '#FFFFFF',
   BEIGE: '#FBF7F2;',
+  GREEN: '#859527;',
 };
 
 const MODALS = {
