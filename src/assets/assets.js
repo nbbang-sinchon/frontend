@@ -5,6 +5,7 @@ import { ReactComponent as SearchIcon } from './icons/search.svg';
 import { ReactComponent as LocationIcon } from './icons/location.svg';
 import { ReactComponent as TimeIcon } from './icons/time.svg';
 import { ReactComponent as HeartIcon } from './icons/heart.svg';
+import { ReactComponent as FilledHeartIcon } from './icons/heart-filled.svg';
 import { ReactComponent as ArrowIcon } from './icons/arrow.svg';
 import { ReactComponent as CancelIcon } from './icons/cancel.svg';
 import { ReactComponent as CheckIcon } from './icons/check.svg';
@@ -36,6 +37,7 @@ const icons = {
   LocationIcon,
   TimeIcon,
   HeartIcon,
+  FilledHeartIcon,
   ArrowIcon,
   CheckIcon,
   CancelIcon,
