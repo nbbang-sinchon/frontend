@@ -1,12 +1,11 @@
 import styled from '@emotion/styled';
-import React, { useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { images } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
-import { MODALS } from '../styles/constants';
+import { SERVER_URL } from '../config';
 import Modal from './Modal';
 import useProfile from '../hooks/useProfile';
-import useConfirm from '../hooks/useConfirm';
 import useFetch from '../hooks/useFetch';
 
 const Container = styled.div`
@@ -53,10 +52,19 @@ const Profile = styled.div`
   overflow: hidden;
   margin-bottom: 20px;
 
+  &:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  input {
+    display: none;
   }
 `;
 
@@ -147,12 +155,28 @@ const Image = styled.img`
   }
 `;
 
+const ModalText = styled.div`
+  font-size: 20px;
+  font-weight: 500;
+  padding-top: 25px;
+  padding-bottom: 40px;
+`;
+
 function MyProfile() {
   const navigate = useNavigate();
   const { customFetch } = useFetch();
-
-  const { isConfirm, setIsConfirm, openConfirmModal, confirmModalVisible, onConfirm, onDisconfirm } = useConfirm();
   const { profile, setProfile } = useProfile();
+  const inputRef = useRef();
+
+  const [preview, setPreview] = useState();
+  const [files, setFiles] = useState();
+
+  const [modalState, setModalState] = useState({
+    visible: false,
+    content: '',
+    type: 'CONFIRM',
+    isPatchProfilebutton: true,
+  });
 
   const onChange = (event) => {
     const { value, name } = event.target;
@@ -164,28 +188,68 @@ function MyProfile() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    openConfirmModal();
+    setModalState((prev) => ({ ...prev, visible: !prev.visible, content: '프로필을 수정하시겠습니까?' }));
   };
 
-  useEffect(async () => {
-    if (isConfirm) {
-      const body = profile;
-      const json = await customFetch(`/members`, 'PATCH', JSON.stringify(body));
+  const LeaveNbbang = async () => {
+    await customFetch(`/members`, 'DELETE');
+    navigate('/');
+  };
 
-      if (json.statusCode === 400) {
-        setIsConfirm(false);
-      } else if (json.statusCode === 200) {
-        navigate('/');
-      }
+  const PatchProfile = async () => {
+    PatchAvatar();
+
+    const body = profile;
+    const json = await customFetch(`/members`, 'PATCH', JSON.stringify(body));
+
+    if (json.statusCode === 200) {
+      navigate('/');
     }
-  }, [isConfirm, profile]);
+  };
+
+  const onImgChange = (e) => {
+    const file = e.target.files;
+    setFiles(file);
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setPreview(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  };
+
+  const PatchAvatar = () => {
+    const formData = new FormData();
+    formData.append('imgFile', files[0]);
+
+    const options = {
+      method: 'POST',
+      mode: 'cors',
+      credentials: 'include',
+      body: formData,
+    };
+    fetch(`${SERVER_URL}/members/avatar`, options);
+  };
 
   return (
     <>
       <Container>
         <Profile>
-          <img src={images.logo}></img>
+          <input
+            ref={inputRef}
+            type="file"
+            name="profile_avatar"
+            accept="image/png, image/jpeg"
+            onChange={onImgChange}
+          />
+          <img
+            src={preview ? preview : profile.avatar || images.logo}
+            onClick={() => {
+              inputRef.current.click();
+            }}
+          />
         </Profile>
         <form onSubmit={handleSubmit}>
           <UserInfo>
@@ -205,14 +269,27 @@ function MyProfile() {
             </InnerContainer>
           </UserInfo>
           <SaveButton type="submit">저장하기</SaveButton>
-          <SecessionButton>탈퇴하기</SecessionButton>
+          <SecessionButton
+            onClick={() =>
+              setModalState((prev) => ({
+                ...prev,
+                visible: !prev.visible,
+                content: '엔빵을 떠나시겠습니까?',
+                isPatchProfilebutton: false,
+              }))
+            }>
+            탈퇴하기
+          </SecessionButton>
         </form>
       </Container>
-      {confirmModalVisible && !isConfirm && (
-        <Modal type={MODALS.CONFIRM} visible={confirmModalVisible} onConfirm={onConfirm} onDisconfirm={onDisconfirm}>
-          <h1>프로피를 수정하시겠습니까?</h1>
-        </Modal>
-      )}
+      <Modal
+        type={modalState.type}
+        visible={modalState.visible}
+        onConfirm={modalState.isPatchProfilebutton ? PatchProfile : LeaveNbbang}
+        onDisconfirm={() => setModalState((prev) => ({ ...prev, visible: false }))}
+        onClose={() => setModalState((prev) => ({ ...prev, visible: false }))}>
+        <ModalText>{modalState.content}</ModalText>
+      </Modal>
     </>
   );
 }

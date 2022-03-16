@@ -24,6 +24,10 @@ const Row = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  svg {
+    margin-right: 2px;
+  }
 `;
 
 const Column = styled.div`
@@ -80,6 +84,8 @@ const NotReadChat = styled.div`
   position: relative;
   bottom: 15px;
   left: 15px;
+
+  display: ${(props) => (props.visible ? 'block' : 'none')};
 `;
 
 const Status = styled.div`
@@ -170,7 +176,9 @@ function MyParty({ title, hashtags, joinNumber, goalNumber, status, id, color, n
           <Link to={`/chats/${id}`}>
             <Title color={color}>
               {title}
-              <NotReadChat notReadNumber={notReadNumber}>{notReadNumber > 99 ? '99+' : notReadNumber}</NotReadChat>
+              <NotReadChat visible={notReadNumber > 0} notReadNumber={notReadNumber}>
+                {notReadNumber > 99 ? '99+' : notReadNumber}
+              </NotReadChat>
             </Title>
           </Link>
           <Row>
@@ -182,10 +190,7 @@ function MyParty({ title, hashtags, joinNumber, goalNumber, status, id, color, n
                 <icons.DetailIcon />
               </Link>
               <Link to={`/newparty/${id}`}>
-                <icons.EditIcon />
-              </Link>
-              <Link to="/">
-                <icons.DeleteIcon />
+                <icons.EditIcon style={{ display: `${isOwner ? 'block' : 'none'}` }} />
               </Link>
             </Row>
           </Row>

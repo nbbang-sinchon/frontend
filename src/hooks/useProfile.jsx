@@ -3,8 +3,11 @@ import useFetch from './useFetch';
 
 function useProfile() {
   const [profile, setProfile] = useState({
-    nickname: '',
-    place: '',
+    id: 0,
+    avatar: 'string',
+    nickname: 'string',
+    breadNumber: 0,
+    place: 'string',
   });
   const { customFetch } = useFetch();
 
