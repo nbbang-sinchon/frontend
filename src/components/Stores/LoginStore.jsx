@@ -12,7 +12,8 @@ function LoginStore({ children }) {
 
   return (
     <Suspense fallback={<div>loafing...</div>}>
-      <LoginStoreContext.Provider value={{ loginId: user.id, logout, isLoggedin: user.id >= 0 }}>
+      <LoginStoreContext.Provider
+        value={{ loginId: user.id, logout, nickname: user.nickname, avatar: user.avatar, isLoggedin: user.id >= 0 }}>
         {children}
       </LoginStoreContext.Provider>
     </Suspense>
