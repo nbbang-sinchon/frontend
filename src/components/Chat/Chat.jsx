@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { images } from '../../assets/assets';
 import { COLORS } from '../../styles/constants';
 import { convertDateToTime } from '../../utils/converter';
+import ChatContent from './ChatContent';
 
 const Container = styled.div`
   display: flex;
@@ -34,27 +35,6 @@ const Nickname = styled.div`
   font-size: 12px;
   padding: 5px;
   padding-top: 0;
-`;
-
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  max-width: ${(props) => (props.isNotice && '90%') || '60%'};
-  font-size: 14px;
-`;
-
-const InnerContent = styled.div`
-  width: fit-content;
-  height: fit-content;
-  background: ${(props) => (props.isNotice ? COLORS.DARK_GRAY : props.isSender ? COLORS.PRIMARY : COLORS.GRAY)};
-  padding: ${(props) => (props.isNotice ? '7px 30px' : '7px 15px')};
-  color: ${(props) => (props.isNotice || props.isSender) && COLORS.WHITE};
-  border-radius: 20px;
-  white-space: pre-wrap;
-  margin: ${(props) => props.isNotice && '10px 0'};
-  opacity: ${(props) => props.isNotice && '0.8'};
 `;
 
 const Time = styled.div`
@@ -95,9 +75,7 @@ const Chat = forwardRef(({ chat, isContinuous, isSender }, ref) => {
   if (chat.type === 'EXIT' || chat.type === 'ENTER') {
     return (
       <Container isNotice ref={ref}>
-        <Content isNotice>
-          <InnerContent isNotice>{chat.content}</InnerContent>
-        </Content>
+        <ChatContent type={chat.type} content={chat.content} />
       </Container>
     );
   }
@@ -105,9 +83,7 @@ const Chat = forwardRef(({ chat, isContinuous, isSender }, ref) => {
     return (
       <Container isSender={isSender} isContinuous ref={ref}>
         {!isSender && <Blank />}
-        <Content>
-          <InnerContent isSender={isSender}>{chat.content}</InnerContent>
-        </Content>
+        <ChatContent isSender={isSender} content={chat.content} type={chat.type} />
         <InfoColumn>
           <NotRead isSender={isSender}>{chat.notReadNumber || ''}</NotRead>
           <Time>{convertDateToTime(chat.createTime)}</Time>
@@ -121,9 +97,7 @@ const Chat = forwardRef(({ chat, isContinuous, isSender }, ref) => {
       <Wrapper>
         {!isSender && <Nickname>{chat.sender.nickname}</Nickname>}
         <Row isSender={isSender}>
-          <Content>
-            <InnerContent isSender={isSender}>{chat.content}</InnerContent>
-          </Content>
+          <ChatContent isSender={isSender} content={chat.content} type={chat.type} />
           <InfoColumn>
             <NotRead isSender={isSender}>{chat.notReadNumber || ''}</NotRead>
             <Time>{convertDateToTime(chat.createTime)}</Time>
