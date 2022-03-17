@@ -53,16 +53,15 @@ function Chats({ chats, detectorRef }) {
 
     if (image) {
       image.onload = () => element.scrollIntoView({ behavior: smooth && 'smooth' });
-    } else {
-      element.scrollIntoView({ behavior: smooth && 'smooth' });
     }
+    element.scrollIntoView({ behavior: smooth && 'smooth' });
   };
 
   useEffect(() => {
     if (!oldChatRef.current) {
-      scroll(lastChatRef.current);
       oldChatRef.current = firstChatRef.current;
       lastChatRef.current = lastChatRef.current || firstChatRef.current;
+      scroll(lastChatRef.current);
     } else if (firstChatRef?.current === oldChatRef?.current) {
       scroll(lastChatRef.current, true);
     } else {
