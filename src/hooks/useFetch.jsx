@@ -13,10 +13,11 @@ function useFetch() {
     const options = { method, mode: 'cors', credentials: 'include' };
 
     if (method === 'POST' || method === 'PATCH') {
-      Object.defineProperties(options, {
-        headers: { value: { 'Content-Type': 'application/json' } },
-        body: { value: body },
-      });
+      if (!(body instanceof FormData)) {
+        Object.defineProperty(options, 'headers', { value: { 'Content-type': 'application/json' } });
+      }
+
+      Object.defineProperty(options, 'body', { value: body });
     }
 
     setFetchState('PENDING');
