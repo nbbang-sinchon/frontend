@@ -3,7 +3,6 @@ import React, { useState, useRef, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { images } from '../assets/assets';
 import { COLORS, SIZES } from '../styles/constants';
-import { SERVER_URL } from '../config';
 import Modal from './Modal';
 import useProfile from '../hooks/useProfile';
 import useFetch from '../hooks/useFetch';
@@ -199,12 +198,17 @@ function MyProfile() {
   };
 
   const patchProfile = async () => {
-    patchAvatar();
+    let fetchList = [customFetch(`/members`, 'PATCH', JSON.stringify(profile))];
 
-    const body = profile;
-    const json = await customFetch(`/members`, 'PATCH', JSON.stringify(body));
+    if (files) {
+      const formData = new FormData();
+      formData.append('imgFile', files[0]);
+      fetchList.push(customFetch(`/members/avatar`, 'POST', formData));
+    }
 
-    if (json.statusCode === 200) {
+    const jsons = await Promise.all(fetchList);
+
+    if (jsons.every(({ statusCode }) => statusCode === 200)) {
       refreshUser();
       navigate('/');
     }
@@ -221,21 +225,6 @@ function MyProfile() {
       }
     };
     reader.readAsDataURL(e.target.files[0]);
-  };
-
-  const patchAvatar = () => {
-    const formData = new FormData();
-    formData.append('imgFile', files[0]);
-
-    const options = {
-      method: 'POST',
-      mode: 'cors',
-      credentials: 'include',
-      body: formData,
-    };
-
-    fetch(`${SERVER_URL}/members/avatar`, options);
-    refreshUser();
   };
 
   return (
