@@ -24,7 +24,7 @@ const InnerContainer = styled.div`
   background-color: white;
 
   height: ${(props) => props.fitHeight && `calc(100vh - ${SIZES.HEADER_HEIGHT_LARGE})`};
-  height: ${(props) => props.isMyPartyPage && '100vh'};
+  min-height: ${(props) => props.isMyPartyPage && '100vh'};
 
   @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
     height: ${(props) => props.fitHeight && `calc(100vh - ${SIZES.HEADER_HEIGHT_MIDDLE})`};

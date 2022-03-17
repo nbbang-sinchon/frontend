@@ -4,7 +4,6 @@ import Header from '../components/Header';
 import Main from '../components/Main';
 import PartyDetail from '../components/Party/PartyDetail';
 import Parties from '../components/Party/Parties';
-import Footer from '../components/Footer';
 import PartyHeader from '../components/Party/PartyHeader';
 import usePartyDetail from '../hooks/usePartyDetail';
 import PartyDetailHeader from '../components/Party/PartyDetailHeader';
@@ -22,7 +21,6 @@ function PartyPage() {
         <PartyHeader header={'다른 파티 목록'} isFiltered={false} />
         <Parties parties={parties} />
       </Main>
-      <Footer />
     </>
   );
 }
