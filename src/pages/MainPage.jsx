@@ -1,6 +1,5 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Main from '../components/Main';
 import Parties from '../components/Party/Parties';
@@ -20,7 +19,6 @@ function MainPage() {
         <PartyHeader header={'파티 목록'} isFiltered setOption={setOption} />
         <Parties parties={parties} detectorRef={detectorRef} />
       </Main>
-      <Footer />
     </>
   );
 }
