@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useContext } from 'react';
+import { LoginStoreContext } from '../components/Stores/LoginStore';
 import { SocketStoreContext } from '../components/Stores/SocketStore';
 import { CHAT_PAGE_SIZE } from '../config';
 import makeObserverCallback from '../utils/observer';
@@ -9,6 +10,7 @@ function useChatUpdate(id, chats, setChats) {
   const fetchOldChatRef = useRef();
   const [isReady, setIsReady] = useState(true);
   const { socket, isConnecting } = useContext(SocketStoreContext);
+  const { loginId } = useContext(LoginStoreContext);
   const { customFetch } = useFetch();
 
   const observerCallback = makeObserverCallback(fetchOldChatRef);
@@ -41,10 +43,12 @@ function useChatUpdate(id, chats, setChats) {
       } else if (parsedBody?.type === 'reading') {
         const { lastReadMessageId, senderId } = parsedBody.data;
 
+        if (loginId === senderId) {
+          return;
+        }
+
         const decreaseNotRead = (chat) =>
-          chat.id > lastReadMessageId && chat.id !== senderId
-            ? { ...chat, notReadNumber: chat.notReadNumber - 1 }
-            : chat;
+          chat.id > lastReadMessageId ? { ...chat, notReadNumber: chat.notReadNumber - 1 } : chat;
 
         setChats((prev) => prev.map(decreaseNotRead));
       }
