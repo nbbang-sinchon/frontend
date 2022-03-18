@@ -6,7 +6,7 @@ import { COLORS } from '../../styles/constants';
 const Container = styled.div`
   display: flex;
 
-  max-width: ${(props) => (props.isNotice && '90%') || '60%'};
+  max-width: ${(props) => (props.type === 'NOTICE' ? '90%' : '60%')};
   font-size: 14px;
 `;
 

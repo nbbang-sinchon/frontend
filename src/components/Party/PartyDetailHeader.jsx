@@ -42,7 +42,7 @@ const StatusColumn = styled.div`
   }
 
   svg {
-    padding: 0 15px;
+    padding-right: 15px;
     width: 40px;
     height: 40px;
 
@@ -53,7 +53,7 @@ const StatusColumn = styled.div`
     ${HOVER_CURSOR_PONTER};
 
     @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
-      padding: 0 10px;
+      padding-right: 10px;
       width: 32px;
       height: 32px;
     }
