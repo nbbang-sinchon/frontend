@@ -54,7 +54,7 @@ function BreadBoardStatus({ id, status, isDelivery, setIsNbbanged, disabled }) {
       {isDelivery ? (
         <div>{status ? '배달비\n나누기' : '배달비\n안 나누기'}</div>
       ) : (
-        <div>{status === 'CHECK' ? '송금완료!' : '송금 대기중'}</div>
+        <div>{status ? '송금 완료!' : '송금 대기중'}</div>
       )}
     </Container>
   );

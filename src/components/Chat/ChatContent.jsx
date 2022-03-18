@@ -6,7 +6,7 @@ import { COLORS } from '../../styles/constants';
 const Container = styled.div`
   display: flex;
 
-  max-width: ${(props) => (props.isNotice && '90%') || '60%'};
+  max-width: ${(props) => (props.type === 'NOTICE' ? '90%' : '60%')};
   font-size: 14px;
 `;
 
@@ -24,19 +24,25 @@ const Content = styled.div`
   opacity: ${(props) => props.type === 'NOTICE' && '0.8'};
 
   img {
-    max-height: 200px;
+    height: 150px;
+    max-width: 100%;
+    max-height: 150px;
+    object-fit: contain;
     border-radius: 15px;
-    padding: 0 -8px;
   }
 `;
 
 function ChatContent({ isSender, content, type }) {
   const convertType = (type) => (type === 'EXIT' || type === 'ENTER' ? 'NOTICE' : type);
 
+  const shrinkHeight = ({ target }) => {
+    target.style.height = 'fit-content';
+  };
+
   return (
     <Container type={convertType(type)}>
       <Content type={convertType(type)} isSender={isSender}>
-        {type === 'IMAGE' ? <img src={content} /> : content}
+        {type === 'IMAGE' ? <img src={content} onLoad={shrinkHeight} /> : content}
       </Content>
     </Container>
   );

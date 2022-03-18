@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import useGlobalAlarm from '../hooks/useGlobalAlarm';
 import { COLORS } from '../styles/constants';
 import { convertDateToTime } from '../utils/converter';
@@ -28,10 +29,14 @@ const Alarm = styled.div`
   margin-right: -10px;
   padding: 8px 30px 8px 15px;
   box-sizing: border-box;
-  background-color: #859527;
+  background-color: ${COLORS.GREEN};
   color: ${COLORS.WHITE};
   border-radius: 15px;
   font-size: 12px;
+
+  &:hover {
+    background-color: ${COLORS.LIGHT_GREEN};
+  }
 
   animation-name: show;
   animation-duration: 0.5s;
@@ -75,15 +80,17 @@ function GlobalAlarm() {
     <Container>
       <InnerContainer>
         {alarms.map((alarm) => (
-          <Alarm key={alarm.id}>
-            <Title>
-              <span>{alarm.party.title}</span>
-              <span>{convertDateToTime(alarm.createTime)}</span>
-            </Title>
-            <Content>
-              {alarm.sender.nickname} : {alarm.content}
-            </Content>
-          </Alarm>
+          <Link to={`/chats/${alarm?.party.id}`} key={alarm.id}>
+            <Alarm>
+              <Title>
+                <span>{alarm.party.title}</span>
+                <span>{convertDateToTime(alarm.createTime)}</span>
+              </Title>
+              <Content>
+                {alarm.sender.nickname} : {alarm.content}
+              </Content>
+            </Alarm>
+          </Link>
         ))}
       </InnerContainer>
     </Container>

@@ -23,8 +23,8 @@ const Container = styled.div`
 function Chats({ chats, detectorRef }) {
   const firstChatRef = useRef();
   const oldChatRef = useRef();
-  const lastChatRef = useRef();
   const chatsRef = useRef();
+  const chatsLengthRef = useRef(0);
   const { loginId } = useContext(LoginStoreContext);
 
   const makeChats = (chats) =>
@@ -39,33 +39,25 @@ function Chats({ chats, detectorRef }) {
           chat={chat}
           isContinuous={isContinuous}
           isSender={isSender}
-          ref={i === 0 ? firstChatRef : i === arr.length - 1 ? lastChatRef : null}
+          ref={i === 0 ? firstChatRef : null}
         />
       );
     });
 
-  const scroll = (element, smooth) => {
-    if (!element) {
+  useEffect(() => {
+    if (chatsLengthRef.current === chats.length) {
       return;
     }
 
-    const image = element?.querySelector('img');
+    chatsLengthRef.current = chats.length;
 
-    if (image) {
-      image.onload = () => element.scrollIntoView({ behavior: smooth && 'smooth' });
-    }
-    element.scrollIntoView({ behavior: smooth && 'smooth' });
-  };
-
-  useEffect(() => {
     if (!oldChatRef.current) {
+      chatsRef.current.scroll({ top: chatsRef.current.scrollHeight });
       oldChatRef.current = firstChatRef.current;
-      lastChatRef.current = lastChatRef.current || firstChatRef.current;
-      scroll(lastChatRef.current);
     } else if (firstChatRef?.current === oldChatRef?.current) {
-      scroll(lastChatRef.current, true);
+      chatsRef.current.scroll({ top: chatsRef.current.scrollHeight, behavior: 'smooth' });
     } else {
-      scroll(oldChatRef.current);
+      oldChatRef.current?.scrollIntoView();
       oldChatRef.current = firstChatRef.current;
     }
   }, [chats]);
