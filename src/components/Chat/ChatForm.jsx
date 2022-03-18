@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { COLORS, HOVER_CURSOR_PONTER, SCROLL_PRIMARY } from '../../styles/constants';
-import { icons } from '../../assets/assets';
 import ChatUploadImage from './ChatUploadImage';
 import useFetch from '../../hooks/useFetch';
 
@@ -46,7 +45,7 @@ const FormColumn = styled.div`
   svg {
     width: 24px;
     height: 24px;
-    padding: 0 5px;
+    padding: 0 15px;
 
     ${HOVER_CURSOR_PONTER};
   }
@@ -119,7 +118,6 @@ function ChatForm({ id }) {
         />
         <FormMenu>
           <FormColumn>
-            <icons.LocationIcon />
             <ChatUploadImage id={id} />
           </FormColumn>
           <FormColumn>

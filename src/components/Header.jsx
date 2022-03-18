@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { icons } from '../assets/assets';
 import { COLORS, HOVER_CURSOR_PONTER, SIZES } from '../styles/constants';
 import Logo from './Logo';
+import { LoginStoreContext } from './Stores/LoginStore';
 
 const Container = styled.header`
   display: flex;
@@ -108,9 +109,46 @@ const SearchBarSubmit = styled.button`
   ${HOVER_CURSOR_PONTER};
 `;
 
+const Avatar = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid ${COLORS.PRIMARY};
+  box-sizing: border-box;
+  object-fit: contain;
+  margin-left: 15px;
+
+  @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
+    margin-left: 10px;
+    width: 24px;
+    height: 24px;
+  }
+
+  @media only screen and (max-width: ${SIZES.SMALL_WIDTH}) {
+    margin-left: 5px;
+    width: 20px;
+    height: 20px;
+  }
+`;
+
+const Profile = styled.div`
+  display: flex;
+  align-items: center;
+  color: ${COLORS.PRIMARY};
+
+  > div {
+    max-width: 80px;
+    padding: 0 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+`;
+
 function Header({ setOption, search }) {
   const navigate = useNavigate();
   const inputRef = useRef();
+  const { nickname, avatar, isLoggedin } = useContext(LoginStoreContext);
 
   const searchKeyword = (event) => {
     event.preventDefault();
@@ -150,7 +188,10 @@ function Header({ setOption, search }) {
           <icons.PartyIcon />
         </Link>
         <Link to="/mypage">
-          <icons.ProfileIcon />
+          <Profile>
+            {avatar ? <Avatar src={avatar} /> : <icons.ProfileIcon />}
+            {isLoggedin && <div>{nickname}</div>}
+          </Profile>
         </Link>
       </HeaderColumn>
     </Container>

@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { icons } from '../../assets/assets';
-import { SERVER_URL } from '../../config';
+import useFetch from '../../hooks/useFetch';
 
 const Container = styled.label`
   display: flex;
@@ -15,18 +15,17 @@ const Container = styled.label`
 
 function ChatUploadImage({ id }) {
   const inputRef = useRef();
+  const { customFetch } = useFetch();
 
   const uploadImage = () => {
-    if (inputRef.current?.files) {
+    if (!inputRef.current?.files) {
       return;
     }
 
-    fetch(`${SERVER_URL}/chats/${id}/images`, {
-      method: 'POST',
-      mode: 'cors',
-      headers: { 'Content-Type': 'image/*' },
-      body: inputRef.current?.files[0],
-    });
+    const formData = new FormData();
+    formData.append('imgFile', inputRef.current.files[0]);
+
+    customFetch(`/chats/${id}/images`, 'POST', formData);
   };
 
   return (

@@ -5,7 +5,7 @@ import { SERVER_URL } from '../config';
 
 function useFetch() {
   const [fetchState, setFetchState] = useState('IDLE');
-  const { setLoginId } = useContext(LoginStoreContext);
+  const { refreshUser } = useContext(LoginStoreContext);
   const navigate = useNavigate();
 
   const customFetch = async (url, method = 'GET', body = '') => {
@@ -13,10 +13,11 @@ function useFetch() {
     const options = { method, mode: 'cors', credentials: 'include' };
 
     if (method === 'POST' || method === 'PATCH') {
-      Object.defineProperties(options, {
-        headers: { value: { 'Content-Type': 'application/json' } },
-        body: { value: body },
-      });
+      if (!(body instanceof FormData)) {
+        Object.defineProperty(options, 'headers', { value: { 'Content-type': 'application/json' } });
+      }
+
+      Object.defineProperty(options, 'body', { value: body });
     }
 
     setFetchState('PENDING');
@@ -27,7 +28,7 @@ function useFetch() {
 
       if (json.statusCode === 401) {
         setFetchState('FAIL');
-        setLoginId(-1);
+        refreshUser();
         navigate('/login');
       } else {
         setFetchState('SUCCESS');
@@ -35,7 +36,7 @@ function useFetch() {
       return json;
     } catch {
       setFetchState('FAIL');
-      setLoginId(-1);
+      refreshUser();
       navigate('/login');
     }
   };
