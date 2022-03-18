@@ -12,7 +12,7 @@ function useChat(id) {
 
     setParty(json.data);
     setChats(json.data?.messages);
-  }, []);
+  }, [id]);
 
   return { party, chats, setChats };
 }

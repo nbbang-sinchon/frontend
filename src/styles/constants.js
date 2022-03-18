@@ -8,6 +8,7 @@ const COLORS = {
   WHITE: '#FFFFFF',
   BEIGE: '#FBF7F2;',
   GREEN: '#859527;',
+  LIGHT_GREEN: '#91a327',
 };
 
 const MODALS = {
