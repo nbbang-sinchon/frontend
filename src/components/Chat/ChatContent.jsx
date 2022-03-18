@@ -42,7 +42,13 @@ function ChatContent({ isSender, content, type }) {
   return (
     <Container type={convertType(type)}>
       <Content type={convertType(type)} isSender={isSender}>
-        {type === 'IMAGE' ? <img src={content} onLoad={shrinkHeight} /> : content}
+        {type === 'IMAGE' ? (
+          <a href={content} target="_blank" rel="noreferrer">
+            <img src={content} onLoad={shrinkHeight} />
+          </a>
+        ) : (
+          content
+        )}
       </Content>
     </Container>
   );

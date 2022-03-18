@@ -181,12 +181,7 @@ function BreadBoard({ isVisible, breadBoard, id }) {
             isDelivery
             disabled={getOwnerId(breadBoard) !== loginId}
           />
-          <BreadBoardStatus
-            status={isNbbanged}
-            setIsNbbanged={setIsNbbanged}
-            isDelivery
-            disabled={getOwnerId(breadBoard) !== loginId}
-          />
+          <BreadBoardStatus status={isNbbanged} setIsNbbanged={setIsNbbanged} isDelivery />
         </User>
       </Content>
     </Container>
