@@ -1,18 +1,21 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { icons } from '../assets/assets';
-import { COLORS, SIZES } from '../styles/constants';
-import plainButton from '../styles/plainButton';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { icons } from '../../assets/assets';
+import { COLORS, HOVER_CURSOR_PONTER, SIZES } from '../../styles/constants';
+import plainButton from '../../styles/plainButton';
+import { LoginStoreContext } from '../Stores/LoginStore';
 
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
+  align-self: center;
 
   width: 100%;
+  min-width: calc(${SIZES.MIN_WIDTH} - 60px);
+  padding: 10px;
   box-sizing: border-box;
-  padding: 0 5% 10px 7%;
 
   div {
     align-items: center;
@@ -90,9 +93,7 @@ const FilterItem = styled.li`
     }
   }
 
-  &:hover {
-    cursor: pointer;
-  }
+  ${HOVER_CURSOR_PONTER};
 `;
 
 const CreatePartyBtn = styled(plainButton)`
@@ -105,10 +106,22 @@ const CreatePartyBtn = styled(plainButton)`
 `;
 
 function PartyHeader({ header, isFiltered, setOption }) {
+  const { isLoggedin } = useContext(LoginStoreContext);
+  const navigate = useNavigate();
+
   const clickFilterItem = ({ target }) => {
     const item = target.closest('li');
+
+    if (!item) {
+      return;
+    }
+
     const place = item.dataset.place;
     const option = item.dataset.option;
+
+    if (option === 'WISHLIST' && !isLoggedin) {
+      navigate('/login');
+    }
 
     item.classList.toggle('isActive');
 

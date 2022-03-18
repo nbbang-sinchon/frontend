@@ -1,14 +1,17 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import Main from '../components/Main';
-import { NewPartyHeader, NewParty } from '../components/NewParty';
+import NewParty from '../components/NewParty';
+import PatchParty from '../components/PatchParty';
+import usePartyDetail from '../hooks/usePartyDetail';
 
 function NewPartyPage() {
+  const { id } = useParams();
+  const { party } = usePartyDetail(id);
+
   return (
     <>
-      <NewPartyHeader />
-      <Main>
-        <NewParty></NewParty>
-      </Main>
+      <Main background="WHITE">{id ? <PatchParty id={id} party={party} /> : <NewParty />}</Main>
     </>
   );
 }

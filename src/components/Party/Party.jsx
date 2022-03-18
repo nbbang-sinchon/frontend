@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { COLORS } from '../styles/constants';
-import { icons } from '../assets/assets';
-import HashTags from './HashTags';
-import { convertDate, convertPlace, convertStatus } from '../utils/converter';
 import { Link } from 'react-router-dom';
+import { COLORS, HOVER_CURSOR_PONTER } from '../../styles/constants';
+import { icons } from '../../assets/assets';
+import HashTags from '../HashTags';
+import { convertDate, convertPlace, convertStatus } from '../../utils/converter';
 
 const Container = styled.div`
   display: flex;
@@ -16,7 +16,7 @@ const Container = styled.div`
 
   &:hover {
     cursor: pointer;
-    background-color: ${COLORS.PRIMARY2};
+    opacity: 0.8;
   }
 `;
 
@@ -40,22 +40,7 @@ const InnerContainer = styled.div`
     width: 10px;
     height: 13px;
 
-    &:hover {
-      cursor: pointer;
-    }
-`;
-
-const Title = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  padding: 15px;
-  margin-bottom: 5px;
-  color: ${COLORS.BLACK};
-  font-size: 18px;
-  font-weight: bolder;
-  background: ${COLORS.PRIMARY};
-  border-radius: 10px;
+    ${HOVER_CURSOR_PONTER};
 `;
 
 const TitleColumn = styled.div`
@@ -69,26 +54,6 @@ const TitleColumn = styled.div`
 
   svg {
     transform: scale(1.2, 1.2);
-  }
-`;
-
-const Status = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  width: 100px;
-  padding: 5px 10px;
-  color: ${COLORS.WHITE};
-  font-size: 12px;
-  font-weight: 500;
-  background: ${COLORS.PRIMARY};
-  border-radius: 10px;
-  white-space: nowrap;
-
-  > div:last-of-type {
-    font-size: 16px;
   }
 `;
 
@@ -109,20 +74,51 @@ const Info = styled.div`
   }
 `;
 
-function Party({ title, hashtags, place, createTime, joinNumber, goalNumber, status, id }) {
+const Title = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  padding: 15px;
+  margin-bottom: 5px;
+  color: ${COLORS.BLACK};
+  font-size: 18px;
+  font-weight: bolder;
+  background: ${(props) => props.color};
+  border-radius: 10px;
+`;
+
+const Status = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100px;
+  padding: 5px 10px;
+  color: ${COLORS.WHITE};
+  font-size: 12px;
+  font-weight: 500;
+  background: ${(props) => props.color};
+  border-radius: 10px;
+  white-space: nowrap;
+
+  > div:last-of-type {
+    font-size: 16px;
+  }
+`;
+
+function Party({ title, hashtags, place, createTime, joinNumber, goalNumber, status, id, color, isWishlist }) {
   return (
     <Container>
       <Link to={'/parties/' + id}>
-        <Title>
+        <Title color={color}>
           <TitleColumn>{title}</TitleColumn>
-          <TitleColumn>
-            <icons.HeartIcon />
-          </TitleColumn>
+          <TitleColumn>{isWishlist ? <icons.FilledHeartIcon /> : <icons.HeartIcon />}</TitleColumn>
         </Title>
       </Link>
       <Content>
         <InnerContainer>
-          <HashTags hashtags={hashtags} />
+          <HashTags hashtags={hashtags} color={color} />
           <Info>
             <icons.LocationIcon />
             <div>{convertPlace(place)}</div>
@@ -130,7 +126,7 @@ function Party({ title, hashtags, place, createTime, joinNumber, goalNumber, sta
             <div>{convertDate(createTime)}</div>
           </Info>
         </InnerContainer>
-        <Status>
+        <Status color={color}>
           <div>
             {joinNumber} / {goalNumber} 명
           </div>
@@ -150,6 +146,8 @@ Party.propTypes = {
   goalNumber: PropTypes.number.isRequired,
   status: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
+  color: PropTypes.string.isRequired,
+  isWishlist: PropTypes.bool.isRequired,
 };
 
 export default Party;

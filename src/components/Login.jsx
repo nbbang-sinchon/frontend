@@ -1,55 +1,8 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { images } from '../assets/assets';
-import { COLORS, SIZES } from '../styles/constants';
-
-function LoginPageHeader() {
-  const Logo = () => {
-    const Container = styled.div`
-      display: flex;
-      &:hover {
-        cursor: pointer;
-      }
-    `;
-
-    const Image = styled.img`
-      height: 60px;
-
-      @media only screen and (max-width: ${SIZES.HEADER_MIDDLE_WIDTH}) {
-        height: 40px;
-      }
-    `;
-
-    return (
-      <Link to="/main">
-        <Container>
-          <Image src={images.logo} />
-        </Container>
-      </Link>
-    );
-  };
-
-  const Container = styled.header`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 10px;
-    border-bottom: 2px solid ${COLORS.PRIMARY};
-    min-width: ${SIZES.HEADER_MIN_WIDTH};
-    position: sticky;
-    top: 0;
-    background-color: white;
-    z-index: 1;
-  `;
-
-  return (
-    <Container>
-      <Logo />
-    </Container>
-  );
-}
+import { COLORS, HOVER_CURSOR_PONTER, SIZES } from '../styles/constants';
+import { LOGIN_URLS } from '../config';
 
 function Login() {
   const Container = styled.div`
@@ -90,26 +43,35 @@ function Login() {
     height: 50px;
     padding-top: 20px;
 
+    ${HOVER_CURSOR_PONTER}
+
     &:hover {
       opacity: 0.8;
-      cursor: pointer;
     }
+
     @media only screen and (max-width: ${SIZES.HEADER_MIDDLE_WIDTH}) {
       height: 40px;
     }
   `;
+
   return (
     <>
       <Container>
         <InnerContainer>
           <h1>어서 파티를 만들러 가고싶어요!</h1>
-          <Image src={images.kakao} />
-          <Image src={images.naver} />
-          <Image src={images.google} />
+          <a href={LOGIN_URLS.KAKAO_LOGIN_URL}>
+            <Image src={images.kakao} />
+          </a>
+          <a href={LOGIN_URLS.NAVER_LOGIN_URL}>
+            <Image src={images.naver} />
+          </a>
+          <a href={LOGIN_URLS.GOOGLE_LOGIN_URL}>
+            <Image src={images.google}></Image>
+          </a>
         </InnerContainer>
       </Container>
     </>
   );
 }
 
-export { LoginPageHeader, Login };
+export default Login;

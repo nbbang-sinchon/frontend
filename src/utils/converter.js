@@ -8,19 +8,18 @@ const convertPlace = (placeString) => {
   } else if (upper === 'YEONHUI') {
     return '연희동';
   } else {
-    return 'ERROR';
+    return '';
   }
 };
 
 const convertDate = (dateString) => {
-  const TIME_ZONE = 9;
   const MILLI_TO_SECOND = 1000;
   const SECOND_TO_MINUTE = 60;
   const MINUTE_TO_HOUR = 60;
   const HOUR_TO_DAY = 24;
 
   const date = new Date(dateString);
-  date.setHours(date.getHours() - TIME_ZONE);
+  date.setHours(date.getHours());
 
   const now = new Date();
   const diff = (now.getTime() - date.getTime()) / MILLI_TO_SECOND;
@@ -52,4 +51,39 @@ const convertStatus = (statusString, joinNumber, goalNumber) => {
   }
 };
 
-export { convertPlace, convertDate, convertStatus };
+const convertDateToTime = (dateString) => {
+  return new Date(dateString).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
+};
+
+const convertOptionToParam = (option) => {
+  const params = [];
+  const places = Object.entries(option.place).filter((entry) => entry[1]);
+
+  if (option.search) {
+    params.push(`search=${option.search}`);
+  }
+  if (option.WISHLIST) {
+    params.push(`isWishlist=true`);
+  }
+
+  if (option.OPEN) {
+    params.push(`status=OPEN`);
+  } else {
+    params.push(`status=CLOSED`);
+    params.push(`status=FULL`);
+  }
+
+  if (places.length === 0) {
+    params.push(`place=NONE`);
+  } else {
+    places.forEach((place) => {
+      params.push(`place=${place[0]}`);
+    });
+  }
+
+  return params;
+};
+
+const convertPrice = (priceString) => Number(priceString).toLocaleString() + '원';
+
+export { convertPlace, convertDate, convertStatus, convertDateToTime, convertOptionToParam, convertPrice };

@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { images } from '../assets/assets';
-import { COLORS, SIZES } from '../styles/constants';
+import { COLORS, HOVER_CURSOR_PONTER, SIZES } from '../styles/constants';
 
 const Container = styled.div`
   display: flex;
@@ -10,9 +11,7 @@ const Container = styled.div`
   justify-content: center;
   white-space: nowrap;
 
-  &:hover {
-    cursor: pointer;
-  }
+  ${HOVER_CURSOR_PONTER};
 `;
 
 const Image = styled.img`
@@ -30,6 +29,7 @@ const Image = styled.img`
 const Title = styled.div`
   color: ${COLORS.PRIMARY};
   font-size: 36px;
+  display: ${(props) => (props.isTitleVisible ? 'block' : 'none')};
 
   @media only screen and (max-width: ${SIZES.MIDDLE_WIDTH}) {
     font-size: 26px;
@@ -40,15 +40,18 @@ const Title = styled.div`
   }
 `;
 
-function Logo() {
+function Logo({ isTitleVisible }) {
   return (
-    <Link to="/main">
+    <Link to="/">
       <Container>
         <Image src={images.logo} />
-        <Title>엔빵</Title>
+        <Title isTitleVisible={isTitleVisible}>엔빵</Title>
       </Container>
     </Link>
   );
 }
+Logo.propTypes = {
+  isTitleVisible: PropTypes.bool,
+};
 
 export default Logo;
