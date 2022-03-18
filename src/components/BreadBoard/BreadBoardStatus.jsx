@@ -35,12 +35,12 @@ function BreadBoardStatus({ id, status, isDelivery, setIsNbbanged, disabled }) {
   const { customFetch } = useFetch();
 
   const toggleStatus = () => {
-    if (disabled) {
+    if (isDelivery) {
+      setIsNbbanged((prev) => !prev);
       return;
     }
 
-    if (isDelivery) {
-      setIsNbbanged((prev) => !prev);
+    if (disabled) {
       return;
     }
 

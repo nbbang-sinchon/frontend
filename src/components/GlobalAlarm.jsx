@@ -87,7 +87,7 @@ function GlobalAlarm() {
                 <span>{convertDateToTime(alarm.createTime)}</span>
               </Title>
               <Content>
-                {alarm.sender.nickname} : {alarm.content}
+                {alarm.sender.nickname} : {alarm.type === 'IMAGE' ? '(사진)' : alarm.content}
               </Content>
             </Alarm>
           </Link>
